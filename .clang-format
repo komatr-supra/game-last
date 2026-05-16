@@ -1,0 +1,14 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+# Odsazení na 4 mezery
+IndentWidth: 4
+# Závorka na stejném řádku (K&R / Attach)
+BreakBeforeBraces: Attach
+# Mezera před závorkami u if/while/for
+SpaceBeforeParens: ControlStatements
+# Zarovnání parametrů funkcí pod sebe
+AlignAfterOpenBracket: Align
+# Maximální délka řádku (profesionální standard je 80-120)
+ColumnLimit: 100
+---
