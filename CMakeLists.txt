@@ -1,51 +1,45 @@
 cmake_minimum_required(VERSION 3.25)
-
-project(My3DARPG C CXX)
-
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_STANDARD_REQUIRED ON)
+project(SuperTransportDeluxe CXX) # Pokud nepíšeš čisté C, C stačí odebrat
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 1. Nastavení Raylibu
+# 1. Externí knihovny
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(BUILD_GAMES    OFF CACHE BOOL "" FORCE)
+add_subdirectory(external/raylib EXCLUDE_FROM_ALL)
 
-# 2. Přidání submodulu (tohle zkompiluje raylib.a / raylib.lib)
-add_subdirectory(external/raylib EXCLUDE_FROM_ALL SYSTEM)
+# 2. Seznam zdrojových souborů (ruční výčet je jistota)
+set(SOURCES
+    src/main.cpp
 
-# 3. Definice tvého spustitelného souboru
-file(GLOB_RECURSE SOURCES "src/*.cpp")
-add_executable(${PROJECT_NAME} ${SOURCES}
-    include/CameraController.hpp
-    external/json.hpp)
-
-# 4. KLÍČOVÝ KROK: Říct kompilátoru, kde jsou .h soubory
-# Musíme zahrnout složku 'src' uvnitř submodulu raylib
-target_include_directories(${PROJECT_NAME} PRIVATE 
-    include 
-    external/raylib/src
-    external
+    src/core/AssetManager.cpp
+    src/core/Camera.cpp
+    src/core/Logistic.cpp
+    src/core/World.cpp
+    
+    src/vehicle/Vehicle.cpp
+    src/vehicle/VehicleDatabase.cpp
+    src/vehicle/VehicleManager.cpp
 )
 
-# 5. Linkování
-target_link_libraries(${PROJECT_NAME} raylib)
+add_executable(${PROJECT_NAME} ${SOURCES})
 
-# 6. Linux fix (pro Ubuntu na notebooku)
-if(UNIX)
-    target_link_libraries(${PROJECT_NAME} m pthread dl rt X11)
-endif()
+# 3. Include directories
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include 
+    ${CMAKE_CURRENT_SOURCE_DIR}/external
+)
 
+# 4. Linkování (Raylib se postará o své include složky sám!)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
+# 5. Varování (Modernější zápis)
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)
 else()
+    target_compile_options(raylib INTERFACE -Wno-missing-field-initializers)
     target_compile_options(${PROJECT_NAME} PRIVATE 
-        -Wall           # Zapne základní varování
-        -Wextra         # Zapne další užitečná varování
-        -Wpedantic      # Trvá na striktním dodržování standardu C11
-        -Wshadow        # Varuje, když si pojmenuješ proměnnou stejně jako globální
-        -Wstrict-prototypes # Hlídá správné definice funkcí
+        -Wall -Wextra -Wpedantic -Wshadow
     )
 endif()

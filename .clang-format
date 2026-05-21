@@ -1,14 +1,33 @@
 ---
 Language: Cpp
+# pointers and references symbols are with type, not with variable name
+PointerAlignment: Left
+ReferenceAlignment: Left
+# main style
 BasedOnStyle: LLVM
-# Odsazení na 4 mezery
+# indent space is 4 characters
 IndentWidth: 4
-# Závorka na stejném řádku (K&R / Attach)
-BreakBeforeBraces: Attach
-# Mezera před závorkami u if/while/for
+# disable tab and set it to 4 spaces too
+UseTab: Never
+TabWidth: 4
+# curly braces are on a new line
+BreakBeforeBraces: Allman
+# space between if/while/... and braces
 SpaceBeforeParens: ControlStatements
-# Zarovnání parametrů funkcí pod sebe
+# if parameters don't fit on one line, place each one on its own
+BinPackParameters: false
+BinPackArguments: false
+# don't move all parameters at next line, slice them separated
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: false
+# same setting like above, but for constructors
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+AllowAllConstructorInitializersOnNextLine: true
+ConstructorInitializerIndentWidth: 4
+# bracket align
 AlignAfterOpenBracket: Align
-# Maximální délka řádku (profesionální standard je 80-120)
-ColumnLimit: 100
+# empty blocks at the same line {} ... no need two lines
+AllowShortBlocksOnASingleLine: Empty
+# max line lenght
+ColumnLimit: 120
 ---
