@@ -26,11 +26,11 @@ World::World(AssetManager& assetManager)
         newNode->Position = {city["x"].get<float>(), city["y"].get<float>()};
         m_cities.push_back(std::move(newNode));
     }
-    for (auto& path : data["roads"])
+    for (auto& roadData : data["roads"])
     {
         // get cityA
-        City* cityA = FindCityByID(path["a"]);
-        City* cityB = FindCityByID(path["b"]);
+        City* cityA = FindCityByID(roadData["a"]);
+        City* cityB = FindCityByID(roadData["b"]);
         auto newRoad = std::make_unique<Road>();
         newRoad->cityA = cityA;
         newRoad->cityB = cityB;
@@ -77,29 +77,21 @@ std::vector<Road*> World::GetRoadsFromCity(City* city)
 }
 void World::Draw()
 {
-    DrawTexture(m_mapTexture, 0, 0, WHITE);
+    DrawSprite(m_mapSprite, {0, 0});
     for (auto& road : m_roads)
     {
         DrawLineEx(road->cityA->Position, road->cityB->Position, 5, GRAY);
     }
     for (auto& city : m_cities)
     {
-        DrawTexture(m_cityTexture,
-                    city->Position.x - m_cityTexture.width / 2,
-                    city->Position.y - m_cityTexture.height / 2,
-                    WHITE);
-        DrawTextEx(m_font,
-                   city->Name.c_str(),
-                   {city->Position.x, city->Position.y + m_cityTexture.width / 2},
-                   42,
-                   10,
-                   GOLD);
+        DrawSprite(m_citySprite, city->Position);
+        DrawTextEx(m_font, city->Name.c_str(), {city->Position.x - 48, city->Position.y - 48}, 42, 10, GOLD);
     }
 }
 
 Vector2 World::GetMapSize()
 {
-    return {static_cast<float>(m_mapTexture.width), static_cast<float>(m_mapTexture.height)};
+    return {static_cast<float>(m_mapSprite.sourceRect.width), static_cast<float>(m_mapSprite.sourceRect.height)};
 }
 
 void World::LoadSprites() {}
