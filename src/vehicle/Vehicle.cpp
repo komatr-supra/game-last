@@ -1,7 +1,6 @@
 #include "vehicle/Vehicle.hpp"
 #include "core/Logistic.hpp"
 #include "shipment/Shipment.hpp"
-#include "vehicle/VehicleDefinition.hpp"
 #include "vehicle/VehicleTaskBase.hpp"
 
 #include "raylib.h"

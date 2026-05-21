@@ -1,3 +1,5 @@
+#include "Config.hpp"
+
 #include "core/AssetManager.hpp"
 #include "core/Camera.hpp"
 #include "core/Map.hpp"
@@ -5,7 +7,7 @@
 
 #include "raylib.h"
 
-#define MAP_ROLL_SPD 5
+#include "vehicle/Vehicle.hpp"
 
 int main(void)
 {
@@ -28,10 +30,18 @@ int main(void)
 
         Vector2 moveCameraVector = {static_cast<float>(IsKeyDown(KEY_D) - IsKeyDown(KEY_A)),
                                     static_cast<float>(IsKeyDown(KEY_S) - IsKeyDown(KEY_W))};
-        cameraController.MoveCamera(Vector2Scale(moveCameraVector, MAP_ROLL_SPD));
+        cameraController.MoveCamera(Vector2Scale(moveCameraVector, Config::Control::MapRollSpeed));
 
         vehicleManager.Update(0.05f);
-
+        if (IsKeyPressed(KEY_H))
+        {
+            TraceLog(LOG_ERROR, "zmaknuto vytvoreni auta");
+            auto vehicles = vehicleManager.GetVehicleDatabase();
+            for (auto& v : vehicles)
+            {
+                TraceLog(LOG_ERROR, "vozidlo s nazvem %s je v databazi", v->nameInternal.c_str());
+            }
+        }
         BeginDrawing();
         BeginMode2D(cameraController.GetCamera());
         ClearBackground(RAYWHITE);

@@ -18,18 +18,22 @@
 class AssetManager;
 class Vehicle;
 struct City;
+struct VehicleDefinition;
 
 class VehicleManager
 {
   private:
     AssetManager& m_assetManager;
+    std::vector<std::unique_ptr<VehicleDefinition>> m_vehicleDatabase;
     std::vector<std::unique_ptr<Vehicle>> m_vehicles;
 
   public:
     VehicleManager(AssetManager& assetManager);
     ~VehicleManager();
 
-    void CreateVehicle(City* startingCity);
+    Vehicle* CreateVehicle(City* startingCity, const std::string& type); // todo add owner
     void Update(float time);
     void DrawAllVehicles();
+
+    std::vector<VehicleDefinition*> GetVehicleDatabase() const;
 };

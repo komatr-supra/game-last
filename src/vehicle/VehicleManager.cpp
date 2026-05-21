@@ -1,12 +1,59 @@
-#include "vehicle/VehicleManager.hpp"
+#include "Config.hpp"
+
 #include "core/AssetManager.hpp"
 #include "vehicle/Vehicle.hpp"
+#include "vehicle/VehicleManager.hpp"
 
-VehicleManager::VehicleManager(AssetManager& assetManager) : m_assetManager(assetManager) {}
+#include "json.hpp"
+
+#include <fstream>
+
+VehicleManager::VehicleManager(AssetManager& assetManager) : m_assetManager(assetManager)
+{
+    std::ifstream f(Config::FilePaths::Vehicles);
+    nlohmann::json data = nlohmann::json::parse(f);
+    for (auto& vehicleJSON : data["vehicles"])
+    {
+        m_vehicleDatabase.emplace_back(
+            std::make_unique<VehicleDefinition>(vehicleJSON["internalName"].get<std::string>(),
+                                                vehicleJSON["type"].get<std::string>(),
+                                                vehicleJSON["maxSpeed"].get<int>(),
+                                                vehicleJSON["maxCapacity"].get<int>(),
+                                                vehicleJSON["price"].get<int>(),
+                                                vehicleJSON["spriteName"].get<std::string>()));
+        TraceLog(LOG_ERROR, "auto vytvoreno");
+    }
+}
 
 VehicleManager::~VehicleManager() {}
 
-void VehicleManager::CreateVehicle(City* startingCity) {}
+std::vector<VehicleDefinition*> VehicleManager::GetVehicleDatabase() const
+{
+    std::vector<VehicleDefinition*> view;
+
+    for (const auto& vehicleUniqePointer : m_vehicleDatabase)
+    {
+        view.push_back(vehicleUniqePointer.get());
+    }
+    TraceLog(LOG_ERROR, "vracim databazi aut o velikosti: %d", view.size());
+    return view;
+}
+
+Vehicle* VehicleManager::CreateVehicle(City* startingCity, const std::string& type)
+{
+    auto it = std::find_if(m_vehicleDatabase.begin(),
+                           m_vehicleDatabase.end(),
+                           [&type](const std::unique_ptr<VehicleDefinition>& v) { return v->nameType == type; });
+    if (it != m_vehicleDatabase.end())
+    {
+        auto newVehicle = std::make_unique<Vehicle>("debilni auto", it->get());
+        Vehicle* ptr = newVehicle.get();
+        // create vehicle
+        m_vehicles.push_back(std::move(newVehicle));
+        return ptr;
+    }
+    return nullptr;
+}
 
 void VehicleManager::Update(float time)
 {

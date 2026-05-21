@@ -19,7 +19,6 @@ set(SOURCES
     src/core/Map.cpp
     
     src/vehicle/Vehicle.cpp
-    src/vehicle/VehicleDatabase.cpp
     src/vehicle/VehicleManager.cpp
 )
 
