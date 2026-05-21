@@ -16,7 +16,7 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":1715},
 	"sourceSize": {"w":2048,"h":1715},
-	"pivot": {"x":0.5,"y":0.5}
+	"pivot": {"x":0.0,"y":0.0}
 },
 "pickup":
 {

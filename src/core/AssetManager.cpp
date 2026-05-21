@@ -8,9 +8,12 @@
 
 AssetManager::AssetManager()
 {
+    TraceLog(LOG_ERROR, "asset manager started");
     std::ifstream f(Config::FilePaths::TexturePack);
     nlohmann::json data = nlohmann::json::parse(f);
+    TraceLog(LOG_ERROR, "reading texturepack jsno file");
     std::string texturePath = data["meta"]["image"];
+    TraceLog(LOG_ERROR, "texture path readed: %s", texturePath.c_str());
     texturePath = "data/" + texturePath;
     m_texture = LoadTexture(texturePath.c_str());
     for (auto& [name, frameData] : data["frames"].items())

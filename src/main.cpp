@@ -14,8 +14,8 @@ int main(void)
     InitWindow(1280, 720, "Raylib");
     SetTargetFPS(60);
 
-    World world;
     AssetManager assetManager;
+    World world{assetManager};
     VehicleManager vehicleManager{assetManager};
     // auto c = vehicleManager.CreateCar(world.m_cities[0].get());
     CameraController cameraController = {GetScreenWidth(), GetScreenHeight(), world.GetMapSize()};
