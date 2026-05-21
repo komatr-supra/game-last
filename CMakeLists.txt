@@ -16,7 +16,7 @@ set(SOURCES
     src/core/AssetManager.cpp
     src/core/Camera.cpp
     src/core/Logistic.cpp
-    src/core/World.cpp
+    src/core/Map.cpp
     
     src/vehicle/Vehicle.cpp
     src/vehicle/VehicleDatabase.cpp

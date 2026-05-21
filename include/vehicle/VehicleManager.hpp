@@ -1,7 +1,15 @@
+/**
+ * @file VehicleManager.hpp
+ * @author your name (you@domain.com)
+ * @brief take care about trucks, buy, sell, find, update them all, etc...
+ * @version 0.1
+ * @date 2026-05-21
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
 #pragma once
-
 #include "raylib.h"
-#include "raymath.h"
 
 #include <algorithm>
 #include <memory>

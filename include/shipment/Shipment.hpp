@@ -1,3 +1,13 @@
+/**
+ * @file Shipment.hpp
+ * @author your name (you@domain.com)
+ * @brief shipment and cargo related staff
+ * @version 0.1
+ * @date 2026-05-21
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
 #pragma once
 
 struct City;

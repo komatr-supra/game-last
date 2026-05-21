@@ -1,9 +1,6 @@
-#include "Config.hpp"
-
 #include "core/AssetManager.hpp"
-
+#include "Config.hpp"
 #include "json.hpp"
-
 #include <fstream>
 
 AssetManager::AssetManager()

@@ -1,7 +1,15 @@
+/**
+ * @file Map.hpp
+ * @author your name (you@domain.com)
+ * @brief take care about map, cities and paths
+ * @version 0.1
+ * @date 2026-05-21
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
 #pragma once
-
 #include "Sprite.hpp"
-
 #include "raylib.h"
 
 #include <memory>
@@ -11,7 +19,7 @@ struct City;
 struct Road;
 class AssetManager;
 
-class World
+class Map
 {
   private:
     City* FindCityByID(int id);
@@ -22,12 +30,11 @@ class World
     std::vector<std::unique_ptr<Road>> m_roads;
 
   public:
-    World(AssetManager& assetManager);
-    ~World();
+    Map(AssetManager& assetManager);
+    ~Map();
 
     Vector2 GetMapSize();
     Road* GetRoadBetweenCities(City* city1, City* city2);
     std::vector<Road*> GetRoadsFromCity(City* city);
     void Draw();
-    void LoadSprites();
 };

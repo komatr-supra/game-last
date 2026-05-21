@@ -1,3 +1,13 @@
+/**
+ * @file Config.hpp
+ * @author your name (you@domain.com)
+ * @brief constants, setting, global stuff
+ * @version 0.1
+ * @date 2026-05-21
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
 #pragma once
 
 namespace Config

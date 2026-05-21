@@ -2,14 +2,14 @@
 
 #include "core/AssetManager.hpp"
 #include "core/Logistic.hpp"
-#include "core/World.hpp"
+#include "core/Map.hpp"
 
 #include "json.hpp"
 #include "raymath.h"
 
 #include <fstream>
 
-World::World(AssetManager& assetManager)
+Map::Map(AssetManager& assetManager)
 {
     m_mapSprite = assetManager.GetSprite("map");
     m_citySprite = assetManager.GetSprite("city");
@@ -43,9 +43,9 @@ World::World(AssetManager& assetManager)
     }
 }
 
-World::~World() {}
+Map::~Map() {}
 
-City* World::FindCityByID(int id)
+City* Map::FindCityByID(int id)
 {
     for (const auto& n : m_cities)
     {
@@ -55,7 +55,7 @@ City* World::FindCityByID(int id)
     return nullptr;
 }
 
-Road* World::GetRoadBetweenCities(City* city1, City* city2)
+Road* Map::GetRoadBetweenCities(City* city1, City* city2)
 {
     for (auto& road : m_roads)
     {
@@ -65,7 +65,7 @@ Road* World::GetRoadBetweenCities(City* city1, City* city2)
     return nullptr;
 }
 
-std::vector<Road*> World::GetRoadsFromCity(City* city)
+std::vector<Road*> Map::GetRoadsFromCity(City* city)
 {
     std::vector<Road*> roads;
     for (auto& road : m_roads)
@@ -75,7 +75,7 @@ std::vector<Road*> World::GetRoadsFromCity(City* city)
     }
     return roads;
 }
-void World::Draw()
+void Map::Draw()
 {
     DrawSprite(m_mapSprite, {0, 0});
     for (auto& road : m_roads)
@@ -89,9 +89,7 @@ void World::Draw()
     }
 }
 
-Vector2 World::GetMapSize()
+Vector2 Map::GetMapSize()
 {
     return {static_cast<float>(m_mapSprite.sourceRect.width), static_cast<float>(m_mapSprite.sourceRect.height)};
 }
-
-void World::LoadSprites() {}

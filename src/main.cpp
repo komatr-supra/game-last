@@ -1,6 +1,6 @@
 #include "core/AssetManager.hpp"
 #include "core/Camera.hpp"
-#include "core/World.hpp"
+#include "core/Map.hpp"
 #include "vehicle/VehicleManager.hpp"
 
 #include "raylib.h"
@@ -15,10 +15,10 @@ int main(void)
     SetTargetFPS(60);
 
     AssetManager assetManager;
-    World world{assetManager};
+    Map map{assetManager};
     VehicleManager vehicleManager{assetManager};
     // auto c = vehicleManager.CreateCar(world.m_cities[0].get());
-    CameraController cameraController = {GetScreenWidth(), GetScreenHeight(), world.GetMapSize()};
+    CameraController cameraController = {GetScreenWidth(), GetScreenHeight(), map.GetMapSize()};
 
     // --- HLAVNÍ SMYČKA ---
     while (!WindowShouldClose())
@@ -35,7 +35,7 @@ int main(void)
         BeginDrawing();
         BeginMode2D(cameraController.GetCamera());
         ClearBackground(RAYWHITE);
-        world.Draw();
+        map.Draw();
         // vehicleManager.Draw();
         EndMode2D();
         EndDrawing();

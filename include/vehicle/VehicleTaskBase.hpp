@@ -1,5 +1,14 @@
+/**
+ * @file VehicleTaskBase.hpp
+ * @author your name (you@domain.com)
+ * @brief base class for all vehicle action - each action got separated file
+ * @version 0.1
+ * @date 2026-05-21
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
 #pragma once
-
 #include <string>
 
 class Car;
@@ -14,10 +23,7 @@ class VehicleTaskBase
 
   public:
     VehicleTaskBase(Car& car, std::string taskName, float timeToComplete)
-        : m_car(car),
-          m_name(std::move(taskName)),
-          m_timeToComplete(timeToComplete),
-          m_timeElapsed(0.0f)
+        : m_car(car), m_name(std::move(taskName)), m_timeToComplete(timeToComplete), m_timeElapsed(0.0f)
     {
     }
 

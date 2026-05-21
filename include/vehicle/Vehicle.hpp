@@ -1,5 +1,14 @@
+/**
+ * @file Vehicle.hpp
+ * @author your name (you@domain.com)
+ * @brief vehicle related function, information about trucks load, position, schedule, etc
+ * @version 0.1
+ * @date 2026-05-21
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
 #pragma once
-
 #include "raylib.h"
 #include "raymath.h"
 

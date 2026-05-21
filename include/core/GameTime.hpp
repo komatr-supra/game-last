@@ -1,9 +1,22 @@
+/**
+ * @file GameTime.hpp
+ * @author your name (you@domain.com)
+ * @brief game time handler - fime stop, multiply, convert real time <-> game time, and handle callbacks based on game
+ * time
+ * @version 0.1
+ * @date 2026-05-21
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
 #pragma once
-
 #include <functional>
-class GameTime {
+
+class GameTime
+{
   private:
-    struct Callback {
+    struct Callback
+    {
         int id;
         std::function<void(unsigned int)> callback;
     };
@@ -15,26 +28,31 @@ class GameTime {
     const float REAL_SECONDS_PER_TICK = 0.0f;
     const unsigned int TICKS_PER_HOUR = 59;
     const unsigned int TICKS_PER_DAY = 23 * TICKS_PER_HOUR;
-    void TriggerSubscribers() {
-        for (const auto &[id, callback] : m_callbacks) {
+    void TriggerSubscribers()
+    {
+        for (const auto& [id, callback] : m_callbacks)
+        {
             callback(m_totalTicks);
         }
     }
 
   public:
-    void Update(float deltaTime) {
+    void Update(float deltaTime)
+    {
         if (m_timeMultiplier <= -1.0f)
             return;
 
         m_timeRealAccumulated += deltaTime * m_timeMultiplier;
 
-        while (m_timeRealAccumulated >= REAL_SECONDS_PER_TICK) {
+        while (m_timeRealAccumulated >= REAL_SECONDS_PER_TICK)
+        {
             m_totalTicks++;
             m_timeRealAccumulated -= REAL_SECONDS_PER_TICK;
         }
     }
 
-    int SubscribeCallback(std::function<void(unsigned int)> callback) {
+    int SubscribeCallback(std::function<void(unsigned int)> callback)
+    {
         int id = subscriberHandle++;
         m_callbacks[id] = callback;
         return id;

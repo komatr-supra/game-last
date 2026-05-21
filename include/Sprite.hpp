@@ -1,5 +1,14 @@
+/**
+ * @file Sprite.hpp
+ * @author your name (you@domain.com)
+ * @brief sprite is an image in texture pack, GOT ORIGIN
+ * @version 0.1
+ * @date 2026-05-21
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
 #pragma once
-
 #include "raylib.h"
 
 #include <string>
