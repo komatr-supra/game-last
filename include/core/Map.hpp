@@ -22,7 +22,6 @@ class AssetManager;
 class Map
 {
   private:
-    City* FindCityByID(int id);
     Sprite m_mapSprite;
     Sprite m_citySprite;
     Font m_font;
@@ -33,6 +32,7 @@ class Map
     Map(AssetManager& assetManager);
     ~Map();
 
+    City* GetCityByID(int id);
     Vector2 GetMapSize();
     Road* GetRoadBetweenCities(City* city1, City* city2);
     std::vector<Road*> GetRoadsFromCity(City* city);

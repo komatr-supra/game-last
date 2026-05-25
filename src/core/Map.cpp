@@ -13,7 +13,6 @@ Map::Map(AssetManager& assetManager)
 {
     m_mapSprite = assetManager.GetSprite("map");
     m_citySprite = assetManager.GetSprite("city");
-    m_font = LoadFont(Config::FilePaths::Font);
 
     std::ifstream f(Config::FilePaths::MapData);
     nlohmann::json data = nlohmann::json::parse(f);
@@ -29,8 +28,8 @@ Map::Map(AssetManager& assetManager)
     for (auto& roadData : data["roads"])
     {
         // get cityA
-        City* cityA = FindCityByID(roadData["a"]);
-        City* cityB = FindCityByID(roadData["b"]);
+        City* cityA = GetCityByID(roadData["a"]);
+        City* cityB = GetCityByID(roadData["b"]);
         auto newRoad = std::make_unique<Road>();
         newRoad->cityA = cityA;
         newRoad->cityB = cityB;
@@ -45,7 +44,7 @@ Map::Map(AssetManager& assetManager)
 
 Map::~Map() {}
 
-City* Map::FindCityByID(int id)
+City* Map::GetCityByID(int id)
 {
     for (const auto& n : m_cities)
     {
@@ -85,7 +84,7 @@ void Map::Draw()
     for (auto& city : m_cities)
     {
         DrawSprite(m_citySprite, city->Position);
-        DrawTextEx(m_font, city->Name.c_str(), {city->Position.x - 48, city->Position.y - 48}, 42, 10, GOLD);
+        // DrawTextEx(m_font, city->Name.c_str(), {city->Position.x - 48, city->Position.y - 48}, 42, 10, GOLD);
     }
 }
 

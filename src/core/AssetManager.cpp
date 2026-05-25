@@ -43,9 +43,33 @@ AssetManager::AssetManager()
         m_sprites[name] = sprite;
         TraceLog(LOG_ERROR, "Sprite %s was created and added to the sprites collection.", name.c_str());
     }
+
+    m_guiPanel.name = "panel_gui";
+    m_guiPanel.texture = LoadTexture("data/window.png");
+    m_guiPanel.nPatchInfo.source = {0, 0, (float)m_guiPanel.texture.width, (float)m_guiPanel.texture.height};
+    m_guiPanel.nPatchInfo.right = 8;
+    m_guiPanel.nPatchInfo.top = 8;
+    m_guiPanel.nPatchInfo.left = 8;
+    m_guiPanel.nPatchInfo.bottom = 8;
+    m_guiPanel.nPatchInfo.layout = NPATCH_NINE_PATCH;
+
+    m_font = LoadFontEx(Config::FilePaths::Font, 48, nullptr, 0);
+
+    Sprite icon;
+    icon.name = "icon";
+    icon.texture = LoadTexture("data/garage.png");
+    icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
+    icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
+    m_sprites[icon.name] = icon;
 }
 
-AssetManager::~AssetManager() {}
+AssetManager::~AssetManager()
+{
+    // unload all textures
+    UnloadTexture(m_texture);
+    UnloadTexture(m_guiPanel.texture);
+    UnloadFont(m_font);
+}
 
 Sprite AssetManager::GetSprite(const std::string& spriteName)
 {
@@ -57,3 +81,6 @@ Sprite AssetManager::GetSprite(const std::string& spriteName)
 
     return Sprite();
 }
+
+Sprite9Slice AssetManager::GetGuiPanel() { return m_guiPanel; }
+Font AssetManager::GetFont() { return m_font; }

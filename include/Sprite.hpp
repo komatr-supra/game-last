@@ -36,3 +36,15 @@ inline void DrawSprite(const Sprite& sprite,
 
     DrawTexturePro(sprite.texture, sprite.sourceRect, destRect, scaledOrigin, rotation, tintColor);
 }
+
+struct Sprite9Slice
+{
+    std::string name;
+    Texture2D texture;
+    NPatchInfo nPatchInfo;
+};
+
+inline void DrawPanel(Sprite9Slice sprite, Rectangle destination, Color tintColor = WHITE)
+{
+    DrawTextureNPatch(sprite.texture, sprite.nPatchInfo, destination, {0, 0}, 0, tintColor);
+}

@@ -22,7 +22,8 @@ set(SOURCES
     src/vehicle/VehicleManager.cpp
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES}
+    include/control/gui/GuiManager.hpp)
 
 # 3. Include directories
 target_include_directories(${PROJECT_NAME} PRIVATE 

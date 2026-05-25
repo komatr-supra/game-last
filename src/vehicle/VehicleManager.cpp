@@ -46,10 +46,12 @@ Vehicle* VehicleManager::CreateVehicle(City* startingCity, const std::string& ty
                            [&type](const std::unique_ptr<VehicleDefinition>& v) { return v->nameType == type; });
     if (it != m_vehicleDatabase.end())
     {
-        auto newVehicle = std::make_unique<Vehicle>("debilni auto", it->get());
+        auto newVehicle = std::make_unique<Vehicle>("debilni auto", it->get(), startingCity);
+
         Vehicle* ptr = newVehicle.get();
         // create vehicle
         m_vehicles.push_back(std::move(newVehicle));
+        TraceLog(LOG_ERROR, "car created");
         return ptr;
     }
     return nullptr;
@@ -67,5 +69,6 @@ void VehicleManager::DrawAllVehicles()
 {
     for (auto& vehicle : m_vehicles)
     {
+        DrawCircle(vehicle->GetPosition().x, vehicle->GetPosition().y, 20, RED);
     }
 }

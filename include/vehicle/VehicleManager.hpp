@@ -36,4 +36,6 @@ class VehicleManager
     void DrawAllVehicles();
 
     std::vector<VehicleDefinition*> GetVehicleDatabase() const;
+
+    const std::vector<std::unique_ptr<Vehicle>>& GetAllVehicles() const { return m_vehicles; }
 };

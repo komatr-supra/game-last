@@ -41,19 +41,10 @@ struct VehicleDefinition
     }
 };
 
-enum class VEHICLE_STATE
-{
-    IDLE,
-    MOVING,
-    LOADING,
-    UNLOADING
-};
-
 class Vehicle
 {
   private:
     const std::string m_name;
-    VEHICLE_STATE m_state;
     int m_speedCurrent;
     VehicleDefinition* m_data;
     City* m_city; // last city, where this vehicle was
@@ -61,18 +52,21 @@ class Vehicle
     std::vector<ShipmentItem*> m_cargo;
 
   public:
-    Vehicle(std::string name, VehicleDefinition* data);
+    Vehicle(std::string name, VehicleDefinition* data, City* city);
     ~Vehicle();
+
+    void Update(float time);
 
     const std::string& GetName() const;
     const std::string& GetTypeName() const;
+    City* GetLastCity() const { return m_city; }
     const std::string& GetInternalName() const;
-    int GetMaxSpeed();
-    int GetMaxCapacity();
-    int GetPrice();
+    int GetMaxSpeed() const;
+    int GetMaxCapacity() const;
+    int GetPrice() const;
     const std::string& GetTexturePath() const;
-
     Vector2 GetPosition();
 
-    void Update(float time);
+    void SetLastCity(City* city) { m_city = city; }
+    void AddTask(std::unique_ptr<VehicleTaskBase> task);
 };

@@ -22,10 +22,14 @@ class AssetManager
   private:
     Texture2D m_texture;
     std::unordered_map<std::string, Sprite> m_sprites;
+    Sprite9Slice m_guiPanel;
+    Font m_font;
 
   public:
     AssetManager(/* args */);
     ~AssetManager();
 
     Sprite GetSprite(const std::string& spriteName);
+    Sprite9Slice GetGuiPanel();
+    Font GetFont();
 };

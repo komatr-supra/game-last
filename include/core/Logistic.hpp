@@ -31,9 +31,3 @@ struct Road
     City* cityB;
     float lenght;
 };
-
-struct PathData
-{
-    City* city; // destination city
-    Road* road;
-};

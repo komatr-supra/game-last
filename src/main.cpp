@@ -7,12 +7,16 @@
 
 #include "raylib.h"
 
+#include "control/gui/GuiManager.hpp"
+
 #include "vehicle/Vehicle.hpp"
+#include "vehicle/tasks/VehicleTaskBase.hpp"
+#include "vehicle/tasks/VehicleTaskMoving.hpp"
 
 int main(void)
 {
     // 1. Inicializace (vypneme otravné logy, aby zářilo naše LOG_INFO)
-    SetTraceLogLevel(LOG_WARNING);
+    SetTraceLogLevel(LOG_INFO);
     InitWindow(1280, 720, "Raylib");
     SetTargetFPS(60);
 
@@ -21,7 +25,7 @@ int main(void)
     VehicleManager vehicleManager{assetManager};
     // auto c = vehicleManager.CreateCar(world.m_cities[0].get());
     CameraController cameraController = {GetScreenWidth(), GetScreenHeight(), map.GetMapSize()};
-
+    GuiManager guiManager{assetManager, vehicleManager};
     // --- HLAVNÍ SMYČKA ---
     while (!WindowShouldClose())
     {
@@ -35,19 +39,19 @@ int main(void)
         vehicleManager.Update(0.05f);
         if (IsKeyPressed(KEY_H))
         {
-            TraceLog(LOG_ERROR, "zmaknuto vytvoreni auta");
-            auto vehicles = vehicleManager.GetVehicleDatabase();
-            for (auto& v : vehicles)
-            {
-                TraceLog(LOG_ERROR, "vozidlo s nazvem %s je v databazi", v->nameInternal.c_str());
-            }
+            auto city1 = map.GetCityByID(1);
+            auto car = vehicleManager.CreateVehicle(city1, "Dodge");
+            auto city2 = map.GetCityByID(1);
+            auto pathh = map.GetRoadBetweenCities(city1, city2);
+            car->AddTask(std::make_unique<VehicleTaskMoving>(pathh, *car, "jizda auta"));
         }
         BeginDrawing();
         BeginMode2D(cameraController.GetCamera());
         ClearBackground(RAYWHITE);
         map.Draw();
-        // vehicleManager.Draw();
+        vehicleManager.DrawAllVehicles();
         EndMode2D();
+        guiManager.DrawDashboard();
         EndDrawing();
     }
 
