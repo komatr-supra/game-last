@@ -25,7 +25,7 @@ int main(void)
     VehicleManager vehicleManager{assetManager};
     // auto c = vehicleManager.CreateCar(world.m_cities[0].get());
     CameraController cameraController = {GetScreenWidth(), GetScreenHeight(), map.GetMapSize()};
-    GuiManager guiManager{assetManager};
+    GuiManager guiManager{assetManager, vehicleManager};
     // --- HLAVNÍ SMYČKA ---
     while (!WindowShouldClose())
     {

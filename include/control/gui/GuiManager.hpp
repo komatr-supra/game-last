@@ -7,15 +7,16 @@ class GuiManager
 {
   private:
     GuiDashboard m_dashboard;
+    VehicleManager& m_vehicleManager;
 
   public:
-    GuiManager(AssetManager& am);
+    GuiManager(AssetManager& am, VehicleManager& vm);
     ~GuiManager();
 
     void Draw();
 };
 
-GuiManager::GuiManager(AssetManager& am) : m_dashboard(am) {}
+GuiManager::GuiManager(AssetManager& am, VehicleManager& vm) : m_dashboard(am, vm), m_vehicleManager(vm) {}
 
 GuiManager::~GuiManager() {}
 

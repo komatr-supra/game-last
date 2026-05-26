@@ -24,6 +24,7 @@ class AssetManager
     std::unordered_map<std::string, Sprite> m_sprites;
     Sprite9Slice m_guiPanel;
     Font m_font;
+    Sprite9Slice m_line;
 
   public:
     AssetManager(/* args */);
@@ -32,4 +33,5 @@ class AssetManager
     Sprite GetSprite(const std::string& spriteName);
     Sprite9Slice GetGuiPanel();
     Font GetFont();
+    Sprite9Slice GetLine() { return m_line; }
 };

@@ -46,6 +46,7 @@ AssetManager::AssetManager()
 
     m_guiPanel.name = "panel_gui";
     m_guiPanel.texture = LoadTexture("data/window.png");
+    SetTextureFilter(m_guiPanel.texture, TEXTURE_FILTER_BILINEAR);
     m_guiPanel.nPatchInfo.source = {0, 0, (float)m_guiPanel.texture.width, (float)m_guiPanel.texture.height};
     m_guiPanel.nPatchInfo.right = 8;
     m_guiPanel.nPatchInfo.top = 8;
@@ -53,7 +54,16 @@ AssetManager::AssetManager()
     m_guiPanel.nPatchInfo.bottom = 8;
     m_guiPanel.nPatchInfo.layout = NPATCH_NINE_PATCH;
 
-    m_font = LoadFontEx(Config::FilePaths::Font, 48, nullptr, 0);
+    m_line.name = "gui_line_h";
+    m_line.texture = LoadTexture("data/line.png");
+    SetTextureFilter(m_line.texture, TEXTURE_FILTER_BILINEAR);
+    m_line.nPatchInfo.source = {0, 0, (float)m_line.texture.width, (float)m_line.texture.height};
+    m_line.nPatchInfo.right = 1;
+    m_line.nPatchInfo.left = 1;
+    m_line.nPatchInfo.layout = NPATCH_NINE_PATCH;
+
+    m_font = LoadFontEx(Config::FilePaths::Font, 46, nullptr, 0);
+    SetTextureFilter(m_font.texture, TEXTURE_FILTER_BILINEAR);
 
     Sprite icon;
     icon.name = "gui_tab_vehicles";
@@ -76,6 +86,12 @@ AssetManager::AssetManager()
 
     icon.name = "gui_tab_sabotages";
     icon.texture = LoadTexture("data/gui_sabotages.png");
+    icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
+    icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
+    m_sprites[icon.name] = icon;
+
+    icon.name = "gui_icon_cross";
+    icon.texture = LoadTexture("data/gui_cross.png");
     icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
     icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
     m_sprites[icon.name] = icon;
