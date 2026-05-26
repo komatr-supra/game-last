@@ -37,6 +37,11 @@ inline void DrawSprite(const Sprite& sprite,
     DrawTexturePro(sprite.texture, sprite.sourceRect, destRect, scaledOrigin, rotation, tintColor);
 }
 
+inline void DrawSpriteRect(const Sprite& sprite, Rectangle targetRectangle, Color color = WHITE)
+{
+    DrawTexturePro(sprite.texture, sprite.sourceRect, targetRectangle, {0, 0}, 0, color);
+}
+
 struct Sprite9Slice
 {
     std::string name;
@@ -44,7 +49,7 @@ struct Sprite9Slice
     NPatchInfo nPatchInfo;
 };
 
-inline void DrawPanel(Sprite9Slice sprite, Rectangle destination, Color tintColor = WHITE)
+inline void DrawSpriteNP(Sprite9Slice sprite, Rectangle destination, Color tintColor = WHITE)
 {
     DrawTextureNPatch(sprite.texture, sprite.nPatchInfo, destination, {0, 0}, 0, tintColor);
 }

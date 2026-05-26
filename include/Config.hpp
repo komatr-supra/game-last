@@ -23,4 +23,7 @@ namespace Control
 {
 inline float MapRollSpeed = 8;
 }
+namespace ImageNames
+{
+}
 } // namespace Config

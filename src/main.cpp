@@ -25,7 +25,7 @@ int main(void)
     VehicleManager vehicleManager{assetManager};
     // auto c = vehicleManager.CreateCar(world.m_cities[0].get());
     CameraController cameraController = {GetScreenWidth(), GetScreenHeight(), map.GetMapSize()};
-    GuiManager guiManager{assetManager, vehicleManager};
+    GuiManager guiManager{assetManager};
     // --- HLAVNÍ SMYČKA ---
     while (!WindowShouldClose())
     {
@@ -51,7 +51,7 @@ int main(void)
         map.Draw();
         vehicleManager.DrawAllVehicles();
         EndMode2D();
-        guiManager.DrawDashboard();
+        guiManager.Draw();
         EndDrawing();
     }
 

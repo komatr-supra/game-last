@@ -56,8 +56,26 @@ AssetManager::AssetManager()
     m_font = LoadFontEx(Config::FilePaths::Font, 48, nullptr, 0);
 
     Sprite icon;
-    icon.name = "icon";
-    icon.texture = LoadTexture("data/garage.png");
+    icon.name = "gui_tab_vehicles";
+    icon.texture = LoadTexture("data/gui_vehicles.png");
+    icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
+    icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
+    m_sprites[icon.name] = icon;
+
+    icon.name = "gui_tab_mainfests";
+    icon.texture = LoadTexture("data/gui_mainfests.png");
+    icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
+    icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
+    m_sprites[icon.name] = icon;
+
+    icon.name = "gui_tab_marketplace";
+    icon.texture = LoadTexture("data/gui_marketplace.png");
+    icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
+    icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
+    m_sprites[icon.name] = icon;
+
+    icon.name = "gui_tab_sabotages";
+    icon.texture = LoadTexture("data/gui_sabotages.png");
     icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
     icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
     m_sprites[icon.name] = icon;
