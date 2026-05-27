@@ -108,15 +108,7 @@ void GuiDashboard::Draw()
     Color inac = GetColor(0x64748BFF);
     Color act = GetColor(0x1E2D4AFF);
     // background
-    // 0x00E5FFFF nebo 0x38BDF8FF small highlight
-    // 0x1E2D4AFF active
-    // ice cyan 0x00E5FFFF - point of interest
-    // pink 0xFF2A85FF - alert
-    // warning text 0xFF6B6BFF
-    // bright green 0x00F5B4FF - OK
-    // black 0x0B0F19F8
-    // gold 0xFF9F1CFF - money
-    // glow = pnik/green/cyan + FFFFFF white in the center -> intense glow
+
     Color bor = GetColor(0xFF9F1CFF);
     Color back = GetColor(0x0B0F19F8);
     DrawSpriteNP(m_backgroundBorder, m_dashboardRect, bor);
