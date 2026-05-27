@@ -1,0 +1,28 @@
+{
+  "vehicles": [
+    {
+      "internalName": "truck_small_01",
+      "type": "Dodge",
+      "maxSpeed": 80,
+      "maxCapacity": 2,
+      "price": 15000,
+      "spriteName": "pickup"
+    },
+    {
+      "internalName": "truck_heavy_01",
+      "type": "Scania R500",
+      "maxSpeed": 110,
+      "maxCapacity": 6,
+      "price": 55000,
+      "spriteName": "truck"
+    },
+    {
+      "internalName": "van_delivery_01",
+      "type": "Ford Transit",
+      "maxSpeed": 130,
+      "maxCapacity": 3,
+      "price": 25000,
+      "spriteName": "van"
+    }
+  ]
+}

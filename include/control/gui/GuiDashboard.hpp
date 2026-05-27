@@ -41,6 +41,7 @@ class GuiDashboard
     Rectangle m_dashboardRect;
     Sprite9Slice m_backgroundSprite;
     Sprite9Slice m_lineSprite;
+    Sprite9Slice m_backgroundBorder;
     Font m_font;
     Padding m_padding;
     Vector2 m_tabMenuSize;
@@ -49,12 +50,9 @@ class GuiDashboard
     TabType m_selectedTab = TabType::Vehicles;
 
     std::vector<TabButton> m_tabButtons;
-    std::array<const char*, 4> TAB_ICONS = {"gui_tab_vehicles",
-                                            "gui_tab_mainfests",
-                                            "gui_tab_marketplace",
-                                            "gui_tab_sabotages"};
+    std::array<const char*, 4> TAB_ICONS = {"tab vehicles", "tab mainfests", "tab marketplace", "tab sabotages"};
     std::array<const char*, 4> TAB_NAMES = {"Vehicles", "Delivery", "Offers", "Sabotages"};
-    Sprite m_cross;
+    Sprite m_plus;
     void Recalculate();
     Rectangle GetItemRectangle(float startingY, int index)
     {
@@ -74,10 +72,14 @@ class GuiDashboard
 };
 
 GuiDashboard::GuiDashboard(AssetManager& am, VehicleManager& vm)
-    : m_vehicleManager(vm), m_backgroundSprite(am.GetGuiPanel()), m_font(am.GetFont()), m_padding({8, 8, 8, 8})
+    : m_vehicleManager(vm),
+      m_backgroundSprite(am.GetSpriteNP("background color")),
+      m_font(am.GetFont()),
+      m_padding({8, 8, 8, 8})
 {
-    m_cross = am.GetSprite("gui_icon_cross");
-    m_lineSprite = am.GetLine();
+    m_plus = am.GetSprite("icon plus");
+    m_lineSprite = am.GetSpriteNP("line horizontal");
+    m_backgroundBorder = am.GetSpriteNP("background border");
     Recalculate();
     for (int i = 0; i < (int)TabType::COUNT; i++)
     {
@@ -102,8 +104,23 @@ void GuiDashboard::Recalculate()
 
 void GuiDashboard::Draw()
 {
+    Color wh = GetColor(0xB4C6D8FF);
+    Color inac = GetColor(0x64748BFF);
+    Color act = GetColor(0x1E2D4AFF);
     // background
-    DrawSpriteNP(m_backgroundSprite, m_dashboardRect);
+    // 0x00E5FFFF nebo 0x38BDF8FF small highlight
+    // 0x1E2D4AFF active
+    // ice cyan 0x00E5FFFF - point of interest
+    // pink 0xFF2A85FF - alert
+    // warning text 0xFF6B6BFF
+    // bright green 0x00F5B4FF - OK
+    // black 0x0B0F19F8
+    // gold 0xFF9F1CFF - money
+    // glow = pnik/green/cyan + FFFFFF white in the center -> intense glow
+    Color bor = GetColor(0xFF9F1CFF);
+    Color back = GetColor(0x0B0F19F8);
+    DrawSpriteNP(m_backgroundBorder, m_dashboardRect, bor);
+    DrawSpriteNP(m_backgroundSprite, m_dashboardRect, back);
 
     // tabs
     for (auto& tab : m_tabButtons)
@@ -114,19 +131,21 @@ void GuiDashboard::Draw()
                              tab.rect.height - (m_padding.top + m_padding.bot)};
         if (CheckCollisionPointRec(GetMousePosition(), tab.rect))
         {
-            Color col = ColorAlpha(LIGHTGRAY, 0.2f);
+            Color col = GetColor(0x161F30FF);
             DrawRectangleRounded(imgRect, 0.3f, 8, col);
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
                 m_selectedTab = tab.tabType;
         }
-        DrawSpriteRect(tab.sprite, imgRect, m_selectedTab == tab.tabType ? WHITE : GRAY);
+        DrawSpriteRect(tab.sprite, imgRect, m_selectedTab == tab.tabType ? wh : inac);
     }
     // line
+    Color divCol = GetColor(0x33476AFF);
     DrawSpriteNP(m_lineSprite,
                  {m_dashboardRect.x + 2 * m_padding.left,
                   m_dashboardRect.y + m_tabMenuSize.y,
                   m_dashboardRect.width - 2 * (m_padding.left + m_padding.right),
-                  (float)m_lineSprite.texture.height});
+                  (float)m_lineSprite.texture.height},
+                 divCol);
     // title
     Vector2 textSize = MeasureTextEx(m_font, TAB_NAMES[(int)m_selectedTab], 46, 0);
     DrawTextEx(m_font,
@@ -134,15 +153,16 @@ void GuiDashboard::Draw()
                {m_dashboardRect.x + m_padding.left, m_dashboardRect.y + m_tabMenuSize.y + m_padding.top},
                46,
                0,
-               WHITE);
+               wh);
     // draw cross symbol = buy vehicle
+    Color warnTxt = GetColor(0xFF0000FF);
     float buyCarIconX = m_dashboardRect.x + m_dashboardRect.width - m_padding.right - textSize.x / 2;
     Rectangle buyCarIconTarget = {buyCarIconX,
                                   m_dashboardRect.y + m_tabMenuSize.y + m_padding.top,
                                   textSize.y - 10,
                                   textSize.y - 10};
     if (m_selectedTab == TabType::Vehicles)
-        DrawSpriteRect(m_cross, buyCarIconTarget);
+        DrawSpriteRect(m_plus, buyCarIconTarget, warnTxt);
 
     // items
     float yItemStartPos = m_dashboardRect.y + m_tabMenuSize.y + textSize.y + m_padding.top;
@@ -154,7 +174,7 @@ void GuiDashboard::Draw()
         for (size_t i = 0; i < vehicles.size(); i++)
         {
             Rectangle r = GetItemRectangle(yItemStartPos + m_padding.top, i);
-            DrawSpriteNP(m_backgroundSprite, r);
+            DrawSpriteNP(m_backgroundSprite, r, act);
             DrawTextEx(m_font,
                        vehicles[i]->GetName().c_str(),
                        {r.x + m_padding.left, r.y + m_padding.top},

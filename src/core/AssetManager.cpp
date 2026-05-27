@@ -44,64 +44,71 @@ AssetManager::AssetManager()
         TraceLog(LOG_ERROR, "Sprite %s was created and added to the sprites collection.", name.c_str());
     }
 
-    m_guiPanel.name = "panel_gui";
-    m_guiPanel.texture = LoadTexture("data/window.png");
-    SetTextureFilter(m_guiPanel.texture, TEXTURE_FILTER_BILINEAR);
-    m_guiPanel.nPatchInfo.source = {0, 0, (float)m_guiPanel.texture.width, (float)m_guiPanel.texture.height};
-    m_guiPanel.nPatchInfo.right = 8;
-    m_guiPanel.nPatchInfo.top = 8;
-    m_guiPanel.nPatchInfo.left = 8;
-    m_guiPanel.nPatchInfo.bottom = 8;
-    m_guiPanel.nPatchInfo.layout = NPATCH_NINE_PATCH;
+    Sprite9Slice bg;
+    bg.texture = LoadTexture("data/background color.png");
+    SetTextureFilter(bg.texture, TEXTURE_FILTER_BILINEAR);
+    bg.nPatchInfo.source = {0, 0, (float)bg.texture.width, (float)bg.texture.height};
+    bg.nPatchInfo.right = 6;
+    bg.nPatchInfo.top = 6;
+    bg.nPatchInfo.left = 6;
+    bg.nPatchInfo.bottom = 6;
+    bg.nPatchInfo.layout = NPATCH_NINE_PATCH;
+    m_spritesNP["background color"] = bg;
 
-    m_line.name = "gui_line_h";
-    m_line.texture = LoadTexture("data/line.png");
-    SetTextureFilter(m_line.texture, TEXTURE_FILTER_BILINEAR);
-    m_line.nPatchInfo.source = {0, 0, (float)m_line.texture.width, (float)m_line.texture.height};
-    m_line.nPatchInfo.right = 1;
-    m_line.nPatchInfo.left = 1;
-    m_line.nPatchInfo.layout = NPATCH_NINE_PATCH;
+    Sprite9Slice bgb;
+    bgb.texture = LoadTexture("data/background border.png");
+    SetTextureFilter(bgb.texture, TEXTURE_FILTER_BILINEAR);
+    bgb.nPatchInfo.source = {0, 0, (float)bgb.texture.width, (float)bgb.texture.height};
+    bgb.nPatchInfo.right = 6;
+    bgb.nPatchInfo.top = 6;
+    bgb.nPatchInfo.left = 6;
+    bgb.nPatchInfo.bottom = 6;
+    bgb.nPatchInfo.layout = NPATCH_NINE_PATCH;
+    m_spritesNP["background border"] = bgb;
 
-    m_font = LoadFontEx(Config::FilePaths::Font, 46, nullptr, 0);
+    Sprite9Slice line;
+    line.texture = LoadTexture("data/line.png");
+    SetTextureFilter(line.texture, TEXTURE_FILTER_BILINEAR);
+    line.nPatchInfo.source = {0, 0, (float)line.texture.width, (float)line.texture.height};
+    line.nPatchInfo.right = 4;
+    line.nPatchInfo.left = 4;
+    line.nPatchInfo.layout = NPATCH_THREE_PATCH_HORIZONTAL;
+    m_spritesNP["line horizontal"] = line;
+
+    m_font = LoadFontEx("data/Lato-Regular.ttf", 32, nullptr, 0);
     SetTextureFilter(m_font.texture, TEXTURE_FILTER_BILINEAR);
 
     Sprite icon;
-    icon.name = "gui_tab_vehicles";
     icon.texture = LoadTexture("data/gui_vehicles.png");
     icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
     icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
-    m_sprites[icon.name] = icon;
+    m_sprites["tab vehicles"] = icon;
 
-    icon.name = "gui_tab_mainfests";
     icon.texture = LoadTexture("data/gui_mainfests.png");
     icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
     icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
-    m_sprites[icon.name] = icon;
+    m_sprites["tab mainfests"] = icon;
 
-    icon.name = "gui_tab_marketplace";
     icon.texture = LoadTexture("data/gui_marketplace.png");
     icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
     icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
-    m_sprites[icon.name] = icon;
+    m_sprites["tab marketplace"] = icon;
 
-    icon.name = "gui_tab_sabotages";
     icon.texture = LoadTexture("data/gui_sabotages.png");
     icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
     icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
-    m_sprites[icon.name] = icon;
+    m_sprites["tab sabotages"] = icon;
 
-    icon.name = "gui_icon_cross";
-    icon.texture = LoadTexture("data/gui_cross.png");
+    icon.texture = LoadTexture("data/icon plus.png");
     icon.origin = {(float)icon.texture.width / 2, (float)icon.texture.height / 2};
     icon.sourceRect = {0, 0, (float)icon.texture.width, (float)icon.texture.height};
-    m_sprites[icon.name] = icon;
+    m_sprites["icon plus"] = icon;
 }
 
 AssetManager::~AssetManager()
 {
     // unload all textures
     UnloadTexture(m_texture);
-    UnloadTexture(m_guiPanel.texture);
     UnloadFont(m_font);
 }
 
@@ -116,5 +123,14 @@ Sprite AssetManager::GetSprite(const std::string& spriteName)
     return Sprite();
 }
 
-Sprite9Slice AssetManager::GetGuiPanel() { return m_guiPanel; }
+Sprite9Slice AssetManager::GetSpriteNP(const std::string& spriteName)
+{
+    auto it = m_spritesNP.find(spriteName);
+    if (it != m_spritesNP.end())
+    {
+        return it->second;
+    }
+
+    return Sprite9Slice();
+}
 Font AssetManager::GetFont() { return m_font; }
