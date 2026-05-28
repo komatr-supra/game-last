@@ -1,0 +1,1 @@
+{% load JsonSpriteExporterSTD %}{{ tp|exportJSON|safe }}

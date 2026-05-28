@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Map of Europe, citiest with paths"
+  },
+  "cities": [
+    { "id": 0, "name": "Madrid", "code": "MAD", "x": 400, "y": 1300 },
+    { "id": 1, "name": "Paris", "code": "PAR", "x": 900, "y": 760 },
+    { "id": 2, "name": "Rome", "code": "ROM", "x": 1370, "y": 1330 },
+    { "id": 3, "name": "Milan", "code": "MIL", "x": 1180, "y": 1070 },
+    { "id": 4, "name": "Vienna", "code": "VIE", "x": 1590, "y": 850 },
+    { "id": 5, "name": "Prague", "code": "PRG", "x": 1490, "y": 730 },
+    { "id": 6, "name": "Berlin", "code": "BER", "x": 1420, "y": 500 },
+    { "id": 7, "name": "Warsaw", "code": "WAR", "x": 1800, "y": 580 }
+  ],
+  "roads": [
+    { "a": 0, "b": 1, "note": "Madrid - Paris" },
+    { "a": 0, "b": 3, "note": "Madrid - Milan" },
+    { "a": 1, "b": 3, "note": "Paris - Milan" },
+    { "a": 1, "b": 4, "note": "Paris - Vienna" },
+    { "a": 1, "b": 5, "note": "Paris - Prague" },
+    { "a": 1, "b": 6, "note": "Paris - Berlin" },
+    { "a": 2, "b": 3, "note": "Rome - Milan" },
+    { "a": 3, "b": 4, "note": "Milan - Vienna" },
+    { "a": 4, "b": 5, "note": "Vienna - Prague" },
+    { "a": 4, "b": 7, "note": "Vienna - Warsaw" },
+    { "a": 5, "b": 6, "note": "Prague - Berlin" },
+    { "a": 5, "b": 7, "note": "Prague - Warsaw" },
+    { "a": 6, "b": 7, "note": "Berlin - Warsaw" }
+  ]
+}

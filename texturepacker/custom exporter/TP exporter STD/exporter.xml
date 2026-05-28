@@ -1,0 +1,91 @@
+<exporter version="1.0">
+    <!-- identifier of the exporter -->
+    <name>STD</name>
+	
+    <!-- display name of the exporter for the combo box -->
+    <displayName>STD - my custom exporter</displayName>
+             
+    <!-- description of the exporter -->
+    <description>Input format for my game(STD) in raylib and c++</description>
+
+    <!-- exporter version -->
+    <version>1.0</version>
+	
+    <files>
+        <file>
+            <!-- name of this file variable -->
+            <name>jsonFile</name>
+
+            <!-- human readable name (for GUI) -->
+            <displayName>JSON file name</displayName>
+
+            <!-- file extension for the file -->
+            <fileExtension>json</fileExtension>
+
+            <!-- description what the file contains, used in tooltips in the GUI -->
+            <description>json sprites data for game</description>
+
+            <!-- write this file only for the first AutoSD variation -->
+            <!-- values are: all (default), first, last -->
+            <hasSeparateAutoSDFiles>all</hasSeparateAutoSDFiles>
+
+            <!-- do not write a file for each multipack variation -->
+            <hasSeparateMultiPackFiles>false</hasSeparateMultiPackFiles>
+
+            <!-- name of the template file -->
+            <template>std.json</template>
+        </file>
+        <file>
+            <!-- name of this file variable -->
+            <name>constantFile</name>
+
+            <!-- human readable name (for GUI) -->
+            <displayName>hpp file name</displayName>
+
+            <!-- file extension for the file -->
+            <fileExtension>hpp</fileExtension>
+
+            <!-- description what the file contains, used in tooltips in the GUI -->
+            <description>Sprite Definition variables for raylib and C++</description>
+
+            <!-- write this file only for the first AutoSD variation -->
+            <!-- values are: all (default), first, last -->
+            <hasSeparateAutoSDFiles>first</hasSeparateAutoSDFiles>
+
+            <!-- do not write a file for each multipack variation -->
+            <hasSeparateMultiPackFiles>false</hasSeparateMultiPackFiles>
+
+            <!-- name of the template file -->
+            <template>std.hpp</template>
+        </file>
+    </files>
+
+    <!-- target framework supports trimming -->
+    <supportsTrimming>true</supportsTrimming>
+    <supportsRotation>false</supportsRotation>
+    <supportsPivotPoint>true</supportsPivotPoint>
+
+    <supportsNPOT>true</supportsNPOT>
+    
+    <textureSizeFactor>1</textureSizeFactor>
+
+    <!-- supports file name stripping (remove .png etc) -->
+    <supportsTrimSpriteNames>true</supportsTrimSpriteNames>
+    <supportsScale9>true</supportsScale9>
+    <supportsAnimations>false</supportsAnimations>
+    <!-- supports texure subpath -->
+    <supportsTextureSubPath>no</supportsTextureSubPath>
+
+    <defaults>
+        <extrude>1</extrude>
+        <trimSpriteNames>true</trimSpriteNames>    
+        <prependSmartFolderName>true</prependSmartFolderName>
+        <shapePadding>2</shapePadding>
+        <borderPadding>2</borderPadding>
+        <trimMode>Trim</trimMode>               <!-- None, Trim, Crop, CropKeepPos, Polygon -->
+        <sizeConstraints>AnySize</sizeConstraints>     <!-- POT, WordAligned, AnySize -->
+        <writePivotPoints>true</writePivotPoints>  <!-- true, false -->
+        <defaultPivotPoint>0.5,0.5</defaultPivotPoint>
+    </defaults>
+
+</exporter>
