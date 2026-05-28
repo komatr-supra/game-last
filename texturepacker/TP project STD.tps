@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>STD</string>
         <key>textureFileName</key>
-        <filename>../assets/sprites/texturepacker_{n}.png</filename>
+        <filename>../assets/sprites/texturepack_{n}.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrQualityLevel</key>
@@ -124,12 +124,12 @@
             <key>constantFile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../assets/sprites/texturepacker.hpp</filename>
+                <filename>../assets/sprites/texturepack.hpp</filename>
             </struct>
             <key>jsonFile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../assets/sprites/texturepacker.json</filename>
+                <filename>../assets/sprites/texturepack.json</filename>
             </struct>
         </map>
         <key>multiPackMode</key>
@@ -178,6 +178,15 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">source images/gui/icon/calendar.png</key>
+            <key type="filename">source images/gui/icon/cancel.png</key>
+            <key type="filename">source images/gui/icon/cart.png</key>
+            <key type="filename">source images/gui/icon/chart.png</key>
+            <key type="filename">source images/gui/icon/marker.png</key>
+            <key type="filename">source images/gui/icon/pause.png</key>
+            <key type="filename">source images/gui/icon/play.png</key>
+            <key type="filename">source images/gui/icon/select.png</key>
+            <key type="filename">source images/gui/icon/settings.png</key>
             <key type="filename">source images/gui/tab/manifests.png</key>
             <key type="filename">source images/gui/tab/marketplace.png</key>
             <key type="filename">source images/gui/tab/sabotages.png</key>
