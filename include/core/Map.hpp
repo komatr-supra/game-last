@@ -9,7 +9,7 @@
  *
  */
 #pragma once
-#include "Sprite.hpp"
+
 #include "raylib.h"
 
 #include <memory>

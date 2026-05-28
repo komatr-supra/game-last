@@ -27,7 +27,8 @@ add_executable(${PROJECT_NAME} ${SOURCES}
     include/control/gui/GuiButton.hpp
     include/control/gui/GuiHelper.hpp
     include/control/gui/GuiDashboard.hpp
-    include/control/gui/GuiTheme.hpp)
+    include/control/gui/GuiTheme.hpp
+    include/vehicle/tasks/VehicleTaskIdle.hpp)
 
 # 3. Include directories
 target_include_directories(${PROJECT_NAME} PRIVATE 

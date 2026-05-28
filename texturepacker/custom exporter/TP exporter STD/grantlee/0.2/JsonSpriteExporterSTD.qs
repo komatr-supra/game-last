@@ -1,15 +1,15 @@
 var ExportJSON = function(tp) {
     var output = {
-        atlases: [], // full name of the generated atlases
+        textures: [], // full name of the generated atlases
         sprites: {}  // all sprites data
     };
 
-    var textures = tp.allResults[tp.variantIndex].textures;
+    var t = tp.allResults[tp.variantIndex].textures;
 
     // all atlases (multipack support)
-    for (var i = 0; i < textures.length; i++) {
-        var texture = textures[i];
-        output.atlases.push(texture.fullName);
+    for (var i = 0; i < t.length; i++) {
+        var texture = t[i];
+        output.textures.push(texture.fullName);
 
         // sprites in current atlas
         for (var j = 0; j < texture.allSprites.length; j++) {

@@ -6,7 +6,7 @@
       "maxSpeed": 80,
       "maxCapacity": 2,
       "price": 15000,
-      "spriteName": "pickup"
+      "img": "pickup"
     },
     {
       "name": "Truck",
@@ -14,7 +14,7 @@
       "maxSpeed": 110,
       "maxCapacity": 6,
       "price": 55000,
-      "spriteName": "truck"
+      "img": "truck"
     },
     {
       "internalName": "Van",
@@ -22,7 +22,7 @@
       "maxSpeed": 130,
       "maxCapacity": 3,
       "price": 25000,
-      "spriteName": "van"
+      "img": "van"
     }
   ]
 }

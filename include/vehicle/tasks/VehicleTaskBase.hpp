@@ -14,30 +14,21 @@
 // for test TODO FIX - returning a position
 #include "raylib.h"
 
-enum class TaskType
-{
-    WAITING,
-    MOVING,
-    LOADING,
-    UNLOADING
-};
-
 class Vehicle;
 
 class VehicleTaskBase
 {
   protected:
-    Vehicle& m_vehicle;
-    TaskType m_taskType;
-    std::string m_nameUI;
+    const std::string m_taskText;
 
   public:
-    VehicleTaskBase(Vehicle& vehicle, std::string taskName) : m_vehicle(vehicle), m_nameUI(std::move(taskName)) {}
+    VehicleTaskBase(std::string taskName) : m_taskText(std::move(taskName)) {}
 
     virtual ~VehicleTaskBase() = default;
 
-    [[nodiscard]] virtual bool Execute(float time) = 0;
-
-    const std::string& GetName() const { return m_nameUI; }
+    // true = keep this task, false = finished
+    [[nodiscard]] virtual bool Update(Vehicle& vehicle, float time) = 0;
+    virtual const std::string& GetLocationText() const = 0;
     virtual Vector2 GetPosition() const = 0;
+    virtual const std::string& GetTaskText() const = 0;
 };

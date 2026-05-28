@@ -21,22 +21,25 @@ struct ShipmentItem;
 struct City;
 struct Road;
 
+enum class CarType
+{
+    NOT_SET,
+    Pickup,
+    Van,
+    Truck,
+    LAST
+};
+
 struct VehicleDefinition
 {
-    std::string nameInternal;
-    std::string nameType;
+    CarType type;
     int speedMax;
     int capacityMax;
     int price;
-    std::string texturePath;
+    Texture2D* texture;
 
-    VehicleDefinition(std::string internal, std::string type, int speed, int cap, int p, std::string tex)
-        : nameInternal(std::move(internal)),
-          nameType(std::move(type)),
-          speedMax(speed),
-          capacityMax(cap),
-          price(p),
-          texturePath(std::move(tex))
+    VehicleDefinition(CarType type, int maxSpeed, int capacity, int cost, Texture2D* tex)
+        : type(type), speedMax(maxSpeed), capacityMax(capacity), price(cost), texture(texture)
     {
     }
 };
@@ -46,27 +49,23 @@ class Vehicle
   private:
     const std::string m_name;
     int m_speedCurrent;
-    VehicleDefinition* m_data;
-    City* m_city; // last city, where this vehicle was
+    VehicleDefinition& m_data;
     std::vector<std::unique_ptr<VehicleTaskBase>> m_tasks;
     std::vector<ShipmentItem*> m_cargo;
 
   public:
-    Vehicle(std::string name, VehicleDefinition* data, City* city);
+    Vehicle(std::string name, VehicleDefinition& data, City* city);
     ~Vehicle();
 
     void Update(float time);
 
     const std::string& GetName() const;
-    const std::string& GetTypeName() const;
-    City* GetLastCity() const { return m_city; }
-    const std::string& GetInternalName() const;
+    const VehicleDefinition& GetTypeData() const;
     int GetMaxSpeed() const;
     int GetMaxCapacity() const;
     int GetPrice() const;
-    const std::string& GetTexturePath() const;
+    const Texture2D& GetTexture() const;
     Vector2 GetPosition();
 
-    void SetLastCity(City* city) { m_city = city; }
     void AddTask(std::unique_ptr<VehicleTaskBase> task);
 };

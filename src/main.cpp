@@ -34,7 +34,7 @@ int main(void)
 
         Vector2 moveCameraVector = {static_cast<float>(IsKeyDown(KEY_D) - IsKeyDown(KEY_A)),
                                     static_cast<float>(IsKeyDown(KEY_S) - IsKeyDown(KEY_W))};
-        cameraController.MoveCamera(Vector2Scale(moveCameraVector, Config::Control::MapRollSpeed));
+        cameraController.MoveCamera(Vector2Scale(moveCameraVector, 8));
 
         vehicleManager.Update(0.05f);
         if (IsKeyPressed(KEY_H))

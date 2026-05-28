@@ -10,21 +10,18 @@
  */
 #pragma once
 
-namespace Config
+namespace game::config
 {
-namespace FilePaths
+namespace path
 {
 inline constexpr const char* TP = "assets/texturepacks/";
 inline constexpr const char* MapTexture = "assets/map.png";
 inline constexpr const char* WorldData = "assets/data/world.json";
 inline constexpr const char* Font = "assets/fonts/lato_regular.ttf";
 inline constexpr const char* VehicleDatabase = "assets/data/vehicles.json";
-} // namespace FilePaths
-namespace Control
+} // namespace path
+namespace control
 {
-inline float MapRollSpeed = 8;
+
 }
-namespace ImageNames
-{
-}
-} // namespace Config
+} // namespace game::config

@@ -20,30 +20,31 @@ class VehicleTaskMoving : public VehicleTaskBase
 {
   private:
     Road* m_road;
-    City* m_start;
-    City* m_target;
+    City* m_startCity;
+    City* m_targetCity;
     float m_positionNor = 0.0f;
 
   public:
-    VehicleTaskMoving(Road* road, Vehicle& vehicle, std::string taskName)
-        : VehicleTaskBase(vehicle, taskName), m_road(road)
+    VehicleTaskMoving(std::string taskName, Road* road, City* startingCity) : VehicleTaskBase(taskName), m_road(road)
     {
-        m_start = vehicle.GetLastCity();
-        m_target = m_road->cityA == m_start ? m_road->cityB : m_road->cityA;
+        m_startCity = startingCity;
+        m_targetCity = m_road->cityA == m_startCity ? m_road->cityB : m_road->cityA;
     }
 
-    bool Execute(float time) override
+    bool Update(Vehicle& vehicle, float time) override
     {
-        float moveNor = (m_vehicle.GetMaxSpeed() * time) / m_road->lenght;
+        float moveNor = (vehicle.GetMaxSpeed() * time) / m_road->lenght;
         m_positionNor += moveNor;
 
         if (m_positionNor >= 1.0f)
         {
-            m_vehicle.SetLastCity(m_target);
             return true;
         }
         return false;
     }
 
-    Vector2 GetPosition() const override { return Vector2Lerp(m_start->Position, m_target->Position, m_positionNor); }
+    Vector2 GetPosition() const override
+    {
+        return Vector2Lerp(m_startCity->Position, m_targetCity->Position, m_positionNor);
+    }
 };

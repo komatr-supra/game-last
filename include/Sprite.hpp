@@ -15,8 +15,7 @@
 
 struct Sprite
 {
-    std::string name;
-    Texture2D texture;
+    Texture2D* texture;
     Rectangle sourceRect;
     Vector2 origin;
 };
@@ -34,22 +33,21 @@ inline void DrawSprite(const Sprite& sprite,
 
     Rectangle destRect = {position.x, position.y, destWidth, destHeight};
 
-    DrawTexturePro(sprite.texture, sprite.sourceRect, destRect, scaledOrigin, rotation, tintColor);
+    DrawTexturePro(*sprite.texture, sprite.sourceRect, destRect, scaledOrigin, rotation, tintColor);
 }
 
 inline void DrawSpriteRect(const Sprite& sprite, Rectangle targetRectangle, Color color = WHITE)
 {
-    DrawTexturePro(sprite.texture, sprite.sourceRect, targetRectangle, {0, 0}, 0, color);
+    DrawTexturePro(*sprite.texture, sprite.sourceRect, targetRectangle, {0, 0}, 0, color);
 }
 
-struct Sprite9Slice
+struct SpriteNP
 {
-    std::string name;
-    Texture2D texture;
+    Texture2D* texture;
     NPatchInfo nPatchInfo;
 };
 
-inline void DrawSpriteNP(Sprite9Slice sprite, Rectangle destination, Color tintColor = WHITE)
+inline void DrawSpriteNP(SpriteNP spriteNP, Rectangle destination, Color tintColor = WHITE)
 {
-    DrawTextureNPatch(sprite.texture, sprite.nPatchInfo, destination, {0, 0}, 0, tintColor);
+    DrawTextureNPatch(*spriteNP.texture, spriteNP.nPatchInfo, destination, {0, 0}, 0, tintColor);
 }

@@ -10,17 +10,18 @@
 
 VehicleManager::VehicleManager(AssetManager& assetManager) : m_assetManager(assetManager)
 {
-    std::ifstream f(Config::FilePaths::Vehicles);
+    std::ifstream f(game::config::path::VehicleDatabase);
     nlohmann::json data = nlohmann::json::parse(f);
     for (auto& vehicleJSON : data["vehicles"])
     {
-        m_vehicleDatabase.emplace_back(
-            std::make_unique<VehicleDefinition>(vehicleJSON["internalName"].get<std::string>(),
-                                                vehicleJSON["type"].get<std::string>(),
-                                                vehicleJSON["maxSpeed"].get<int>(),
-                                                vehicleJSON["maxCapacity"].get<int>(),
-                                                vehicleJSON["price"].get<int>(),
-                                                vehicleJSON["spriteName"].get<std::string>()));
+        // get texture
+
+        m_vehicleDatabase.emplace_back(std::make_unique<VehicleDefinition>(vehicleJSON["name"].get<std::string>(),
+                                                                           vehicleJSON["type"].get<std::string>(),
+                                                                           vehicleJSON["maxSpeed"].get<int>(),
+                                                                           vehicleJSON["maxCapacity"].get<int>(),
+                                                                           vehicleJSON["price"].get<int>(),
+                                                                           vehicleJSON["img"].get<std::string>()));
         TraceLog(LOG_ERROR, "auto vytvoreno");
     }
 }
