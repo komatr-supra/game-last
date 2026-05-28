@@ -14,10 +14,11 @@ namespace Config
 {
 namespace FilePaths
 {
-inline constexpr const char* Vehicles = "data/vehicles.json";
-inline constexpr const char* TexturePack = "data/texture_pack.json";
-inline constexpr const char* MapData = "data/map.json";
-inline constexpr const char* Font = "data/OpenSans-Regular.ttf";
+inline constexpr const char* TP = "assets/texturepacks/";
+inline constexpr const char* MapTexture = "assets/map.png";
+inline constexpr const char* WorldData = "assets/data/world.json";
+inline constexpr const char* Font = "assets/fonts/lato_regular.ttf";
+inline constexpr const char* VehicleDatabase = "assets/data/vehicles.json";
 } // namespace FilePaths
 namespace Control
 {

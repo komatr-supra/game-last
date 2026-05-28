@@ -3,9 +3,16 @@
  *
  * Contains references to each image inside sprite sheet.
  *
- */{% load TransformName %}
+ */
+{
+    % load TransformName %
+}
 namespace game::config::assets
 {
-{% for sprite in allSprites %}    inline constexpr const char* {{sprite.trimmedName|stripForbiddenSymbols}} = "{{sprite.trimmedName}}";
-{% endfor %}
+{% for sprite in allSprites %
 }
+inline constexpr const char* {{sprite.trimmedName | stripForbiddenSymbols}} = "{{sprite.trimmedName|replaceBackslash}}";
+{
+    % endfor %
+}
+} // namespace game::config::assets
