@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
-project(SuperTransportDeluxe CXX) # Pokud nepíšeš čisté C, C stačí odebrat
+
+project(ProjectSTD CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -12,23 +13,13 @@ add_subdirectory(external/raylib EXCLUDE_FROM_ALL)
 # 2. Seznam zdrojových souborů (ruční výčet je jistota)
 set(SOURCES
     src/main.cpp
-
     src/core/AssetManager.cpp
-    src/core/Camera.cpp
-    src/core/Logistic.cpp
-    src/core/Map.cpp
-    
-    src/vehicle/Vehicle.cpp
-    src/vehicle/VehicleManager.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES}
-    include/control/gui/GuiManager.hpp
-    include/control/gui/GuiButton.hpp
-    include/control/gui/GuiHelper.hpp
-    include/control/gui/GuiDashboard.hpp
-    include/control/gui/GuiTheme.hpp
-    include/vehicle/tasks/VehicleTaskIdle.hpp)
+    include/Config.hpp
+    include/core/AssetManager.hpp
+    )
 
 # 3. Include directories
 target_include_directories(${PROJECT_NAME} PRIVATE 

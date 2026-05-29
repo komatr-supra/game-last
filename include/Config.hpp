@@ -10,7 +10,7 @@
  */
 #pragma once
 
-namespace game::config
+namespace game::constant
 {
 namespace path
 {
@@ -20,8 +20,10 @@ inline constexpr const char* WorldData = "assets/data/world.json";
 inline constexpr const char* Font = "assets/fonts/lato_regular.ttf";
 inline constexpr const char* VehicleDatabase = "assets/data/vehicles.json";
 } // namespace path
-namespace control
+namespace settings
 {
+inline constexpr int winWidth = 1280;
+inline constexpr int winHeight = 720;
 
-}
-} // namespace game::config
+} // namespace settings
+} // namespace game::constant

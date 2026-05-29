@@ -7,32 +7,27 @@
 
 AssetManager::AssetManager()
 {
+    // BACKUP ASSETS - loaded at all cast... also looking inside assets in project folder
+    // TODO: remove at production
+    m_errorTexture = LoadTexture("../assets/thumb-down.png");
+    m_errorSprite.texture = &m_errorTexture;
+    m_errorSprite.origin = {0.5f, 0.5f};
+    m_errorSprite.sourceRect = {0, 0, (float)m_errorTexture.width, (float)m_errorTexture.height};
+    m_errorSpriteNP.texture = &m_errorTexture;
+    m_errorSpriteNP.nPatchInfo.layout = NPATCH_NINE_PATCH;
+    m_errorSpriteNP.nPatchInfo.source = m_errorSprite.sourceRect;
+    // FONT
+    m_font = LoadFontEx(game::constant::path::Font, 32, nullptr, 0);
+    SetTextureFilter(m_font.texture, TEXTURE_FILTER_BILINEAR);
+    // TEXTUREPACK
     std::filesystem::path file;
     std::filesystem::path dir;
     auto GetPath = [&]() { return dir / file; };
-
-    // texturepacks
-    /*
-    "textures": [
-        "texturepack_0.png"
-    ],
-    "sprites": {
-        "gui_tab_vehicles": {
-            "texture_id": 0,
-            "x": 3,
-            "y": 3,
-            "w": 122,
-            "h": 70,
-            "ox": 0.5,
-            "oy": 0.5
-        },...
-    */
     file = "texturepack.json";
-    dir = game::config::path::TP;
+    dir = game::constant::path::TP;
     std::ifstream f(GetPath());
     nlohmann::json data = nlohmann::json::parse(f);
-
-    // load textures
+    // TEXTURES
     std::vector<Texture2D*> texturesByID;
     for (size_t i = 0; i < data["textures"].size(); i++)
     {
@@ -41,7 +36,7 @@ AssetManager::AssetManager()
         SetTextureFilter(m_textures[fn], TEXTURE_FILTER_BILINEAR);
         texturesByID[i] = &m_textures[fn];
     }
-
+    // SPRITES
     for (auto& [name, sprData] : data["sprites"].items())
     {
         if (sprData.contains("slice"))
@@ -74,41 +69,32 @@ AssetManager::AssetManager()
             m_sprites[name] = sprite;
         }
     }
-
-    m_font = LoadFontEx(game::config::path::Font, 32, nullptr, 0);
-    SetTextureFilter(m_font.texture, TEXTURE_FILTER_BILINEAR);
 }
 
 AssetManager::~AssetManager()
 {
-    // unload all textures
-    for (auto& [name, texture] : m_textures)
-    {
-        UnloadTexture(texture);
-    }
-
+    // unload ALL
     UnloadFont(m_font);
+    UnloadTexture(m_errorTexture);
+    for (auto& [name, texture] : m_textures)
+        UnloadTexture(texture);
 }
 
-Sprite* AssetManager::GetSprite(const std::string& spriteName)
+const Sprite& AssetManager::GetSprite(const std::string& spriteName)
 {
     auto it = m_sprites.find(spriteName);
     if (it != m_sprites.end())
-    {
-        return &it->second;
-    }
+        return it->second;
 
-    return nullptr;
+    return m_errorSprite;
 }
 
-SpriteNP* AssetManager::GetSpriteNP(const std::string& spriteName)
+const SpriteNP& AssetManager::GetSpriteNP(const std::string& spriteName)
 {
     auto it = m_spritesNP.find(spriteName);
     if (it != m_spritesNP.end())
-    {
-        return &it->second;
-    }
+        return it->second;
 
-    return nullptr;
+    return m_errorSpriteNP;
 }
 Font AssetManager::GetFont() { return m_font; }
