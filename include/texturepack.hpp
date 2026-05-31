@@ -4,19 +4,51 @@
  * Contains references to each image inside sprite sheet.
  *
  */
-namespace game::assets
-{
-inline constexpr const char* s_gui_tab_manifests = "gui/tab/manifests";
-inline constexpr const char* s_gui_tab_marketplace = "gui/tab/marketplace";
-inline constexpr const char* s_gui_tab_sabotages = "gui/tab/sabotages";
-inline constexpr const char* s_gui_tab_vehicles = "gui/tab/vehicles";
-inline constexpr const char* s_gui_vehicle_vehiclePickup = "gui/vehicle/vehiclePickup";
-inline constexpr const char* s_gui_vehicle_vehicleTruck = "gui/vehicle/vehicleTruck";
-inline constexpr const char* s_gui_vehicle_vehicleVan = "gui/vehicle/vehicleVan";
-inline constexpr const char* s_gui_win_bg = "gui/win/bg";
-inline constexpr const char* s_gui_win_border = "gui/win/border";
-inline constexpr const char* s_gui_win_divH = "gui/win/divH";
-inline constexpr const char* s_gui_win_divV = "gui/win/divV";
-inline constexpr const char* s_shared_circleBlur = "shared/circleBlur";
 
-} // namespace game::assets
+
+namespace game::constant::sprite
+{
+
+inline constexpr const char* s_gui_icon_calendar = "gui_icon_calendar";
+
+inline constexpr const char* s_gui_icon_cancel = "gui_icon_cancel";
+
+inline constexpr const char* s_gui_icon_cart = "gui_icon_cart";
+
+inline constexpr const char* s_gui_icon_chart = "gui_icon_chart";
+
+inline constexpr const char* s_gui_icon_marker = "gui_icon_marker";
+
+inline constexpr const char* s_gui_icon_pause = "gui_icon_pause";
+
+inline constexpr const char* s_gui_icon_play = "gui_icon_play";
+
+inline constexpr const char* s_gui_icon_select = "gui_icon_select";
+
+inline constexpr const char* s_gui_icon_settings = "gui_icon_settings";
+
+inline constexpr const char* s_gui_tab_manifests = "gui_tab_manifests";
+
+inline constexpr const char* s_gui_tab_marketplace = "gui_tab_marketplace";
+
+inline constexpr const char* s_gui_tab_sabotages = "gui_tab_sabotages";
+
+inline constexpr const char* s_gui_tab_vehicles = "gui_tab_vehicles";
+
+inline constexpr const char* s_gui_vehicle_vehiclePickup = "gui_vehicle_vehiclePickup";
+
+inline constexpr const char* s_gui_vehicle_vehicleTruck = "gui_vehicle_vehicleTruck";
+
+inline constexpr const char* s_gui_vehicle_vehicleVan = "gui_vehicle_vehicleVan";
+
+inline constexpr const char* s_gui_win_bg = "gui_win_bg";
+
+inline constexpr const char* s_gui_win_border = "gui_win_border";
+
+inline constexpr const char* s_gui_win_divH = "gui_win_divH";
+
+inline constexpr const char* s_gui_win_divV = "gui_win_divV";
+
+inline constexpr const char* s_shared_circleBlur = "shared_circleBlur";
+
+} // namespace game::constant::sprite

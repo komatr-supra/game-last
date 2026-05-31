@@ -12,12 +12,12 @@
 
 #include "raylib.h"
 
-namespace game::camera
-{
 
 #include "raylib.h"
 #include <math.h>
 
+namespace game::core
+{
 class GameCamera
 {
   private:
@@ -32,7 +32,7 @@ class GameCamera
         camera.position = Vector3{0.0f, 0.0f, 0.0f};
         camera.target = Vector3{0.0f, 0.0f, 0.0f}; // Tady začíná náš neviditelný bod
         camera.up = Vector3{0.0f, 1.0f, 0.0f};     // Y je nahoru
-        camera.fovy = 60.0f;
+        camera.fovy = 30.0f;
         camera.projection = CAMERA_PERSPECTIVE;
     }
 
@@ -69,7 +69,7 @@ class GameCamera
     }
 
     // Getter pro Raylib vykreslování
-    Camera3D GetRaylibCamera() const { return camera; }
+    Camera3D GetCam() const { return camera; }
 };
 
 } // namespace game::camera

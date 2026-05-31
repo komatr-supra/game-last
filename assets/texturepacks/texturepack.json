@@ -3,46 +3,91 @@
 		"texturepack_0.png"
 	],
 	"sprites": {
-		"gui_tab_vehicles": {
-			"atlas_id": 0,
+		"gui_icon_settings": {
+			"texture_id": 0,
 			"x": 3,
 			"y": 3,
+			"w": 122,
+			"h": 123,
+			"ox": 0.5,
+			"oy": 0.4959
+		},
+		"gui_icon_cancel": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 130,
+			"w": 122,
+			"h": 122,
+			"ox": 0.5,
+			"oy": 0.5
+		},
+		"gui_icon_select": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 256,
+			"w": 122,
+			"h": 122,
+			"ox": 0.5,
+			"oy": 0.5
+		},
+		"gui_tab_vehicles": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 382,
 			"w": 122,
 			"h": 70,
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_tab_marketplace": {
-			"atlas_id": 0,
+		"gui_icon_chart": {
+			"texture_id": 0,
 			"x": 3,
-			"y": 77,
+			"y": 456,
+			"w": 120,
+			"h": 120,
+			"ox": 0.5,
+			"oy": 0.5
+		},
+		"gui_tab_marketplace": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 580,
 			"w": 118,
 			"h": 108,
 			"ox": 0.5,
 			"oy": 0.4444
 		},
 		"gui_tab_sabotages": {
-			"atlas_id": 0,
+			"texture_id": 0,
 			"x": 3,
-			"y": 189,
+			"y": 692,
 			"w": 118,
 			"h": 46,
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_vehicle_vehicleTruck": {
-			"atlas_id": 0,
+		"gui_icon_cart": {
+			"texture_id": 0,
 			"x": 3,
-			"y": 239,
+			"y": 742,
+			"w": 112,
+			"h": 100,
+			"ox": 0.5357,
+			"oy": 0.5
+		},
+		"gui_vehicle_vehicleTruck": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 846,
 			"w": 103,
 			"h": 63,
 			"ox": 0.4466,
 			"oy": 0.5079
 		},
 		"gui_win_divV": {
-			"atlas_id": 0,
+			"texture_id": 0,
 			"x": 110,
-			"y": 239,
+			"y": 846,
 			"w": 13,
 			"h": 53,
 			"ox": 0,
@@ -55,60 +100,54 @@
 			}
 		},
 		"gui_vehicle_vehicleVan": {
-			"atlas_id": 0,
+			"texture_id": 0,
 			"x": 3,
-			"y": 306,
+			"y": 913,
 			"w": 102,
 			"h": 51,
 			"ox": 0.4706,
 			"oy": 0.4902
 		},
 		"gui_vehicle_vehiclePickup": {
-			"atlas_id": 0,
+			"texture_id": 0,
 			"x": 3,
-			"y": 361,
+			"y": 968,
 			"w": 102,
 			"h": 45,
 			"ox": 0.4902,
 			"oy": 0.4889
 		},
 		"gui_tab_manifests": {
-			"atlas_id": 0,
+			"texture_id": 0,
 			"x": 3,
-			"y": 410,
+			"y": 1017,
 			"w": 100,
 			"h": 93,
 			"ox": 0.5,
 			"oy": 0.5054
 		},
 		"shared_circleBlur": {
-			"atlas_id": 0,
+			"texture_id": 0,
 			"x": 3,
-			"y": 507,
+			"y": 1114,
 			"w": 96,
 			"h": 96,
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_win_divH": {
-			"atlas_id": 0,
+		"gui_icon_calendar": {
+			"texture_id": 0,
 			"x": 3,
-			"y": 607,
-			"w": 53,
-			"h": 13,
-			"ox": 0,
-			"oy": 0,
-			"slice": {
-				"l": 15,
-				"t": 0,
-				"r": 15,
-				"b": 0
-			}
+			"y": 1214,
+			"w": 94,
+			"h": 105,
+			"ox": 0.5,
+			"oy": 0.5524
 		},
 		"gui_win_bg": {
-			"atlas_id": 0,
-			"x": 60,
-			"y": 607,
+			"texture_id": 0,
+			"x": 101,
+			"y": 1214,
 			"w": 24,
 			"h": 24,
 			"ox": 0,
@@ -121,9 +160,9 @@
 			}
 		},
 		"gui_win_border": {
-			"atlas_id": 0,
-			"x": 88,
-			"y": 607,
+			"texture_id": 0,
+			"x": 101,
+			"y": 1242,
 			"w": 24,
 			"h": 24,
 			"ox": 0,
@@ -133,6 +172,48 @@
 				"t": 6,
 				"r": 6,
 				"b": 6
+			}
+		},
+		"gui_icon_play": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 1323,
+			"w": 90,
+			"h": 78,
+			"ox": 0.5,
+			"oy": 0.5
+		},
+		"gui_icon_pause": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 1405,
+			"w": 80,
+			"h": 108,
+			"ox": 0.5,
+			"oy": 0.5
+		},
+		"gui_icon_marker": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 1517,
+			"w": 72,
+			"h": 122,
+			"ox": 0.5,
+			"oy": 0.5
+		},
+		"gui_win_divH": {
+			"texture_id": 0,
+			"x": 3,
+			"y": 1643,
+			"w": 53,
+			"h": 13,
+			"ox": 0,
+			"oy": 0,
+			"slice": {
+				"l": 15,
+				"t": 0,
+				"r": 15,
+				"b": 0
 			}
 		}
 	}

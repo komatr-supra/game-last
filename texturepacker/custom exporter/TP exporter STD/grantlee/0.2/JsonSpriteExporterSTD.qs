@@ -25,7 +25,7 @@ var ExportJSON = function(tp) {
 
             // sprite data
             output.sprites[name] = {
-                atlas_id: i,
+                texture_id: i,
                 x: sprite.frameRect.x,
                 y: sprite.frameRect.y,
                 w: sprite.frameRect.width,

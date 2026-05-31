@@ -31,6 +31,7 @@ class AssetManager
     std::unordered_map<std::string, Sprite> m_sprites;
     std::unordered_map<std::string, SpriteNP> m_spritesNP;
     Font m_font;
+    Texture2D m_map;
 
   public:
     AssetManager();
@@ -39,7 +40,8 @@ class AssetManager
     /// @brief Return a Sprite Reference.
     /// @param spriteName string from "texturepack.hpp"
     /// @return
-    const Sprite& GetSprite(const std::string& spriteName);
-    const SpriteNP& GetSpriteNP(const std::string& spriteName);
+    const Sprite& GetSprite(const std::string& spriteName) const;
+    const SpriteNP& GetSpriteNP(const std::string& spriteName) const;
+    Texture2D GetMapTexture() const {return m_map;}
     Font GetFont();
 };

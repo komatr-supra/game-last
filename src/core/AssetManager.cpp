@@ -1,6 +1,7 @@
 #include "core/AssetManager.hpp"
 #include "Config.hpp"
 #include "json.hpp"
+#include "raylib.h"
 #include <filesystem>
 #include <fstream>
 #include <vector>
@@ -9,13 +10,16 @@ AssetManager::AssetManager()
 {
     // BACKUP ASSETS - loaded at all cast... also looking inside assets in project folder
     // TODO: remove at production
-    m_errorTexture = LoadTexture("../assets/thumb-down.png");
+    m_errorTexture = LoadTexture("assets/thumb-down.png");
     m_errorSprite.texture = &m_errorTexture;
     m_errorSprite.origin = {0.5f, 0.5f};
     m_errorSprite.sourceRect = {0, 0, (float)m_errorTexture.width, (float)m_errorTexture.height};
     m_errorSpriteNP.texture = &m_errorTexture;
     m_errorSpriteNP.nPatchInfo.layout = NPATCH_NINE_PATCH;
     m_errorSpriteNP.nPatchInfo.source = m_errorSprite.sourceRect;
+    // MAP
+    m_map = LoadTexture("assets/map.png");
+    SetTextureFilter(m_map, TEXTURE_FILTER_BILINEAR);
     // FONT
     m_font = LoadFontEx(game::constant::path::Font, 32, nullptr, 0);
     SetTextureFilter(m_font.texture, TEXTURE_FILTER_BILINEAR);
@@ -32,10 +36,13 @@ AssetManager::AssetManager()
     for (size_t i = 0; i < data["textures"].size(); i++)
     {
         auto fn = data["textures"][i].get<std::string>();
+        file = fn;
+        TraceLog(LOG_WARNING, "texture path is: %s", GetPath().c_str());
         m_textures[fn] = LoadTexture(GetPath().c_str());
         SetTextureFilter(m_textures[fn], TEXTURE_FILTER_BILINEAR);
-        texturesByID[i] = &m_textures[fn];
+        texturesByID.push_back(&m_textures[fn]);
     }
+    TraceLog(LOG_WARNING, "texture by id temporary vecror have got size of: %d", texturesByID.size());
     // SPRITES
     for (auto& [name, sprData] : data["sprites"].items())
     {
@@ -62,10 +69,12 @@ AssetManager::AssetManager()
         else
         {
             Sprite sprite;
-            sprite.texture = texturesByID[sprData["texture_id"]];
+            int textureId = sprData["texture_id"];
+            TraceLog(LOG_WARNING, "texture id is: %d", textureId);
+            sprite.texture = texturesByID[textureId];
             sprite.sourceRect = {sprData["x"], sprData["y"], sprData["w"], sprData["h"]};
             sprite.origin = {sprData["ox"], sprData["oy"]};
-
+            TraceLog(LOG_WARNING, "sprite created: %s", name.c_str());
             m_sprites[name] = sprite;
         }
     }
@@ -80,7 +89,7 @@ AssetManager::~AssetManager()
         UnloadTexture(texture);
 }
 
-const Sprite& AssetManager::GetSprite(const std::string& spriteName)
+const Sprite& AssetManager::GetSprite(const std::string& spriteName) const
 {
     auto it = m_sprites.find(spriteName);
     if (it != m_sprites.end())
@@ -89,7 +98,7 @@ const Sprite& AssetManager::GetSprite(const std::string& spriteName)
     return m_errorSprite;
 }
 
-const SpriteNP& AssetManager::GetSpriteNP(const std::string& spriteName)
+const SpriteNP& AssetManager::GetSpriteNP(const std::string& spriteName) const
 {
     auto it = m_spritesNP.find(spriteName);
     if (it != m_spritesNP.end())

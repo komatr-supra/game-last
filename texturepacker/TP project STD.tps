@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>STD</string>
         <key>textureFileName</key>
-        <filename>../assets/sprites/texturepack_{n}.png</filename>
+        <filename>../assets/texturepacks/texturepack_{n}.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrQualityLevel</key>
@@ -124,12 +124,12 @@
             <key>constantFile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../assets/sprites/texturepack.hpp</filename>
+                <filename>../include/texturepack.hpp</filename>
             </struct>
             <key>jsonFile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../assets/sprites/texturepack.json</filename>
+                <filename>../assets/texturepacks/texturepack.json</filename>
             </struct>
         </map>
         <key>multiPackMode</key>

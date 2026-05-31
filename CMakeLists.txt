@@ -19,6 +19,7 @@ set(SOURCES
 add_executable(${PROJECT_NAME} ${SOURCES}
     include/Config.hpp
     include/core/AssetManager.hpp
+    include/core/Camera.hpp
     )
 
 # 3. Include directories
@@ -38,4 +39,16 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE 
         -Wall -Wextra -Wpedantic -Wshadow
     )
+endif()
+
+# Při vývoji vytvoříme odkaz na assets přímo v build složce
+if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E create_symlink
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/assets"
+    )
+else()
+    # Při ostrém vydání (Release/Publish) se assets reálně překopírují do výsledného balíčku
+    install(DIRECTORY assets DESTINATION .)
 endif()
