@@ -13,13 +13,17 @@ add_subdirectory(external/raylib EXCLUDE_FROM_ALL)
 # 2. Seznam zdrojových souborů (ruční výčet je jistota)
 set(SOURCES
     src/main.cpp
-    src/core/AssetManager.cpp
+    src/AssetManager.cpp
+    src/Camera.cpp
+    src/Map.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES}
     include/Config.hpp
-    include/core/AssetManager.hpp
-    include/core/Camera.hpp
+    include/AssetManager.hpp
+    include/Camera.hpp
+    include/WorldObject.hpp
+    include/Map.hpp
     )
 
 # 3. Include directories

@@ -18,6 +18,8 @@
 #include <string>
 #include <unordered_map>
 
+namespace game::assets
+{
 class AssetManager
 {
   private:
@@ -30,8 +32,8 @@ class AssetManager
     std::unordered_map<std::string, Texture2D> m_textures;
     std::unordered_map<std::string, Sprite> m_sprites;
     std::unordered_map<std::string, SpriteNP> m_spritesNP;
+    std::unordered_map<std::string, Model> m_models;
     Font m_font;
-    Texture2D m_map;
 
   public:
     AssetManager();
@@ -42,6 +44,7 @@ class AssetManager
     /// @return
     const Sprite& GetSprite(const std::string& spriteName) const;
     const SpriteNP& GetSpriteNP(const std::string& spriteName) const;
-    Texture2D GetMapTexture() const {return m_map;}
+    const Model& GetModel(const std::string& modelName) const;
     Font GetFont();
 };
+} // namespace game::assets

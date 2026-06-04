@@ -6,9 +6,9 @@
  */
 {% load TransformName %}
 
-namespace game::constant::sprite
+namespace game::constant::assets
 {
 {% for sprite in allSprites %}
 inline constexpr const char* {{ sprite.trimmedName|stripForbiddenSymbols }} = "{{ sprite.trimmedName|replaceBackslash }}";
 {% endfor %}
-} // namespace game::constant::sprite
+} // namespace game::constant::assets

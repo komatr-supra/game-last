@@ -15,26 +15,37 @@
 #include <memory>
 #include <vector>
 
+namespace game::world
+{
 struct City;
 struct Road;
+} // namespace game::world
+
+namespace game::assets
+{
+struct Sprite;
 class AssetManager;
+} // namespace game::assets
+
+namespace game::world
+{
 
 class Map
 {
   private:
-    Sprite m_mapSprite;
-    Sprite m_citySprite;
+    const Model& m_mapModel;
+    const Model& m_cityModel;
     Font m_font;
     std::vector<std::unique_ptr<City>> m_cities;
     std::vector<std::unique_ptr<Road>> m_roads;
 
   public:
-    Map(AssetManager& assetManager);
+    Map(game::assets::AssetManager& assetManager);
     ~Map();
 
     City* GetCityByID(int id);
-    Vector2 GetMapSize();
     Road* GetRoadBetweenCities(City* city1, City* city2);
     std::vector<Road*> GetRoadsFromCity(City* city);
     void Draw();
 };
+} // namespace game::world

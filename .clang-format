@@ -1,6 +1,6 @@
----
 Language: Cpp
 # pointers and references symbols are with type, not with variable name
+DerivePointerAlignment: false
 PointerAlignment: Left
 ReferenceAlignment: Left
 # main style
@@ -30,4 +30,3 @@ AlignAfterOpenBracket: Align
 AllowShortBlocksOnASingleLine: Empty
 # max line lenght
 ColumnLimit: 120
----

@@ -11,6 +11,8 @@
 #pragma once
 
 #include "raylib.h"
+namespace game::assets
+{
 
 struct Sprite
 {
@@ -50,3 +52,4 @@ inline void DrawSpriteNP(SpriteNP spriteNP, Rectangle destination, Color tintCol
 {
     DrawTextureNPatch(*spriteNP.texture, spriteNP.nPatchInfo, destination, {0, 0}, 0, tintColor);
 }
+} // namespace game::assets

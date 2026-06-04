@@ -1,20 +1,21 @@
 #include "Config.hpp"
 
-#include "core/AssetManager.hpp"
-#include "core/Logistic.hpp"
-#include "core/Map.hpp"
-
+#include "AssetManager.hpp"
+#include "Logistic.hpp"
+#include "Map.hpp"
 #include "json.hpp"
+#include "raylib.h"
 #include "raymath.h"
 
 #include <fstream>
-
-Map::Map(AssetManager& assetManager)
+namespace game::world
 {
-    m_mapSprite = assetManager.GetSprite("map");
-    m_citySprite = assetManager.GetSprite("city");
 
-    std::ifstream f(Config::FilePaths::MapData);
+Map::Map(game::assets::AssetManager& assetManager)
+    : m_mapModel(assetManager.GetModel("map")), m_cityModel(assetManager.GetModel("assets/models/building-h"))
+{
+
+    std::ifstream f(game::constant::path::WorldData);
     nlohmann::json data = nlohmann::json::parse(f);
     for (auto& city : data["cities"])
     {
@@ -76,19 +77,21 @@ std::vector<Road*> Map::GetRoadsFromCity(City* city)
 }
 void Map::Draw()
 {
+    // DrawCube({0, 0, 0}, 1, 1, 1, BLACK);
+    DrawModel(m_mapModel, {-5, 0, -5}, 1, WHITE);
+    /*
     DrawSprite(m_mapSprite, {0, 0});
     for (auto& road : m_roads)
     {
         DrawLineEx(road->cityA->Position, road->cityB->Position, 5, GRAY);
     }
+
     for (auto& city : m_cities)
     {
         DrawSprite(m_citySprite, city->Position);
         // DrawTextEx(m_font, city->Name.c_str(), {city->Position.x - 48, city->Position.y - 48}, 42, 10, GOLD);
     }
+        */
 }
 
-Vector2 Map::GetMapSize()
-{
-    return {static_cast<float>(m_mapSprite.sourceRect.width), static_cast<float>(m_mapSprite.sourceRect.height)};
-}
+} // namespace game::world

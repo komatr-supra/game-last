@@ -1,10 +1,12 @@
-#include "core/AssetManager.hpp"
+#include "AssetManager.hpp"
 #include "Config.hpp"
 #include "json.hpp"
 #include "raylib.h"
 #include <filesystem>
 #include <fstream>
 #include <vector>
+namespace game::assets
+{
 
 AssetManager::AssetManager()
 {
@@ -18,8 +20,13 @@ AssetManager::AssetManager()
     m_errorSpriteNP.nPatchInfo.layout = NPATCH_NINE_PATCH;
     m_errorSpriteNP.nPatchInfo.source = m_errorSprite.sourceRect;
     // MAP
-    m_map = LoadTexture("assets/map.png");
-    SetTextureFilter(m_map, TEXTURE_FILTER_BILINEAR);
+    Mesh terrainMesh = GenMeshPlane(50, 50, 1, 1);
+    m_models["map"] = LoadModelFromMesh(terrainMesh);
+    auto map = LoadTexture("assets/map.png");
+    SetTextureFilter(map, TEXTURE_FILTER_BILINEAR);
+    SetTextureWrap(map, TEXTURE_WRAP_CLAMP);
+    m_models["map"].materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = map;
+
     // FONT
     m_font = LoadFontEx(game::constant::path::Font, 32, nullptr, 0);
     SetTextureFilter(m_font.texture, TEXTURE_FILTER_BILINEAR);
@@ -78,6 +85,8 @@ AssetManager::AssetManager()
             m_sprites[name] = sprite;
         }
     }
+    // MODELS
+    m_models["assets/models/building-h"] = LoadModel("assets/models/building-h.glb");
 }
 
 AssetManager::~AssetManager()
@@ -106,4 +115,6 @@ const SpriteNP& AssetManager::GetSpriteNP(const std::string& spriteName) const
 
     return m_errorSpriteNP;
 }
+const Model& AssetManager::GetModel(const std::string& name) const { return m_models.at(name); }
 Font AssetManager::GetFont() { return m_font; }
+} // namespace game::assets

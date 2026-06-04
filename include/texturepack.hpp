@@ -6,7 +6,7 @@
  */
 
 
-namespace game::constant::sprite
+namespace game::constant::assets
 {
 
 inline constexpr const char* s_gui_icon_calendar = "gui_icon_calendar";
@@ -51,4 +51,4 @@ inline constexpr const char* s_gui_win_divV = "gui_win_divV";
 
 inline constexpr const char* s_shared_circleBlur = "shared_circleBlur";
 
-} // namespace game::constant::sprite
+} // namespace game::constant::assets

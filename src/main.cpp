@@ -1,33 +1,31 @@
+#include "AssetManager.hpp"
+#include "Camera.hpp"
 #include "Config.hpp"
-#include "Sprite.hpp"
-#include "core/AssetManager.hpp"
+#include "Map.hpp"
 #include "raylib.h"
-#include "core/Camera.hpp"
 
 int main(void)
 {
     InitWindow(game::constant::settings::winWidth, game::constant::settings::winHeight, "STD");
     SetTargetFPS(60);
 
-    
-    game::core::GameCamera cam;
-    AssetManager am;
-    Sprite test = am.GetSprite(game::constant::sprite::s_gui_icon_calendar);
+    game::camera::GameCamera cam;
 
-    Mesh testPlane = GenMeshPlane(40, 40, 1, 1);
-    Model testModel = LoadModelFromMesh(testPlane);
-    testModel.materials[0].maps[MATERIAL_MAP_ALBEDO].texture = am.GetMapTexture();
+    game::assets::AssetManager am;
+
+    game::world::Map map(am);
     // --- HLAVNÍ SMYČKA ---
     while (!WindowShouldClose())
     {
-        
-        cam.Update({0, 0}, GetTime());
+
+        cam.Update(GetTime());
         BeginDrawing();
         ClearBackground(GRAY);
+        // 3D objects - map, vehicles
         BeginMode3D(cam.GetCam());
-        DrawModel(testModel, {0,0,0}, 1, WHITE);
+        map.Draw();
         EndMode3D();
-        DrawSprite(test, {500, 500});
+        // GUI
         EndDrawing();
     }
 
