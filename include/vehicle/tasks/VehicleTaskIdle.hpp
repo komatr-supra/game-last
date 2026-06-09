@@ -1,6 +1,9 @@
 #pragma once
 
-#include "vehicle/tasks/VehicleTaskBase.hpp"
+#include "VehicleTaskBase.hpp"
+
+namespace game::vehicles
+{
 
 class VehicleTaskIdle : public VehicleTaskBase
 {
@@ -11,16 +14,6 @@ class VehicleTaskIdle : public VehicleTaskBase
     ~VehicleTaskIdle();
 
     bool Update(Vehicle& vehicle, float time) override;
-    const std::string& GetLocationText() const override;
     Vector2 GetPosition() const override;
-    const std::string& GetTaskText() const override;
 };
-
-VehicleTaskIdle::VehicleTaskIdle(/* args */) : VehicleTaskBase("Idle") {}
-
-VehicleTaskIdle::~VehicleTaskIdle() {}
-
-bool VehicleTaskIdle::Update(Vehicle& vehicle, float time) {}
-const std::string& VehicleTaskIdle::GetLocationText() const {}
-Vector2 VehicleTaskIdle::GetPosition() const {}
-const std::string& VehicleTaskIdle::GetTaskText() const {}
+} // namespace game::vehicles

@@ -9,12 +9,16 @@
  *
  */
 #pragma once
+
+#include "vehicle/Vehicle.hpp"
+
 #include <string>
 
 // for test TODO FIX - returning a position
 #include "raylib.h"
 
-class Vehicle;
+namespace game::vehicles
+{
 
 class VehicleTaskBase
 {
@@ -23,12 +27,20 @@ class VehicleTaskBase
 
   public:
     VehicleTaskBase(std::string taskName) : m_taskText(std::move(taskName)) {}
-
     virtual ~VehicleTaskBase() = default;
 
     // true = keep this task, false = finished
+    /**
+     * @brief
+     *
+     * @param vehicle owner of the task
+     * @param time gameTime
+     * @return true continue this task
+     * @return false don't continue -> this task ended
+     */
     [[nodiscard]] virtual bool Update(Vehicle& vehicle, float time) = 0;
-    virtual const std::string& GetLocationText() const = 0;
     virtual Vector2 GetPosition() const = 0;
-    virtual const std::string& GetTaskText() const = 0;
+
+    const std::string& GetName() { return m_taskText; }
 };
+} // namespace game::vehicles

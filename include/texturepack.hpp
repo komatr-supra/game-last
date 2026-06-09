@@ -9,46 +9,46 @@
 namespace game::constant::assets
 {
 
-inline constexpr const char* s_gui_icon_calendar = "gui_icon_calendar";
+inline constexpr const char* s_background = "background";
 
-inline constexpr const char* s_gui_icon_cancel = "gui_icon_cancel";
+inline constexpr const char* s_border = "border";
 
-inline constexpr const char* s_gui_icon_cart = "gui_icon_cart";
+inline constexpr const char* s_calendar = "calendar";
 
-inline constexpr const char* s_gui_icon_chart = "gui_icon_chart";
+inline constexpr const char* s_cancel = "cancel";
 
-inline constexpr const char* s_gui_icon_marker = "gui_icon_marker";
+inline constexpr const char* s_cart = "cart";
 
-inline constexpr const char* s_gui_icon_pause = "gui_icon_pause";
+inline constexpr const char* s_chart = "chart";
 
-inline constexpr const char* s_gui_icon_play = "gui_icon_play";
+inline constexpr const char* s_circleBlur = "circleBlur";
 
-inline constexpr const char* s_gui_icon_select = "gui_icon_select";
+inline constexpr const char* s_divH = "divH";
 
-inline constexpr const char* s_gui_icon_settings = "gui_icon_settings";
+inline constexpr const char* s_divV = "divV";
 
-inline constexpr const char* s_gui_tab_manifests = "gui_tab_manifests";
+inline constexpr const char* s_manifests = "manifests";
 
-inline constexpr const char* s_gui_tab_marketplace = "gui_tab_marketplace";
+inline constexpr const char* s_marker = "marker";
 
-inline constexpr const char* s_gui_tab_sabotages = "gui_tab_sabotages";
+inline constexpr const char* s_marketplace = "marketplace";
 
-inline constexpr const char* s_gui_tab_vehicles = "gui_tab_vehicles";
+inline constexpr const char* s_pause = "pause";
 
-inline constexpr const char* s_gui_vehicle_vehiclePickup = "gui_vehicle_vehiclePickup";
+inline constexpr const char* s_pickup = "pickup";
 
-inline constexpr const char* s_gui_vehicle_vehicleTruck = "gui_vehicle_vehicleTruck";
+inline constexpr const char* s_play = "play";
 
-inline constexpr const char* s_gui_vehicle_vehicleVan = "gui_vehicle_vehicleVan";
+inline constexpr const char* s_sabotages = "sabotages";
 
-inline constexpr const char* s_gui_win_bg = "gui_win_bg";
+inline constexpr const char* s_select = "select";
 
-inline constexpr const char* s_gui_win_border = "gui_win_border";
+inline constexpr const char* s_settings = "settings";
 
-inline constexpr const char* s_gui_win_divH = "gui_win_divH";
+inline constexpr const char* s_truck = "truck";
 
-inline constexpr const char* s_gui_win_divV = "gui_win_divV";
+inline constexpr const char* s_van = "van";
 
-inline constexpr const char* s_shared_circleBlur = "shared_circleBlur";
+inline constexpr const char* s_vehicles = "vehicles";
 
 } // namespace game::constant::assets

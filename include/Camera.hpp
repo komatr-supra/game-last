@@ -10,43 +10,34 @@
  */
 #pragma once
 
-#include "WorldObject.hpp"
 #include "raylib.h"
-
-#include <math.h>
-
+#include "tweeny.h"
 namespace game::camera
 {
-class CameraAnchor : public game::world::WorldObject
-{
-  public:
-    const game::world::WorldObject* targetObject = nullptr;
-
-    void SetTarget(const game::world::WorldObject* target)
-    {
-        if (target)
-            targetObject = target;
-    }
-    Vector3 GetPosition() const { return targetObject ? targetObject->GetPosition() : position; }
-};
 
 class GameCamera
 {
   private:
-    Camera3D camera;
-    float yaw = 0.0f;     // Úhel kolem dokola (v radiánech nebo stupních)
-    float pitch = 0.9f;   // Úhel nad obzorem
-    float radius = 30.0f; // Vzdálenost kamery od auta/bodu
-    float fovy = 30.0f;
-
+    Camera3D m_camera;
+    float m_yaw = 0.0f;
+    float m_pitch = 0.9f;
+    float m_radius = 30.0f;
+    float m_fovy = 30.0f;
+    const Vector3* m_trackedPosition;
+    Vector3 m_desiredPosition;
+    float m_camSpeed = 5.0f;
+    Vector2 m_moveDir;
     void CalculatePosition();
 
-  public:
-    CameraAnchor cameraAnchor;
-    GameCamera();
-    Camera3D GetCam() const { return camera; }
-    void SetTarget(const game::world::WorldObject* target);
+    // tweeny test
+    tweeny::tween<float, float> m_moveTween;
 
+  public:
+    GameCamera();
+    const Camera3D& GetCam() const { return m_camera; }
+    void Follow(const Vector3* target);
+    void Unfollow();
+    void Move(Vector2 direction);
     void Update(float deltaTime);
 };
 

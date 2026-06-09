@@ -178,19 +178,35 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">source images/gui/icon/calendar.png</key>
-            <key type="filename">source images/gui/icon/cancel.png</key>
-            <key type="filename">source images/gui/icon/cart.png</key>
-            <key type="filename">source images/gui/icon/chart.png</key>
-            <key type="filename">source images/gui/icon/marker.png</key>
-            <key type="filename">source images/gui/icon/pause.png</key>
-            <key type="filename">source images/gui/icon/play.png</key>
-            <key type="filename">source images/gui/icon/select.png</key>
-            <key type="filename">source images/gui/icon/settings.png</key>
-            <key type="filename">source images/gui/tab/manifests.png</key>
-            <key type="filename">source images/gui/tab/marketplace.png</key>
-            <key type="filename">source images/gui/tab/sabotages.png</key>
-            <key type="filename">source images/gui/tab/vehicles.png</key>
+            <key type="filename">source images/background.png</key>
+            <key type="filename">source images/border.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>6,6,12,12</rect>
+                <key>scale9Paddings</key>
+                <rect>6,6,12,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">source images/calendar.png</key>
+            <key type="filename">source images/cancel.png</key>
+            <key type="filename">source images/cart.png</key>
+            <key type="filename">source images/chart.png</key>
+            <key type="filename">source images/manifests.png</key>
+            <key type="filename">source images/marker.png</key>
+            <key type="filename">source images/marketplace.png</key>
+            <key type="filename">source images/pause.png</key>
+            <key type="filename">source images/play.png</key>
+            <key type="filename">source images/sabotages.png</key>
+            <key type="filename">source images/select.png</key>
+            <key type="filename">source images/settings.png</key>
+            <key type="filename">source images/vehicles.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -205,9 +221,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">source images/gui/vehicle/vehiclePickup.png</key>
-            <key type="filename">source images/gui/vehicle/vehicleTruck.png</key>
-            <key type="filename">source images/gui/vehicle/vehicleVan.png</key>
+            <key type="filename">source images/circleBlur.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -216,59 +230,45 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>32,16,64,32</rect>
+                <rect>24,24,48,48</rect>
                 <key>scale9Paddings</key>
-                <rect>32,16,64,32</rect>
+                <rect>24,24,48,48</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">source images/gui/win/bg.png</key>
-            <key type="filename">source images/gui/win/border.png</key>
+            <key type="filename">source images/divH.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
-                <true/>
-                <key>scale9Borders</key>
-                <rect>6,6,12,12</rect>
-                <key>scale9Paddings</key>
-                <rect>6,6,12,12</rect>
-                <key>scale9FromFile</key>
                 <false/>
-            </struct>
-            <key type="filename">source images/gui/win/divH.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <true/>
                 <key>scale9Borders</key>
-                <rect>15,0,23,13</rect>
+                <rect>13,3,27,7</rect>
                 <key>scale9Paddings</key>
                 <rect>13,3,27,7</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">source images/gui/win/divV.png</key>
+            <key type="filename">source images/divV.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
-                <true/>
+                <false/>
                 <key>scale9Borders</key>
-                <rect>0,15,13,23</rect>
+                <rect>3,13,7,27</rect>
                 <key>scale9Paddings</key>
                 <rect>3,13,7,27</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">source images/shared/circleBlur.png</key>
+            <key type="filename">source images/pickup.png</key>
+            <key type="filename">source images/truck.png</key>
+            <key type="filename">source images/van.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -277,9 +277,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>24,24,48,48</rect>
+                <rect>32,16,64,32</rect>
                 <key>scale9Paddings</key>
-                <rect>24,24,48,48</rect>
+                <rect>32,16,64,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

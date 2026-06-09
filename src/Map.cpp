@@ -12,7 +12,7 @@ namespace game::world
 {
 
 Map::Map(game::assets::AssetManager& assetManager)
-    : m_mapModel(assetManager.GetModel("map")), m_cityModel(assetManager.GetModel("assets/models/building-h"))
+    : m_mapModelID(assetManager.GetModelID("map")), m_cityModelID(assetManager.GetModelID("assets/models/building-h"))
 {
 
     std::ifstream f(game::constant::path::WorldData);
@@ -75,10 +75,26 @@ std::vector<Road*> Map::GetRoadsFromCity(City* city)
     }
     return roads;
 }
+void Map::Update(float DelatTime) {}
+
+bool Map::TryGetRaycast(Camera3D camera, Vector3& outputPoint)
+{
+    Vector2 mousePos = GetMousePosition();
+    Ray mouseRay = GetMouseRay(mousePos, camera);
+    RayCollision collision =
+        GetRayCollisionMesh(mouseRay, am.GetModel(m_mapModelID).meshes[0], am.GetModel(m_mapModelID).transform);
+    if (collision.hit)
+    {
+        outputPoint = collision.point;
+        return true;
+    }
+    return false;
+}
+
 void Map::Draw()
 {
     // DrawCube({0, 0, 0}, 1, 1, 1, BLACK);
-    DrawModel(m_mapModel, {-5, 0, -5}, 1, WHITE);
+    DrawModel(am.GetModel(m_mapModelID), {-5, 0, -5}, 1, WHITE);
     /*
     DrawSprite(m_mapSprite, {0, 0});
     for (auto& road : m_roads)

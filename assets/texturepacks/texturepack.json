@@ -3,7 +3,7 @@
 		"texturepack_0.png"
 	],
 	"sprites": {
-		"gui_icon_settings": {
+		"settings": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 3,
@@ -12,7 +12,7 @@
 			"ox": 0.5,
 			"oy": 0.4959
 		},
-		"gui_icon_cancel": {
+		"cancel": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 130,
@@ -21,7 +21,7 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_icon_select": {
+		"select": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 256,
@@ -30,7 +30,7 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_tab_vehicles": {
+		"vehicles": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 382,
@@ -39,7 +39,7 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_icon_chart": {
+		"chart": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 456,
@@ -48,7 +48,7 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_tab_marketplace": {
+		"marketplace": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 580,
@@ -57,7 +57,7 @@
 			"ox": 0.5,
 			"oy": 0.4444
 		},
-		"gui_tab_sabotages": {
+		"sabotages": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 692,
@@ -66,7 +66,7 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_icon_cart": {
+		"cart": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 742,
@@ -75,7 +75,7 @@
 			"ox": 0.5357,
 			"oy": 0.5
 		},
-		"gui_vehicle_vehicleTruck": {
+		"truck": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 846,
@@ -84,22 +84,16 @@
 			"ox": 0.4466,
 			"oy": 0.5079
 		},
-		"gui_win_divV": {
+		"divV": {
 			"texture_id": 0,
 			"x": 110,
 			"y": 846,
 			"w": 13,
 			"h": 53,
-			"ox": 0,
-			"oy": 0,
-			"slice": {
-				"l": 0,
-				"t": 15,
-				"r": 0,
-				"b": 15
-			}
+			"ox": 0.5,
+			"oy": 0.5
 		},
-		"gui_vehicle_vehicleVan": {
+		"van": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 913,
@@ -108,7 +102,7 @@
 			"ox": 0.4706,
 			"oy": 0.4902
 		},
-		"gui_vehicle_vehiclePickup": {
+		"pickup": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 968,
@@ -117,7 +111,7 @@
 			"ox": 0.4902,
 			"oy": 0.4889
 		},
-		"gui_tab_manifests": {
+		"manifests": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 1017,
@@ -126,7 +120,7 @@
 			"ox": 0.5,
 			"oy": 0.5054
 		},
-		"shared_circleBlur": {
+		"circleBlur": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 1114,
@@ -135,7 +129,16 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_icon_calendar": {
+		"background": {
+			"texture_id": 0,
+			"x": 103,
+			"y": 1114,
+			"w": 22,
+			"h": 22,
+			"ox": 0.5,
+			"oy": 0.5
+		},
+		"calendar": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 1214,
@@ -144,37 +147,16 @@
 			"ox": 0.5,
 			"oy": 0.5524
 		},
-		"gui_win_bg": {
+		"border": {
 			"texture_id": 0,
 			"x": 101,
 			"y": 1214,
 			"w": 24,
 			"h": 24,
-			"ox": 0,
-			"oy": 0,
-			"slice": {
-				"l": 6,
-				"t": 6,
-				"r": 6,
-				"b": 6
-			}
+			"ox": 0.5,
+			"oy": 0.5
 		},
-		"gui_win_border": {
-			"texture_id": 0,
-			"x": 101,
-			"y": 1242,
-			"w": 24,
-			"h": 24,
-			"ox": 0,
-			"oy": 0,
-			"slice": {
-				"l": 6,
-				"t": 6,
-				"r": 6,
-				"b": 6
-			}
-		},
-		"gui_icon_play": {
+		"play": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 1323,
@@ -183,7 +165,7 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_icon_pause": {
+		"pause": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 1405,
@@ -192,7 +174,7 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_icon_marker": {
+		"marker": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 1517,
@@ -201,20 +183,14 @@
 			"ox": 0.5,
 			"oy": 0.5
 		},
-		"gui_win_divH": {
+		"divH": {
 			"texture_id": 0,
 			"x": 3,
 			"y": 1643,
 			"w": 53,
 			"h": 13,
-			"ox": 0,
-			"oy": 0,
-			"slice": {
-				"l": 15,
-				"t": 0,
-				"r": 15,
-				"b": 0
-			}
+			"ox": 0.5,
+			"oy": 0.5
 		}
 	}
 }

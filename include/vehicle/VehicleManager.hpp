@@ -9,33 +9,39 @@
  *
  */
 #pragma once
-#include "raylib.h"
 
-#include <algorithm>
+#include "vehicle/VehicleDefinition.hpp"
+#include <cstddef>
 #include <memory>
+#include <unordered_map>
 #include <vector>
 
+namespace game::assets
+{
 class AssetManager;
+}
+
+namespace game::vehicles
+{
+
 class Vehicle;
-struct City;
-struct VehicleDefinition;
 
 class VehicleManager
 {
   private:
-    AssetManager& m_assetManager;
-    std::vector<std::unique_ptr<VehicleDefinition>> m_vehicleDatabase;
-    std::vector<std::unique_ptr<Vehicle>> m_vehicles;
+    game::assets::AssetManager& m_assetManager;
+
+    std::unordered_map<size_t, std::unique_ptr<Vehicle>> m_vehicles;
 
   public:
-    VehicleManager(AssetManager& assetManager);
+    VehicleManager(game::assets::AssetManager& assetManager);
     ~VehicleManager();
-
-    Vehicle* CreateVehicle(City* startingCity, const std::string& type); // todo add owner
+    Vehicle* CreateVehicle(CarType carType);
     void Update(float time);
     void DrawAllVehicles();
 
     std::vector<VehicleDefinition*> GetVehicleDatabase() const;
 
-    const std::vector<std::unique_ptr<Vehicle>>& GetAllVehicles() const { return m_vehicles; }
+    // const std::vector<std::unique_ptr<Vehicle>>& GetAllVehicles() const { return m_vehicles; }
 };
+} // namespace game::vehicles

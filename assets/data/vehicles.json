@@ -1,12 +1,20 @@
 {
   "vehicles": [
     {
+      "name": "FALLBACK VEHICLE DATA",
+      "type": "N/A",
+      "maxSpeed": 0,
+      "maxCapacity": 0,
+      "price": 1,
+      "resource": "fallback"
+    },
+    {
       "name": "Pickup",
       "type": "Dodge",
       "maxSpeed": 80,
       "maxCapacity": 2,
       "price": 15000,
-      "img": "pickup"
+      "resource": "pickup"
     },
     {
       "name": "Truck",
@@ -14,15 +22,15 @@
       "maxSpeed": 110,
       "maxCapacity": 6,
       "price": 55000,
-      "img": "truck"
+      "resource": "truck"
     },
     {
-      "internalName": "Van",
+      "name": "Van",
       "type": "Ford Transit",
       "maxSpeed": 130,
       "maxCapacity": 3,
       "price": 25000,
-      "img": "van"
+      "resource": "van"
     }
   ]
 }

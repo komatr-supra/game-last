@@ -12,6 +12,7 @@
 
 #include "raylib.h"
 
+#include <cstddef>
 #include <memory>
 #include <vector>
 
@@ -33,8 +34,9 @@ namespace game::world
 class Map
 {
   private:
-    const Model& m_mapModel;
-    const Model& m_cityModel;
+    game::assets::AssetManager& am;
+    size_t m_mapModelID;
+    size_t m_cityModelID;
     Font m_font;
     std::vector<std::unique_ptr<City>> m_cities;
     std::vector<std::unique_ptr<Road>> m_roads;
@@ -42,10 +44,11 @@ class Map
   public:
     Map(game::assets::AssetManager& assetManager);
     ~Map();
-
     City* GetCityByID(int id);
     Road* GetRoadBetweenCities(City* city1, City* city2);
     std::vector<Road*> GetRoadsFromCity(City* city);
+    bool TryGetRaycast(Camera3D camera, Vector3& outputPoint);
+    void Update(float deltaTime);
     void Draw();
 };
 } // namespace game::world

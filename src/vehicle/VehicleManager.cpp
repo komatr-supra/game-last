@@ -1,66 +1,26 @@
-#include "Config.hpp"
 
-#include "core/AssetManager.hpp"
-#include "vehicle/Vehicle.hpp"
 #include "vehicle/VehicleManager.hpp"
+#include "AssetManager.hpp"
+#include "vehicle/Vehicle.hpp"
 
-#include "json.hpp"
-
-#include <fstream>
-
-VehicleManager::VehicleManager(AssetManager& assetManager) : m_assetManager(assetManager)
+namespace game::vehicles
 {
-    std::ifstream f(game::config::path::VehicleDatabase);
-    nlohmann::json data = nlohmann::json::parse(f);
-    for (auto& vehicleJSON : data["vehicles"])
-    {
-        // get texture
 
-        m_vehicleDatabase.emplace_back(std::make_unique<VehicleDefinition>(vehicleJSON["name"].get<std::string>(),
-                                                                           vehicleJSON["type"].get<std::string>(),
-                                                                           vehicleJSON["maxSpeed"].get<int>(),
-                                                                           vehicleJSON["maxCapacity"].get<int>(),
-                                                                           vehicleJSON["price"].get<int>(),
-                                                                           vehicleJSON["img"].get<std::string>()));
-        TraceLog(LOG_ERROR, "auto vytvoreno");
-    }
-}
-
-VehicleManager::~VehicleManager() {}
-
-std::vector<VehicleDefinition*> VehicleManager::GetVehicleDatabase() const
+VehicleManager::VehicleManager(game::assets::AssetManager& assetManager) : m_assetManager(assetManager) {}
+VehicleManager::~VehicleManager() = default;
+Vehicle* VehicleManager::CreateVehicle(CarType carType)
 {
-    std::vector<VehicleDefinition*> view;
-
-    for (const auto& vehicleUniqePointer : m_vehicleDatabase)
-    {
-        view.push_back(vehicleUniqePointer.get());
-    }
-    TraceLog(LOG_ERROR, "vracim databazi aut o velikosti: %d", view.size());
-    return view;
-}
-
-Vehicle* VehicleManager::CreateVehicle(City* startingCity, const std::string& type)
-{
-    auto it = std::find_if(m_vehicleDatabase.begin(),
-                           m_vehicleDatabase.end(),
-                           [&type](const std::unique_ptr<VehicleDefinition>& v) { return v->nameType == type; });
-    if (it != m_vehicleDatabase.end())
-    {
-        auto newVehicle = std::make_unique<Vehicle>("debilni auto", it->get(), startingCity);
-
-        Vehicle* ptr = newVehicle.get();
-        // create vehicle
-        m_vehicles.push_back(std::move(newVehicle));
-        TraceLog(LOG_ERROR, "car created");
-        return ptr;
-    }
-    return nullptr;
+    static size_t vehicleIndex = 0;
+    auto car = std::make_unique<Vehicle>("test car name", m_assetManager.GetVehicleDefinition(carType));
+    Vehicle* vehicle = car.get();
+    m_vehicles.emplace(vehicleIndex, std::move(car));
+    vehicleIndex++;
+    return vehicle;
 }
 
 void VehicleManager::Update(float time)
 {
-    for (auto& vehicle : m_vehicles)
+    for (const auto& [vehicleIndex, vehicle] : m_vehicles)
     {
         vehicle->Update(time);
     }
@@ -68,8 +28,9 @@ void VehicleManager::Update(float time)
 
 void VehicleManager::DrawAllVehicles()
 {
-    for (auto& vehicle : m_vehicles)
+    for (const auto& [vehicleIndex, vehicle] : m_vehicles)
     {
         DrawCircle(vehicle->GetPosition().x, vehicle->GetPosition().y, 20, RED);
     }
 }
+} // namespace game::vehicles
