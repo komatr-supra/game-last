@@ -22,7 +22,8 @@ set(SOURCES
     src/Map.cpp
     src/vehicle/VehicleManager.cpp
     src/vehicle/Vehicle.cpp
-    #src/vehicle/tasks/VehicleTaskIdle.cpp
+    src/vehicle/tasks/TaskIdle.cpp
+    src/vehicle/tasks/TaskMoving.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES}
@@ -35,7 +36,9 @@ add_executable(${PROJECT_NAME} ${SOURCES}
     include/vehicle/VehicleManager.hpp
     include/vehicle/Vehicle.hpp
     include/vehicle/VehicleDefinition.hpp
-    #include/vehicle/tasks/VehicleTaskBase.hpp
+    include/vehicle/tasks/TaskBase.hpp
+    include/vehicle/tasks/TaskIdle.hpp
+    include/vehicle/tasks/TaskMoving.hpp
 )
 
 # ==============================================================================

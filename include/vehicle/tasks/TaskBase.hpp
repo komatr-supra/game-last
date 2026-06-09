@@ -10,8 +10,6 @@
  */
 #pragma once
 
-#include "vehicle/Vehicle.hpp"
-
 #include <string>
 
 // for test TODO FIX - returning a position
@@ -20,14 +18,25 @@
 namespace game::vehicles
 {
 
-class VehicleTaskBase
+class Vehicle;
+
+enum class TaskType
+{
+    NotAnyType,
+    TaskIdle,
+    TaskMoving
+};
+
+class TaskBase
 {
   protected:
-    const std::string m_taskText;
+    const std::string m_taskName;
 
   public:
-    VehicleTaskBase(std::string taskName) : m_taskText(std::move(taskName)) {}
-    virtual ~VehicleTaskBase() = default;
+    virtual TaskType GetTaskType() = 0;
+
+    TaskBase(std::string taskName) : m_taskName(std::move(taskName)) {}
+    virtual ~TaskBase() = default;
 
     // true = keep this task, false = finished
     /**
@@ -39,8 +48,7 @@ class VehicleTaskBase
      * @return false don't continue -> this task ended
      */
     [[nodiscard]] virtual bool Update(Vehicle& vehicle, float time) = 0;
-    virtual Vector2 GetPosition() const = 0;
 
-    const std::string& GetName() { return m_taskText; }
+    const std::string& GetName() { return m_taskName; }
 };
 } // namespace game::vehicles

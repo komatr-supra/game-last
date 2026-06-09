@@ -26,7 +26,7 @@ struct VehicleDefinition
     int capacityMax;
     int price;
     const Sprite* sprite;
-    size_t gameModelID;
+    size_t modelHandle;
 
     VehicleDefinition(std::string carName,
                       CarType typeOfTheCar,
@@ -34,14 +34,14 @@ struct VehicleDefinition
                       int maximumCapacity,
                       int costInShop,
                       const Sprite& spriteInGui,
-                      size_t modelID)
+                      size_t handleID)
         : name(carName),
           type(typeOfTheCar),
           speedMax(maximumSpeed),
           capacityMax(maximumCapacity),
           price(costInShop),
           sprite(&spriteInGui),
-          gameModelID(modelID)
+          modelHandle(handleID)
     {
     }
 };

@@ -1,6 +1,7 @@
 
 #include "vehicle/VehicleManager.hpp"
 #include "AssetManager.hpp"
+#include "raylib.h"
 #include "vehicle/Vehicle.hpp"
 
 namespace game::vehicles
@@ -28,9 +29,24 @@ void VehicleManager::Update(float time)
 
 void VehicleManager::DrawAllVehicles()
 {
+    static bool testShow = true;
     for (const auto& [vehicleIndex, vehicle] : m_vehicles)
     {
-        DrawCircle(vehicle->GetPosition().x, vehicle->GetPosition().y, 20, RED);
+        // test on UI layer
+        // DrawCircle(vehicle->GetPosition().x, vehicle->GetPosition().y, 20, RED);if
+        if (testShow)
+        {
+            testShow = false;
+            TraceLog(LOG_WARNING,
+                     "car mesh count: %d",
+                     m_assetManager.GetModel(vehicle->GetTypeData().modelHandle).materialCount);
+        }
+        DrawModelEx(m_assetManager.GetModel(vehicle->GetTypeData().modelHandle),
+                    {vehicle->GetPosition().x, 0.01f, vehicle->GetPosition().z},
+                    {0, 1, 0},
+                    vehicle->rotation,
+                    {0.1f, 0.1f, 0.1f},
+                    WHITE);
     }
 }
 } // namespace game::vehicles

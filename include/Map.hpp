@@ -34,15 +34,17 @@ namespace game::world
 class Map
 {
   private:
-    game::assets::AssetManager& am;
-    size_t m_mapModelID;
-    size_t m_cityModelID;
+    const game::assets::AssetManager& m_am;
+    const Model& m_mapModel;
+    const Model& m_cityModel;
     Font m_font;
     std::vector<std::unique_ptr<City>> m_cities;
     std::vector<std::unique_ptr<Road>> m_roads;
 
+    Vector3 GetCityWorldPosition(float x, float y);
+
   public:
-    Map(game::assets::AssetManager& assetManager);
+    Map(const game::assets::AssetManager& assetManager);
     ~Map();
     City* GetCityByID(int id);
     Road* GetRoadBetweenCities(City* city1, City* city2);

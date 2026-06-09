@@ -47,11 +47,16 @@ AssetManager::AssetManager()
     size_t mapModelID = m_models.size() - 1;
     m_nameToModelID["map"] = mapModelID;
     auto map = LoadTexture(game::constant::path::Map);
+    m_textures["map"] = map;
     SetTextureFilter(map, TEXTURE_FILTER_BILINEAR);
     SetTextureWrap(map, TEXTURE_WRAP_CLAMP);
     m_models[mapModelID].materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = map;
     if (IsTextureValid(map) && IsModelValid(m_models[mapModelID]))
+    {
+
         TraceLog(LOG_INFO, "SUCCESS");
+        TraceLog(LOG_INFO, "texture size: %d, %d", map.width, map.height);
+    }
     else
         throw std::runtime_error("Map Plane loading FAILED!");
 
@@ -149,6 +154,7 @@ AssetManager::AssetManager()
     TraceLog(LOG_INFO, "Loading models");
     // open file, parse, save
     // TODO: create DataLoader -> move everything inside
+    // VEHICLES
     std::ifstream file(game::constant::path::VehicleDatabase);
     nlohmann::json dataVehiclesJSON = nlohmann::json::parse(file);
     if (dataVehiclesJSON.is_discarded())
@@ -157,18 +163,20 @@ AssetManager::AssetManager()
     }
     for (auto& vehicleJSON : dataVehiclesJSON["vehicles"])
     {
-        TraceLog(LOG_INFO, "Vehicle in database");
+
         game::vehicles::CarType carType = GetCarType(vehicleJSON["type"].get<std::string>());
-        m_vehicleDatabase[carType] =
-            std::make_unique<game::vehicles::VehicleDefinition>(vehicleJSON["name"].get<std::string>(),
-                                                                carType,
-                                                                vehicleJSON["maxSpeed"].get<int>(),
-                                                                vehicleJSON["maxCapacity"].get<int>(),
-                                                                vehicleJSON["price"].get<int>(),
-                                                                GetSprite(vehicleJSON["resource"].get<std::string>()),
-                                                                GetModelID(vehicleJSON["resource"].get<std::string>()));
+        m_vehicleDatabase[carType] = std::make_unique<game::vehicles::VehicleDefinition>(
+            vehicleJSON["name"].get<std::string>(),
+            carType,
+            vehicleJSON["maxSpeed"].get<int>(),
+            vehicleJSON["maxCapacity"].get<int>(),
+            vehicleJSON["price"].get<int>(),
+            GetSprite(vehicleJSON["resource"].get<std::string>()),
+            GetOrCreateModelID(vehicleJSON["resource"].get<std::string>()));
         TraceLog(LOG_INFO, "Vehicle \"%s\" in database CREATED", vehicleJSON["name"].get<std::string>().c_str());
     }
+    // CITIES
+    GetOrCreateModelID("building"); // TEST
 }
 
 AssetManager::~AssetManager()
@@ -180,7 +188,16 @@ AssetManager::~AssetManager()
     for (auto& model : m_models)
         UnloadModel(model);
 }
+const Texture2D& AssetManager::GetTexture(const std::string& textureName) const
+{
+    auto it = m_textures.find(textureName);
+    if (it != m_textures.end())
+    {
+        return it->second;
+    }
 
+    return m_textures.at(fallback);
+}
 const Sprite& AssetManager::GetSprite(const std::string& spriteName) const
 {
     auto it = m_sprites.find(spriteName);
@@ -201,20 +218,39 @@ const SpriteNP& AssetManager::GetSpriteNP(const std::string& spriteName) const
     }
     return m_spritesNP.at(fallback);
 }
-size_t AssetManager::GetModelID(const std::string& name3Dmodel)
+size_t AssetManager::GetOrCreateModelID(const std::string& modelName)
 {
-    auto it = m_nameToModelID.find(name3Dmodel);
+    auto it = m_nameToModelID.find(modelName);
     if (it != m_nameToModelID.end())
     {
         return it->second;
     }
-    auto path = "assets/models/" + name3Dmodel + ".glb";
-    m_models.push_back(LoadModel(path.c_str()));
+    auto path = "assets/models/" + modelName + ".glb";
+    auto model = LoadModel(path.c_str());
+    for (int i = 0; i < model.materialCount; i++)
+    {
+        // 1. Každému materiálu vnutí kód náš lighting shader
+        // model.materials[i].shader = lightingShader;
+
+        model.materials[i].maps[MATERIAL_MAP_DIFFUSE].value = 1;
+    }
+    m_models.push_back(model);
     size_t id = m_models.size() - 1;
-    m_nameToModelID[name3Dmodel] = id;
+    m_nameToModelID[modelName] = id;
     return id;
 }
-Model& AssetManager::GetModel(size_t id) { return m_models[id]; }
+
+const Model& AssetManager::GetModel(size_t id) const { return m_models[id]; }
+
+const Model& AssetManager::GetModel(const std::string& modelName) const
+{
+    auto it = m_nameToModelID.find(modelName);
+    if (it != m_nameToModelID.end())
+    {
+        return GetModel(it->second);
+    }
+    return GetModel(0);
+}
 
 std::vector<const game::vehicles::VehicleDefinition*> AssetManager::GetVehicleDatabase() const
 {
@@ -228,5 +264,5 @@ std::vector<const game::vehicles::VehicleDefinition*> AssetManager::GetVehicleDa
     return view;
 }
 
-Font AssetManager::GetFont() { return m_font; }
+const Font& AssetManager::GetFont() const { return m_font; }
 } // namespace game::assets

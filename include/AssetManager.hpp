@@ -38,7 +38,7 @@ class AssetManager
     std::unordered_map<game::vehicles::CarType, std::unique_ptr<game::vehicles::VehicleDefinition>> m_vehicleDatabase;
     Font m_font;
 
-    game::vehicles::CarType GetCarType(const std::string& carName)
+    game::vehicles::CarType GetCarType(const std::string& carName) const
     {
         static const std::unordered_map<std::string, game::vehicles::CarType> conversionMap = {
             {"pickup", game::vehicles::CarType::Pickup},
@@ -61,10 +61,12 @@ class AssetManager
     /// @brief Return a Sprite Reference.
     /// @param spriteName string from "texturepack.hpp"
     /// @return
+    const Texture2D& GetTexture(const std::string& textureName) const;
     const Sprite& GetSprite(const std::string& spriteName) const;
     const SpriteNP& GetSpriteNP(const std::string& spriteName) const;
-    size_t GetModelID(const std::string& modelName);
-    Model& GetModel(size_t);
+    size_t GetOrCreateModelID(const std::string& modelName);
+    const Model& GetModel(size_t) const;
+    const Model& GetModel(const std::string& modelName) const;
     std::vector<const game::vehicles::VehicleDefinition*> GetVehicleDatabase() const;
     const game::vehicles::VehicleDefinition& GetVehicleDefinition(game::vehicles::CarType carType)
     {
@@ -73,6 +75,6 @@ class AssetManager
             return *it->second.get();
         return *m_vehicleDatabase.at(game::vehicles::CarType::NOT_SET);
     }
-    Font GetFont();
+    const Font& GetFont() const;
 };
 } // namespace game::assets

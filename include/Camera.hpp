@@ -21,8 +21,8 @@ class GameCamera
     Camera3D m_camera;
     float m_yaw = 0.0f;
     float m_pitch = 0.9f;
-    float m_radius = 30.0f;
-    float m_fovy = 30.0f;
+    float m_radius = 20.0f;
+    float m_fovy = 50.0f;
     const Vector3* m_trackedPosition;
     Vector3 m_desiredPosition;
     float m_camSpeed = 5.0f;

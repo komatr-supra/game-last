@@ -5,7 +5,10 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "vehicle/Vehicle.hpp"
+#include "vehicle/VehicleDefinition.hpp"
 #include "vehicle/VehicleManager.hpp"
+#include "vehicle/tasks/TaskMoving.hpp"
+#include <memory>
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
 
@@ -17,15 +20,18 @@
 
 int main(void)
 {
-    InitWindow(game::constant::settings::winWidth, game::constant::settings::winHeight, "STD");
-    SetTargetFPS(120);
+    SetConfigFlags(FLAG_MSAA_4X_HINT);
 
-    game::camera::GameCamera cam;
+    InitWindow(game::constant::settings::winWidth, game::constant::settings::winHeight, "STD");
+    // InitWindow(1920, 1080, "STD");
+    SetTargetFPS(60);
+
     game::assets::AssetManager am;
+    game::camera::GameCamera cam;
     game::world::Map map(am);
     game::vehicles::VehicleManager vm(am);
     Vector3 point;
-    Model modelTest = LoadModel("assets/models/sedan.glb");
+    // Model modelTest = LoadModel("assets/models/sedan.glb");
     Shader lightingShader = LoadShader(TextFormat("assets/shaders/glsl%i/lighting.vs", GLSL_VERSION),
                                        TextFormat("assets/shaders/glsl%i/lighting.fs", GLSL_VERSION));
     lightingShader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(lightingShader, "viewPos");
@@ -33,15 +39,16 @@ int main(void)
     float ambient[4] = {0.3f, 0.3f, 0.3f, 1.0f};
     SetShaderValue(lightingShader, ambientLoc, ambient, SHADER_UNIFORM_VEC4);
     Light light = CreateLight(LIGHT_DIRECTIONAL, {-10, 30, 20}, Vector3Zero(), GRAY, lightingShader);
-    for (int i = 0; i < modelTest.materialCount; i++)
-    {
-        // 1. Každému materiálu vnutí kód náš lighting shader
-        modelTest.materials[i].shader = lightingShader;
+    // for (int i = 0; i < modelTest.materialCount; i++)
+    //{
+    //// 1. Každému materiálu vnutí kód náš lighting shader
+    //    modelTest.materials[i].shader = lightingShader;
 
-        // 2. Zapne texturu pro daný materiál (tohle opraví to GLB)
-        modelTest.materials[i].maps[MATERIAL_MAP_DIFFUSE].value = 1;
-    }
+    // 2. Zapne texturu pro daný materiál (tohle opraví to GLB)
+    // modelTest.materials[i].maps[MATERIAL_MAP_DIFFUSE].value = 1;
+    // }
     auto car = vm.CreateVehicle(game::vehicles::CarType::Pickup);
+    car->SetPosition({0, 0, 0});
     TraceLog(LOG_WARNING, "auto se jmenuje: %s", car->GetName().c_str());
     //      --- HLAVNÍ SMYČKA ---
     while (!WindowShouldClose())
@@ -51,8 +58,16 @@ int main(void)
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && map.TryGetRaycast(cam.GetCam(), point))
         {
             cam.Follow(&point);
-            TraceLog(LOG_WARNING, "new follow point for camera is set");
+            TraceLog(LOG_WARNING, "new follow point for camera is set to: %f, %f, %f", point.x, point.y, point.z);
+            // car->SetTargetPos(point);
+            car->AddTask(std::make_unique<game::vehicles::TaskMoving>(nullptr, nullptr, point, car->GetPosition()));
         }
+        if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
+        {
+            car->rotation += 1.0f;
+        }
+        // TODO real time
+        vm.Update(0.01f);
 
         BeginDrawing();
         ClearBackground(GRAY);
@@ -60,9 +75,10 @@ int main(void)
         BeginMode3D(cam.GetCam());
         map.Draw();
         // BeginShaderMode(lightingShader);
-        DrawCube({0, 0, 0}, 1, 1, 1, WHITE);
-        DrawModelEx(modelTest, {0, 1, 0}, {0, 1, 0}, 45, {1, 1, 1}, WHITE);
+        // DrawCube({0, 0, 0}, 1, 1, 1, WHITE);
+        // DrawModelEx(modelTest, {0, 1, 0}, {0, 1, 0}, 45, {1, 1, 1}, WHITE);
         // EndShaderMode();
+        vm.DrawAllVehicles();
         EndMode3D();
         // GUI
         EndDrawing();

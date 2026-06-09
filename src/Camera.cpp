@@ -2,7 +2,6 @@
 
 #include "raylib.h"
 #include "raymath.h"
-#include "tweeny.h"
 #include <array>
 
 namespace game::camera
@@ -32,11 +31,10 @@ void GameCamera::Follow(const Vector3* target)
         // m_trackedPosition = target;
         HideCursor();
         SetMousePosition(GetScreenWidth() / 2, GetScreenHeight() / 2);
-        /*
-                m_moveTween = tweeny::from(m_camera.target.x, m_camera.target.z)
-                                  .to(target->x, target->z)
-                                  .during(400)
-                                  .via(tweeny::easing::cubicInOut);*/
+        m_moveTween = tweeny::from(m_camera.target.x, m_camera.target.z)
+                          .to(target->x, target->z)
+                          .during(400)
+                          .via(tweeny::easing::cubicInOut);
     }
 }
 
@@ -63,7 +61,9 @@ void GameCamera::Update(float deltaTime)
         m_desiredPosition.x += m_moveDir.x * m_camSpeed * deltaTime;
         m_desiredPosition.z += m_moveDir.y * m_camSpeed * deltaTime;
     }
-
+    float wheel = GetMouseWheelMove();
+    // TraceLog(LOG_WARNING, "wheel input: %f", wheel);
+    m_radius += wheel;
     if (m_moveTween.progress() < 1.0f)
     {
         auto current = m_moveTween.step(static_cast<int>(deltaTime * 1000));

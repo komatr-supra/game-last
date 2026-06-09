@@ -24,7 +24,7 @@ struct City
     int id;
     std::string Name;
     std::string Shortcut;
-    Vector2 Position;
+    Vector3 Position;
     std::vector<Road*> Connections;
 };
 
