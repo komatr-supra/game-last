@@ -1,0 +1,5 @@
+If:
+  PathMatch: external/.*
+
+Diagnostics:
+  Suppress: "*"

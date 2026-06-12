@@ -1,0 +1,12 @@
+{
+    "search.exclude": {
+        "**/external/**": true
+    },
+    "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontVariations": true,
+    "clangd.arguments": [
+        "--compile-commands-dir=build"
+    ]
+
+}

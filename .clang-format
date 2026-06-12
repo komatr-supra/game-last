@@ -27,6 +27,8 @@ ConstructorInitializerIndentWidth: 4
 # bracket align
 AlignAfterOpenBracket: Align
 # empty blocks at the same line {} ... no need two lines
-AllowShortBlocksOnASingleLine: Empty
+AllowShortBlocksOnASingleLine: Always
+AllowShortLoopsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 # max line lenght
 ColumnLimit: 120

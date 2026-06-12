@@ -1,14 +1,14 @@
-#include "AssetManager.hpp"
-#include "Camera.hpp"
 #include "Config.hpp"
-#include "Map.hpp"
+#include "core/AssetManager.hpp"
+#include "entities/vehicles/Vehicle.hpp"
+#include "entities/vehicles/VehicleManager.hpp"
+#include "entities/vehicles/tasks/TaskMoving.hpp"
+#include "graphics/Camera.hpp"
+#include "world/World.hpp"
+
 #include "raylib.h"
 #include "raymath.h"
-#include "vehicle/Vehicle.hpp"
-#include "vehicle/VehicleDefinition.hpp"
-#include "vehicle/VehicleManager.hpp"
-#include "vehicle/tasks/TaskMoving.hpp"
-#include <memory>
+
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
 
@@ -26,10 +26,10 @@ int main(void)
     // InitWindow(1920, 1080, "STD");
     SetTargetFPS(60);
 
-    game::assets::AssetManager am;
-    game::camera::GameCamera cam;
-    game::world::Map map(am);
-    game::vehicles::VehicleManager vm(am);
+    game::core::AssetManager am;
+    game::graphics::GameCamera cam;
+    game::world::World map(am);
+    game::entities::vehicles::VehicleManager vm(am);
     Vector3 point;
     // Model modelTest = LoadModel("assets/models/sedan.glb");
     Shader lightingShader = LoadShader(TextFormat("assets/shaders/glsl%i/lighting.vs", GLSL_VERSION),
@@ -47,7 +47,7 @@ int main(void)
     // 2. Zapne texturu pro daný materiál (tohle opraví to GLB)
     // modelTest.materials[i].maps[MATERIAL_MAP_DIFFUSE].value = 1;
     // }
-    auto car = vm.CreateVehicle(game::vehicles::CarType::Pickup);
+    auto car = vm.CreateVehicle(game::entities::vehicles::CarType::Pickup);
     car->SetPosition({0, 0, 0});
     TraceLog(LOG_WARNING, "auto se jmenuje: %s", car->GetName().c_str());
     //      --- HLAVNÍ SMYČKA ---
@@ -60,12 +60,10 @@ int main(void)
             cam.Follow(&point);
             TraceLog(LOG_WARNING, "new follow point for camera is set to: %f, %f, %f", point.x, point.y, point.z);
             // car->SetTargetPos(point);
-            car->AddTask(std::make_unique<game::vehicles::TaskMoving>(nullptr, nullptr, point, car->GetPosition()));
+            car->AddTask(
+                std::make_unique<game::entities::vehicles::TaskMoving>(nullptr, nullptr, point, car->GetPosition()));
         }
-        if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
-        {
-            car->rotation += 1.0f;
-        }
+        if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) { car->rotation += 1.0f; }
         // TODO real time
         vm.Update(0.01f);
 
