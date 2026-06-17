@@ -12,10 +12,11 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external")
 # ===== Source files =====
 include(sources.cmake)
 add_executable(${PROJECT_NAME} ${SOURCES}
-    src/world/WorldObject.hpp)
+    
+    )
 
 # ===== Include =====
-target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${CMAKE_CURRENT_SOURCE_DIR}/src/common")
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)

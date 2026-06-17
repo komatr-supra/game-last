@@ -15,11 +15,11 @@
 namespace pth = game::constant::path;
 namespace dset = game::constant::settings;
 namespace fs = std::filesystem;
-namespace veh = game::entities::vehicles;
+namespace veh = game::vehicles;
 
 namespace game::core
 {
-AssetManager::AssetManager()
+void AssetManager::Init()
 {
     // FALLBACK ASSETS
     TraceLog(LOG_INFO, "Loading fallback assets...");
@@ -170,7 +170,7 @@ AssetManager::AssetManager()
     GetOrCreateModelID("building"); // TEST
 }
 
-AssetManager::~AssetManager()
+void AssetManager::Shutdown()
 {
     // unload ALL
     UnloadFont(m_font);
@@ -226,7 +226,7 @@ const Model& AssetManager::GetModel(const std::string& modelName) const
     return GetModel(0);
 }
 
-std::vector<const game::entities::vehicles::VehicleDefinition*> AssetManager::GetVehicleDatabase() const
+std::vector<const game::vehicles::VehicleDefinition*> AssetManager::GetVehicleDatabase() const
 {
     std::vector<const veh::VehicleDefinition*> view;
 

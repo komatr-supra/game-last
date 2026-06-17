@@ -12,8 +12,9 @@
  */
 #pragma once
 
-#include "entities/vehicles/VehicleDefinition.hpp"
-#include "graphics/Sprite.hpp"
+#include "Core.hpp"
+#include "Sprite.hpp"
+#include "vehicles/VehicleDefinition.hpp"
 
 #include "raylib.h"
 
@@ -30,9 +31,9 @@ struct VehicleDefinition;
 
 namespace game::core
 {
-class AssetManager
+class AssetManager : public Manager
 {
-    using Vd = game::entities::vehicles::VehicleDefinition;
+    using Vd = game::vehicles::VehicleDefinition;
 
   private:
     const char* fallback = "default";
@@ -43,15 +44,12 @@ class AssetManager
     std::unordered_map<std::string, size_t> m_nameToModelID;
     std::vector<Model> m_models;
 
-    std::unordered_map<game::entities::vehicles::CarType, std::unique_ptr<Vd>> m_vehicleDatabase;
+    std::unordered_map<game::vehicles::CarType, std::unique_ptr<Vd>> m_vehicleDatabase;
     Font m_font;
 
-    game::entities::vehicles::CarType GetCarType(const std::string& carName) const;
+    game::vehicles::CarType GetCarType(const std::string& carName) const;
 
   public:
-    AssetManager();
-    ~AssetManager();
-
     /// @brief Return a Sprite Reference.
     /// @param spriteName string from "texturepack.hpp"
     /// @return
@@ -62,7 +60,9 @@ class AssetManager
     const Model& GetModel(size_t) const;
     const Model& GetModel(const std::string& modelName) const;
     std::vector<const Vd*> GetVehicleDatabase() const;
-    const Vd& GetVehicleDefinition(game::entities::vehicles::CarType carType);
+    const Vd& GetVehicleDefinition(game::vehicles::CarType carType);
     const Font& GetFont() const;
+    void Init() override;
+    void Shutdown() override;
 };
 } // namespace game::core

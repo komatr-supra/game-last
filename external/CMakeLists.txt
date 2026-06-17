@@ -16,8 +16,10 @@ endif()
 # DEAR IMGUI + RLIMGUI 
 # ==============================================================================
 set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/imgui")
-add_library(my_imgui_lib STATIC "${IMGUI_DIR}/rlImGui.cpp")
-
+add_library(my_imgui_lib STATIC 
+    "${IMGUI_DIR}/rlImGui.cpp"
+    "${IMGUI_DIR}/imgui.cpp"
+)
 # 🟢 OPRAVA: Přidáno SYSTEM před PUBLIC. Všechny include složky z ImGui 
 # budou pro tvou hlavní hru označené jako systémové (bez warningů).
 target_include_directories(my_imgui_lib SYSTEM PUBLIC ${IMGUI_DIR})

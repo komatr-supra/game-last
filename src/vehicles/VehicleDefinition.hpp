@@ -6,7 +6,7 @@
 struct Model;
 struct Sprite;
 
-namespace game::entities::vehicles
+namespace game::vehicles
 {
 
 enum class CarType
@@ -45,4 +45,4 @@ struct VehicleDefinition
     {
     }
 };
-} // namespace game::entities::vehicles
+} // namespace game::vehicles

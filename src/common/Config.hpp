@@ -9,7 +9,6 @@
  *
  */
 #pragma once
-#include "texturepack.hpp"
 namespace game::constant
 {
 namespace path

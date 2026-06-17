@@ -10,7 +10,9 @@
  */
 #pragma once
 
+#include "Core.hpp"
 #include "VehicleDefinition.hpp"
+
 #include <cstddef>
 #include <memory>
 #include <unordered_map>
@@ -21,7 +23,7 @@ namespace game::core
 class AssetManager;
 }
 
-namespace game::entities::vehicles
+namespace game::vehicles
 {
 class Vehicle;
 
@@ -37,11 +39,8 @@ class VehicleManager
     VehicleManager(Am& assetManager);
     ~VehicleManager();
     Vehicle* CreateVehicle(CarType carType);
-    void Update(float time);
+    void Update(game::core::Time time);
     void DrawAllVehicles();
-
     std::vector<VehicleDefinition*> GetVehicleDatabase() const;
-
-    // const std::vector<std::unique_ptr<Vehicle>>& GetAllVehicles() const { return m_vehicles; }
 };
-} // namespace game::entities::vehicles
+} // namespace game::vehicles

@@ -15,7 +15,7 @@ set(SOURCES
     src/world/World.cpp
 
     # ----- Entities ------
-    src/entities/vehicles/Vehicle.cpp
-    src/entities/vehicles/VehicleManager.cpp
+    src/vehicles/Vehicle.cpp
+    src/vehicles/VehicleManager.cpp
 
 )
