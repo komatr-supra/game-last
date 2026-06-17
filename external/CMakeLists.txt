@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.25)
 # ==============================================================================
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(BUILD_GAMES    OFF CACHE BOOL "" FORCE)
-add_subdirectory(raylib)
+add_subdirectory(raylib-6.0)
 
 if(NOT MSVC)
     target_compile_options(raylib INTERFACE -Wno-missing-field-initializers)
