@@ -1,3 +1,9 @@
+/**
+ * @file Core.hpp
+ * @author komatr
+ * @brief helper struc and classes in game::core namespace
+ * @date 18.06.2026
+ */
 #pragma once
 
 #include <compare>

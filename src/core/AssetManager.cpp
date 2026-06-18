@@ -1,7 +1,11 @@
+/**
+ * @file AssetManager.cpp
+ * @author komatr
+ * @date 18.06.2026
+ */
 #include "AssetManager.hpp"
 
 #include "Config.hpp"
-
 #include "json.hpp"
 #include "raylib.h"
 

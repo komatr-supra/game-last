@@ -1,12 +1,8 @@
 /**
  * @file Camera.hpp
- * @author your name (you@domain.com)
+ * @author komatr
  * @brief setup and move camera, effects, zoom, etc...
- * @version 0.1
- * @date 2026-05-21
- *
- * @copyright Copyright (c) 2026
- *
+ * @date 21.5.2026
  */
 #pragma once
 

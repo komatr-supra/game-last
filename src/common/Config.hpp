@@ -1,18 +1,16 @@
 /**
  * @file Config.hpp
- * @author your name (you@domain.com)
+ * @author komatr
  * @brief constants, setting, global stuff
  * @version 0.1
- * @date 2026-05-21
- *
- * @copyright Copyright (c) 2026
- *
+ * @date 21.5.2026
  */
 #pragma once
 namespace game::constant
 {
 namespace path
 {
+// folders and files paths
 inline constexpr const char* TP = "assets/texturepacks/texturepack.json";
 inline constexpr const char* Map = "assets/map.png";
 inline constexpr const char* WorldData = "assets/data/world.json";

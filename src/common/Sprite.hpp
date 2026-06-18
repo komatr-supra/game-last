@@ -1,12 +1,9 @@
 /**
  * @file Sprite.hpp
  * @author your name (you@domain.com)
- * @brief sprite is an image in texture pack, GOT ORIGIN
- * @version 0.1
+ * @brief sprite struct and related functions
+ * sprite is an image in texture pack, GOT ORIGIN
  * @date 2026-05-21
- *
- * @copyright Copyright (c) 2026
- *
  */
 #pragma once
 
@@ -38,9 +35,7 @@ inline void DrawSprite(const Sprite* sprite,
 }
 
 inline void DrawSpriteRect(const Sprite& sprite, Rectangle targetRectangle, Color color = WHITE)
-{
-    DrawTexturePro(*sprite.texture, sprite.sourceRect, targetRectangle, {0, 0}, 0, color);
-}
+{ DrawTexturePro(*sprite.texture, sprite.sourceRect, targetRectangle, {0, 0}, 0, color); }
 
 struct SpriteNP
 {
@@ -49,6 +44,4 @@ struct SpriteNP
 };
 
 inline void DrawSpriteNP(SpriteNP spriteNP, Rectangle destination, Color tintColor = WHITE)
-{
-    DrawTextureNPatch(*spriteNP.texture, spriteNP.nPatchInfo, destination, {0, 0}, 0, tintColor);
-}
+{ DrawTextureNPatch(*spriteNP.texture, spriteNP.nPatchInfo, destination, {0, 0}, 0, tintColor); }

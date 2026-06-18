@@ -1,13 +1,9 @@
 /**
  * @file TimeManager.hpp
- * @author your name (you@domain.com)
+ * @author komatr
  * @brief game time handler - fime stop, multiply, convert real time <-> game time, and handle callbacks based on game
  * time
- * @version 0.1
- * @date 2026-06-16
- *
- * @copyright Copyright (c) 2026
- *
+ * @date 16.6.2026
  */
 #pragma once
 namespace game::core
