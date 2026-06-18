@@ -1,3 +1,10 @@
+/**
+ * @file Task.hpp
+ * @author komatr
+ * @brief task related stuff, task is the main feature used for
+ * vehicles, cities and roads
+ * @date 18.06.2026
+ */
 #pragma once
 
 #include "Core.hpp"

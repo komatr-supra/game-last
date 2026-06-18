@@ -4,11 +4,7 @@
  * @brief Load assets, should take care of loading/unloading or prevent multiple or wrong reading,
  *        maybe cooperate with renderer, sound manager, etc...
  *        all sprites are loaded at start
- * @version 0.1
  * @date 2026-05-21
- *
- * @copyright Copyright (c) 2026
- *
  */
 #pragma once
 
