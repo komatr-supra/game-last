@@ -9,24 +9,24 @@
       "resource": "fallback"
     },
     {
-      "name": "Pickup",
-      "type": "Dodge",
+      "name": "Dodge Ram",
+      "type": "Pickup",
       "maxSpeed": 80,
       "maxCapacity": 2,
       "price": 15000,
       "resource": "pickup"
     },
     {
-      "name": "Truck",
-      "type": "Scania R500",
+      "name": "Scania R500",
+      "type": "Truck",
       "maxSpeed": 110,
       "maxCapacity": 6,
       "price": 55000,
       "resource": "truck"
     },
     {
-      "name": "Van",
-      "type": "Ford Transit",
+      "name": "Ford Transit",
+      "type": "Van",
       "maxSpeed": 130,
       "maxCapacity": 3,
       "price": 25000,

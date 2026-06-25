@@ -8,10 +8,12 @@
 #include "Config.hpp"
 #include "json.hpp"
 #include "raylib.h"
+#include "vehicles/VehicleDefinition.hpp"
 
 #include <cstddef>
 #include <filesystem>
 #include <fstream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -86,10 +88,7 @@ void AssetManager::Init()
     nlohmann::json data = nlohmann::json::parse(f_tp, nullptr, false);
     TraceLog(LOG_INFO, "Closing json file");
     f_tp.close();
-    if (data.is_discarded())
-    {
-        throw std::runtime_error("Json file for texturepack can't be parsed - file exist, but can't read.");
-    }
+    if (data.is_discarded()) { throw std::runtime_error("Json file for texturepack can't be parsed - file exist, but can't read."); }
 
     // TEXTURES
     std::vector<Texture2D*> texturesByID; // relative indexed textures - for sprite parse
@@ -126,8 +125,7 @@ void AssetManager::Init()
             spriteNP.nPatchInfo.top = slice["t"];
             spriteNP.nPatchInfo.left = slice["l"];
             spriteNP.nPatchInfo.bottom = slice["b"];
-            if (spriteNP.nPatchInfo.right == 0 && spriteNP.nPatchInfo.left == 0)
-                spriteNP.nPatchInfo.layout = NPATCH_THREE_PATCH_VERTICAL;
+            if (spriteNP.nPatchInfo.right == 0 && spriteNP.nPatchInfo.left == 0) spriteNP.nPatchInfo.layout = NPATCH_THREE_PATCH_VERTICAL;
             else if (spriteNP.nPatchInfo.top == 0 && spriteNP.nPatchInfo.bottom == 0)
                 spriteNP.nPatchInfo.layout = NPATCH_THREE_PATCH_HORIZONTAL;
             else spriteNP.nPatchInfo.layout = NPATCH_NINE_PATCH;
@@ -157,24 +155,26 @@ void AssetManager::Init()
     nlohmann::json dataVehiclesJSON = nlohmann::json::parse(f_vd);
     f_vd.close();
     if (dataVehiclesJSON.is_discarded()) { throw std::runtime_error("Json file for texturepack is broken."); }
+    int generatedID = 1;
     for (auto& vehicleJSON : dataVehiclesJSON["vehicles"])
     {
         veh::CarType carType = GetCarType(vehicleJSON["type"].get<std::string>());
-        m_vehicleDatabase[carType] =
-            std::make_unique<veh::VehicleDefinition>(vehicleJSON["name"].get<std::string>(),
+        m_vehicleDatabase.push_back(
+            std::make_unique<veh::VehicleDefinition>(generatedID++,
+                                                     vehicleJSON["name"].get<std::string>(),
                                                      carType,
                                                      vehicleJSON["maxSpeed"].get<int>(),
                                                      vehicleJSON["maxCapacity"].get<int>(),
                                                      vehicleJSON["price"].get<int>(),
                                                      GetSprite(vehicleJSON["resource"].get<std::string>()),
-                                                     GetOrCreateModelID(vehicleJSON["resource"].get<std::string>()));
+                                                     GetOrCreateModelID(vehicleJSON["resource"].get<std::string>())));
         TraceLog(LOG_INFO, "Vehicle \"%s\" in database CREATED", vehicleJSON["name"].get<std::string>().c_str());
     }
     // CITIES
     GetOrCreateModelID("building"); // TEST
 }
 
-void AssetManager::Shutdown()
+void AssetManager::Shut()
 {
     // unload ALL
     UnloadFont(m_font);
@@ -232,10 +232,11 @@ const Model& AssetManager::GetModel(const std::string& modelName) const
 
 std::vector<const game::vehicles::VehicleDefinition*> AssetManager::GetVehicleDatabase() const
 {
+
     std::vector<const veh::VehicleDefinition*> view;
 
-    for (const auto& [vehicleType, vehicleData] : m_vehicleDatabase) { view.push_back(vehicleData.get()); }
-    TraceLog(LOG_ERROR, "vracim databazi aut o velikosti: %d", view.size());
+    for (const auto& vehicleData : m_vehicleDatabase) { view.push_back(vehicleData.get()); }
+    // TraceLog(LOG_ERROR, "vracim databazi aut o velikosti: %d, celkova velikost databaze je: %d", view.size(), m_vehicleDatabase.size());
     return view;
 }
 
@@ -243,20 +244,27 @@ const Font& AssetManager::GetFont() const { return m_font; }
 
 veh::CarType AssetManager::GetCarType(const std::string& carName) const
 {
-    static const std::unordered_map<std::string, veh::CarType> conversionMap = {{"pickup", veh::CarType::Pickup},
-                                                                                {"van", veh::CarType::Van},
-                                                                                {"truck", veh::CarType::Truck}};
-
     auto it = conversionMap.find(carName);
     if (it != conversionMap.end()) { return it->second; }
 
     return veh::CarType::NOT_SET;
 }
-
-const veh::VehicleDefinition& AssetManager::GetVehicleDefinition(veh::CarType carType)
+const std::string& AssetManager::GetTypeText(game::vehicles::CarType type) const
 {
-    auto it = m_vehicleDatabase.find(carType);
-    if (it != m_vehicleDatabase.end()) return *it->second.get();
-    return *m_vehicleDatabase.at(veh::CarType::NOT_SET);
+    for (auto [carName, enumValue] : conversionMap)
+    {
+        if (enumValue == type) return carName;
+    }
+
+    return fallback;
+}
+
+const veh::VehicleDefinition& AssetManager::GetVehicleDefinition(int carID)
+{
+    auto it = std::find_if(m_vehicleDatabase.begin(),
+                           m_vehicleDatabase.end(),
+                           [carID](const std::unique_ptr<game::vehicles::VehicleDefinition>& vehicle) { return vehicle->id == carID; });
+    if (it != m_vehicleDatabase.end()) return *it->get();
+    return *m_vehicleDatabase[0];
 }
 } // namespace game::core

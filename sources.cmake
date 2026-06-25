@@ -6,7 +6,7 @@ set(SOURCES
     src/main.cpp
 
     # ----- Graphics -----
-    src/graphics/Camera.cpp
+    src/graphics/GameCamera.cpp
 
     # ----- Game Core -----
     src/core/AssetManager.cpp

@@ -13,8 +13,12 @@
 namespace game::world
 {
 
-World::World(const game::core::AssetManager& assetManager)
+World::World(game::core::AssetManager& assetManager)
     : m_am(assetManager), m_mapModel(assetManager.GetModel("map")), m_cityModel(assetManager.GetModel("building"))
+{
+}
+World::~World() = default;
+void World::Init()
 {
 
     std::ifstream f(game::constant::path::WorldData);
@@ -51,17 +55,12 @@ World::World(const game::core::AssetManager& assetManager)
     }
 }
 
-World::~World() {}
-
 Vector3 World::GetCityWorldPosition(float x, float y)
 {
     // city position on the texture in normalized values
     float widthNormalized = x / static_cast<float>(m_am.GetTexture("map").width);
     float heightNormalized = y / static_cast<float>(m_am.GetTexture("map").height);
-    TraceLog(LOG_WARNING,
-             "city pos 2D x: %f, y: %f   .. normalized values  x:%.2f, y:%.2f",
-             widthNormalized,
-             heightNormalized);
+    TraceLog(LOG_WARNING, "city pos 2D x: %f, y: %f   .. normalized values  x:%.2f, y:%.2f", widthNormalized, heightNormalized);
     // real units X and Z coordination
     // texture is from top left corner, but plane have got center at {0, 0, 0}
     float worldX = widthNormalized * game::constant::settings::mapSizeX - game::constant::settings::mapSizeX / 2;
@@ -81,8 +80,7 @@ Road* World::GetRoadBetweenCities(City* city1, City* city2)
 {
     for (auto& road : m_roads)
     {
-        if ((road->cityA == city1 || road->cityB == city1) && (road->cityA == city2 || road->cityB == city2))
-            return road.get();
+        if ((road->cityA == city1 || road->cityB == city1) && (road->cityA == city2 || road->cityB == city2)) return road.get();
     }
     return nullptr;
 }

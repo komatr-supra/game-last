@@ -20,6 +20,7 @@ enum class CarType
 
 struct VehicleDefinition
 {
+    int id;
     std::string name;
     CarType type;
     int speedMax;
@@ -28,14 +29,16 @@ struct VehicleDefinition
     const Sprite* sprite;
     size_t modelHandle;
 
-    VehicleDefinition(std::string carName,
+    VehicleDefinition(int uniqueID,
+                      std::string carName,
                       CarType typeOfTheCar,
                       int maximumSpeed,
                       int maximumCapacity,
                       int costInShop,
                       const Sprite& spriteInGui,
                       size_t handleID)
-        : name(carName),
+        : id(uniqueID),
+          name(carName),
           type(typeOfTheCar),
           speedMax(maximumSpeed),
           capacityMax(maximumCapacity),

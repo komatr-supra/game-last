@@ -45,9 +45,11 @@ struct Time
 
 class NonCopyable
 {
-  public:
+  protected:
     NonCopyable() = default;
-    ~NonCopyable() = default;
+    virtual ~NonCopyable() = default;
+
+  public:
     NonCopyable(const NonCopyable&) = delete;
     NonCopyable& operator=(const NonCopyable&) = delete;
     NonCopyable(NonCopyable&&) = delete;
@@ -57,8 +59,11 @@ class NonCopyable
 class Manager : public NonCopyable
 {
   public:
-    virtual void Init() {}
-    virtual void Shutdown() {}
+    Manager() = default;
+    virtual ~Manager() = default;
+
+    virtual void Init() = 0;
+    virtual void Shut() {}
 };
 
 } // namespace game::core
