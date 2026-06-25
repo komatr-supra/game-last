@@ -12,6 +12,7 @@
 
 #include "Core.hpp"
 #include "VehicleDefinition.hpp"
+#include "world/World.hpp"
 
 #include <cstddef>
 #include <memory>
@@ -27,20 +28,25 @@ namespace game::vehicles
 {
 class Vehicle;
 
-class VehicleManager
+class VehicleManager : public game::core::Manager
 {
     using Am = game::core::AssetManager;
 
   private:
     Am& m_assetManager;
+    game::world::World& m_world;
     std::unordered_map<size_t, std::unique_ptr<Vehicle>> m_vehicles;
+    const char* GenerateCarName() const;
 
   public:
-    VehicleManager(Am& assetManager);
+    VehicleManager(Am& assetManager, game::world::World& world);
     ~VehicleManager();
-    Vehicle* CreateVehicle(CarType carType);
+    Vehicle* CreateVehicle(int carID, int cityID);
     void Update(game::core::Time time);
     void DrawAllVehicles();
-    std::vector<VehicleDefinition*> GetVehicleDatabase() const;
+    std::vector<const VehicleDefinition*> GetVehicleDatabase() const;
+    void Init() override;
+    std::vector<Vehicle*> GetVehicles();
+    const std::string& GetVehicleTypeText(game::vehicles::CarType type) const;
 };
 } // namespace game::vehicles

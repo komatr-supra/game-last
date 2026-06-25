@@ -12,6 +12,7 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external")
 # ===== Source files =====
 include(sources.cmake)
 add_executable(${PROJECT_NAME} ${SOURCES}
+    src/gui/GuiManager.hpp
     
     )
 

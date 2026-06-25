@@ -31,4 +31,4 @@ AllowShortBlocksOnASingleLine: Always
 AllowShortLoopsOnASingleLine: true
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 # max line lenght
-ColumnLimit: 120
+ColumnLimit: 140

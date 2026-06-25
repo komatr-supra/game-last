@@ -10,6 +10,7 @@
  */
 #pragma once
 
+#include "Core.hpp"
 #include "raylib.h"
 
 #include <memory>
@@ -35,7 +36,7 @@ struct Road;
 
 namespace game::world
 {
-class World
+class World : public game::core::Manager
 {
   private:
     const game::core::AssetManager& m_am;
@@ -48,8 +49,9 @@ class World
     Vector3 GetCityWorldPosition(float x, float y);
 
   public:
-    World(const game::core::AssetManager& assetManager);
+    World(game::core::AssetManager& assetManager);
     ~World();
+    void Init() override;
     City* GetCityByID(int id);
     Road* GetRoadBetweenCities(City* city1, City* city2);
     std::vector<Road*> GetRoadsFromCity(City* city);

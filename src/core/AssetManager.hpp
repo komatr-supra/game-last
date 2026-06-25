@@ -36,7 +36,7 @@ class AssetManager : public Manager
     using Vd = game::vehicles::VehicleDefinition;
 
   private:
-    const char* fallback = "default";
+    static inline constexpr const char* fallback = "default";
     // collections for assets
     std::unordered_map<std::string, Texture2D> m_textures;
     std::unordered_map<std::string, Sprite> m_sprites;
@@ -44,10 +44,13 @@ class AssetManager : public Manager
     std::unordered_map<std::string, size_t> m_nameToModelID;
     std::vector<Model> m_models;
 
-    std::unordered_map<game::vehicles::CarType, std::unique_ptr<Vd>> m_vehicleDatabase;
+    std::vector<std::unique_ptr<Vd>> m_vehicleDatabase;
     Font m_font;
 
     game::vehicles::CarType GetCarType(const std::string& carName) const;
+    const std::unordered_map<std::string, game::vehicles::CarType> conversionMap = {{"Pickup", game::vehicles::CarType::Pickup},
+                                                                                    {"Van", game::vehicles::CarType::Van},
+                                                                                    {"Truck", game::vehicles::CarType::Truck}};
 
   public:
     /// @brief Return a Sprite Reference.
@@ -60,9 +63,10 @@ class AssetManager : public Manager
     const Model& GetModel(size_t) const;
     const Model& GetModel(const std::string& modelName) const;
     std::vector<const Vd*> GetVehicleDatabase() const;
-    const Vd& GetVehicleDefinition(game::vehicles::CarType carType);
+    const Vd& GetVehicleDefinition(int carID);
     const Font& GetFont() const;
+    const std::string& GetTypeText(game::vehicles::CarType type) const;
     void Init() override;
-    void Shutdown() override;
+    void Shut() override;
 };
 } // namespace game::core
