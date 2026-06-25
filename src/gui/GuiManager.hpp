@@ -40,23 +40,64 @@ inline void GuiManager::Draw()
 
     // 2. Vykreslení samostatných oken (ImGuiCond_FirstUseEver zajistí,
     // že pozice se nastaví jen poprvé, pak už si to řídí hráč sám)
-
+    // ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 5.0f);
     // --- 1. OKNO: FLEET ---
     ImGui::SetNextWindowPos(ImVec2(startX, windowHeight * 0), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(panelWidth, windowHeight), ImGuiCond_FirstUseEver);
     if (ImGui::Begin("Fleet"))
     {
+        // ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 5.0f);
+        //  draw all cars
         for (auto* vehicle : vm.GetVehicles())
         {
             ImGui::PushID(vehicle);
-            if (ImGui::CollapsingHeader(vehicle->GetName().c_str()))
-            {
-                ImGui::Text("informace o aute a hodne dlouhy text, jak bude zalamovani fungovat, tho rozbalovani ma neco do sebe");
-            }
 
+            ImVec2 startPos = ImGui::GetCursorScreenPos();
+            ImGui::BeginGroup();
+            // ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+            // ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+            float size = ImGui::GetContentRegionAvail().x / 3.0f * 2.0f;
+            ImGui::AlignTextToFramePadding();
+            ImGui::Text("%s", vehicle->GetName().c_str());
+
+            ImGui::SameLine();
+            size = ImGui::GetContentRegionAvail().x / 2.0f;
+            if (ImGui::Button("Xr", ImVec2(size - 1, 0))) { TraceLog(LOG_INFO, "tracking vahicle"); }
+            ImGui::SameLine();
+            if (ImGui::Button("Qt", ImVec2(size - 1, 0)))
+            {
+                // open settings for vehicle
+                TraceLog(LOG_INFO, "open vehicle settings");
+            }
+            // next line
+            size = ImGui::GetContentRegionAvail().x / 2;
+            if (ImGui::Button("current action data", ImVec2(size, 0)))
+            {
+                // vehicle shedule
+                TraceLog(LOG_INFO, "open schedule");
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("cargo 3/7", ImVec2(size, 0)))
+            {
+                // cargo info
+                TraceLog(LOG_INFO, "cargo detail window");
+            }
+            // ImGui::PopStyleVar(2);
+            ImGui::EndGroup();
+            ImVec2 min = ImVec2(startPos.x - 5, startPos.y - 5);
+            ImVec2 max = ImVec2(startPos.x + ImGui::GetItemRectSize().x + 5, startPos.y + ImGui::GetItemRectSize().y + 5);
+
+            // 3. Vykreslíme tvar do pozadí (před vykreslením obsahu skupiny by to bylo lepší,
+            // ale museli byste znát velikost předem - proto kreslíme "pod" pomocí DrawList)
+            ImDrawList* draw_list = ImGui::GetBackgroundDrawList();
+            float rounding = 10.0f; // Zaoblení rohů
+            draw_list->AddRect(min, max, IM_COL32(200, 200, 200, 255), rounding);
             ImGui::PopID();
+            ImGui::Dummy(ImVec2(0, 10.0f));
             ImGui::Separator();
+            ImGui::Dummy(ImVec2(0, 10.0f));
         }
+        // ImGui::PopStyleVar();
     }
     ImGui::End();
 
@@ -104,6 +145,7 @@ inline void GuiManager::Draw()
             ImGui::Separator();
         }
     }
+    // ImGui::PopStyleVar();
     ImGui::End();
 
     rlImGuiEnd();
@@ -122,8 +164,23 @@ inline void GuiManager::Init()
     auto fnt = io.Fonts->AddFontFromFileTTF("assets/fonts/Roboto-Medium.ttf", 20.0f, &fontConfig);
     io.FontDefault = fnt;
     ImGuiStyle& style = ImGui::GetStyle();
-    style.Colors[ImGuiCol_WindowBg].w = 0.80f;
-    style.Colors[ImGuiCol_TitleBgActive].w = 0.85f;
+
+    style.WindowRounding = 5.0f;
+    style.ChildRounding = 5.0f;
+    style.FrameRounding = 5.0f;
+    style.Colors[ImGuiCol_WindowBg].w = 0.85f;
+    style.Colors[ImGuiCol_TitleBgActive].w = 0.9f;
     style.Colors[ImGuiCol_Text] = ImVec4(0.8f, 0.8, 0.8, 1.0f);
+    // Normal: Tmavě modrá
+    ImVec4 col_normal = ImVec4(0.12f, 0.20f, 0.40f, 1.0f);
+
+    // Hovered: Světlejší modrá
+    ImVec4 col_hover = ImVec4(0.20f, 0.35f, 0.60f, 1.0f);
+
+    // Active: svetla zelena
+    ImVec4 col_active = ImVec4(0.2f, 0.60f, 0.2f, 1.0f);
+    style.Colors[ImGuiCol_Button] = col_normal;
+    style.Colors[ImGuiCol_ButtonActive] = col_active;
+    style.Colors[ImGuiCol_ButtonHovered] = col_hover;
 }
 } // namespace game::gui
