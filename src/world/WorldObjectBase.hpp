@@ -5,9 +5,9 @@
 class WorldObject
 {
   protected:
-    Vector2 m_position;
+    Vector3 m_position;
 
   public:
     virtual ~WorldObject() = default;
-    Vector2 GetPosition() const { return m_position; }
+    Vector3 GetPosition() const { return m_position; }
 };

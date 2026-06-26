@@ -1,42 +1,27 @@
 /**
- * @file Map.hpp
- * @author your name (you@domain.com)
- * @brief take care about map, cities and paths
- * @version 0.1
- * @date 2026-05-21
- *
- * @copyright Copyright (c) 2026
- *
+ * @file World.hpp
+ * @author komatr
+ * @brief take care about map, cities and paths... the world...
+ * @date 21.5.2026
  */
 #pragma once
 
-#include "Core.hpp"
+#include "ManagerBase.hpp"
 #include "raylib.h"
-
 #include <memory>
 #include <vector>
 
 #pragma region Forward declaration
-namespace game::grahics
-{
 struct Sprite;
-}
-
 namespace game::core
 {
 class AssetManager;
-}
-
-namespace game::world
-{
 struct City;
 struct Road;
-} // namespace game::world
+
 #pragma endregion
 
-namespace game::world
-{
-class World : public game::core::Manager
+class World : public Manager
 {
   private:
     const game::core::AssetManager& m_am;
@@ -59,4 +44,4 @@ class World : public game::core::Manager
     void Update(float deltaTime);
     void Draw();
 };
-} // namespace game::world
+} // namespace game::core

@@ -8,6 +8,9 @@ set(SOURCES
     # ----- Graphics -----
     src/graphics/GameCamera.cpp
 
+    # ----- GUI ------
+    src/gui/GuiManager.hpp
+
     # ----- Game Core -----
     src/core/AssetManager.cpp
 

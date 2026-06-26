@@ -1,19 +1,20 @@
 
 #include "VehicleManager.hpp"
 
-#include "Core.hpp"
+// #include "Core.hpp"
 #include "Vehicle.hpp"
 #include "core/AssetManager.hpp"
 #include "raylib.h"
 #include "vehicles/VehicleDefinition.hpp"
 #include "world/Logistic.hpp"
 #include "world/World.hpp"
+#include <string>
 #include <vector>
 
 namespace game::vehicles
 {
 
-VehicleManager::VehicleManager(game::core::AssetManager& assetManager, game::world::World& world)
+VehicleManager::VehicleManager(game::core::AssetManager& assetManager, game::core::World& world)
     : m_assetManager(assetManager), m_world(world)
 {
 }
@@ -38,7 +39,7 @@ Vehicle* VehicleManager::CreateVehicle(int carID, int cityID)
     return vehicle;
 }
 
-void VehicleManager::Update(game::core::Time time)
+void VehicleManager::Update(Time time)
 {
     for (const auto& [vehicleIndex, vehicle] : m_vehicles) { vehicle->Update(time); }
 }
@@ -62,10 +63,10 @@ void VehicleManager::DrawAllVehicles()
     }
 }
 std::vector<const VehicleDefinition*> VehicleManager::GetVehicleDatabase() const { return m_assetManager.GetVehicleDatabase(); }
-const char* VehicleManager::GenerateCarName() const
+std::string VehicleManager::GenerateCarName() const
 {
-    // todo: real function
-    return "\"GENERATED\" CAR NAME";
+    static int vehicleCounter = 1;
+    return "Vehicle " + std::to_string(vehicleCounter++);
 }
 std::vector<Vehicle*> VehicleManager::GetVehicles()
 {

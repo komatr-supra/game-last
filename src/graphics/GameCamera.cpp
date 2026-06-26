@@ -6,8 +6,6 @@
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
 
-#include <array>
-
 #if defined(PLATFORM_DESKTOP)
 #define GLSL_VERSION 330
 #else // PLATFORM_ANDROID, PLATFORM_WEB

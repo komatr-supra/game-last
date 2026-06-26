@@ -1,19 +1,16 @@
 #include "World.hpp"
 
 #include "Config.hpp"
-
 #include "Logistic.hpp"
 #include "core/AssetManager.hpp"
-
 #include "json.hpp"
 #include "raylib.h"
 #include "raymath.h"
-
 #include <fstream>
-namespace game::world
-{
 
-World::World(game::core::AssetManager& assetManager)
+namespace game::core
+{
+World::World(AssetManager& assetManager)
     : m_am(assetManager), m_mapModel(assetManager.GetModel("map")), m_cityModel(assetManager.GetModel("building"))
 {
 }
@@ -128,4 +125,4 @@ void World::Draw()
     }
 }
 
-} // namespace game::world
+} // namespace game::core

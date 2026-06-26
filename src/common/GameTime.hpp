@@ -1,14 +1,14 @@
 /**
- * @file Core.hpp
+ * @file GameTime.hpp
  * @author komatr
- * @brief helper struc and classes in game::core namespace
+ * @brief game time data
  * @date 18.06.2026
  */
 #pragma once
 
 #include <compare>
 
-namespace game::core
+namespace game
 {
 struct Time
 {
@@ -43,27 +43,4 @@ struct Time
     auto operator<=>(const Time&) const = default;
 };
 
-class NonCopyable
-{
-  protected:
-    NonCopyable() = default;
-    virtual ~NonCopyable() = default;
-
-  public:
-    NonCopyable(const NonCopyable&) = delete;
-    NonCopyable& operator=(const NonCopyable&) = delete;
-    NonCopyable(NonCopyable&&) = delete;
-    NonCopyable& operator=(NonCopyable&&) = delete;
-};
-
-class Manager : public NonCopyable
-{
-  public:
-    Manager() = default;
-    virtual ~Manager() = default;
-
-    virtual void Init() = 0;
-    virtual void Shut() {}
-};
-
-} // namespace game::core
+} // namespace game

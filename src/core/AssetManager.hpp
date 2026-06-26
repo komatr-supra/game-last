@@ -8,7 +8,7 @@
  */
 #pragma once
 
-#include "Core.hpp"
+#include "ManagerBase.hpp"
 #include "Sprite.hpp"
 #include "vehicles/VehicleDefinition.hpp"
 

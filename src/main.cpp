@@ -20,7 +20,7 @@ int main(void)
     am.Init();
     game::graphics::GameCamera cam;
     cam.Init();
-    game::world::World world(am);
+    game::core::World world(am);
     world.Init();
     game::vehicles::VehicleManager vm(am, world);
     vm.Init();

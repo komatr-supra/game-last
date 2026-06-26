@@ -34,7 +34,7 @@ class Vehicle
     Vehicle(std::string name, const VehicleDefinition& data);
     ~Vehicle();
 
-    void Update(const game::core::Time& gameTime);
+    void Update(const game::Time& gameTime);
     const std::string& GetName() { return m_name; }
     const VehicleDefinition& GetTypeData() const;
 

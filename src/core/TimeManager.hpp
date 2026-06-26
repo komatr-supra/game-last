@@ -6,10 +6,11 @@
  * @date 16.6.2026
  */
 #pragma once
+#include "ManagerBase.hpp"
 namespace game::core
 {
 
-class TimeManager
+class TimeManager : public Manager
 {
   private:
     bool m_isGamePaused = false;

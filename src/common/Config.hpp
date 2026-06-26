@@ -2,7 +2,6 @@
  * @file Config.hpp
  * @author komatr
  * @brief constants, setting, global stuff
- * @version 0.1
  * @date 21.5.2026
  */
 #pragma once

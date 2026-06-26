@@ -6,14 +6,14 @@
  */
 #pragma once
 
-#include "Core.hpp"
+#include "ManagerBase.hpp"
 #include "raylib.h"
 #include "rlights.h"
 #include "tween.h"
 namespace game::graphics
 {
 
-class GameCamera : public game::core::Manager
+class GameCamera : public Manager
 {
   private:
     Camera3D m_camera;

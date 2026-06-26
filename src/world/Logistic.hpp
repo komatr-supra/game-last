@@ -1,12 +1,8 @@
 /**
  * @file Logistic.hpp
- * @author your name (you@domain.com)
- * @brief everything about movement, loading cargo, delivery, etc...
- * @version 0.1
- * @date 2026-05-21
- *
- * @copyright Copyright (c) 2026
- *
+ * @author komatr
+ * @brief everything about movement
+ * @date 21.5.2026
  */
 #pragma once
 #include "raylib.h"
@@ -14,7 +10,7 @@
 #include <string>
 #include <vector>
 
-namespace game::world
+namespace game::core
 {
 
 struct Road;
@@ -34,4 +30,4 @@ struct Road
     City* cityB;
     float lenght;
 };
-} // namespace game::world
+} // namespace game::core

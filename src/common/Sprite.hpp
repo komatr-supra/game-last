@@ -1,6 +1,6 @@
 /**
  * @file Sprite.hpp
- * @author your name (you@domain.com)
+ * @author komatr
  * @brief sprite struct and related functions
  * sprite is an image in texture pack, GOT ORIGIN
  * @date 2026-05-21
@@ -14,15 +14,10 @@ struct Sprite
     Texture2D* texture;
     Rectangle sourceRect;
     Vector2 origin;
-
     Sprite(Texture2D* tex) : texture(tex) {}
 };
 
-inline void DrawSprite(const Sprite* sprite,
-                       Vector2 position,
-                       Vector2 scale = {1.0f, 1.0f},
-                       float rotation = 0,
-                       Color tintColor = WHITE)
+inline void DrawSprite(const Sprite* sprite, Vector2 position, Vector2 scale = {1.0f, 1.0f}, float rotation = 0, Color tintColor = WHITE)
 {
     float destWidth = sprite->sourceRect.width * scale.x;
     float destHeight = sprite->sourceRect.height * scale.y;
