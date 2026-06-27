@@ -38,7 +38,7 @@ class Vehicle
     const std::string& GetName() { return m_name; }
     const VehicleDefinition& GetTypeData() const;
 
-    Vector3 GetPosition() { return m_position; }
+    Vector3 GetPosition() const { return m_position; }
     void SetPosition(Vector3 position);
 };
 } // namespace game::vehicles

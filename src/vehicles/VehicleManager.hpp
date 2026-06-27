@@ -16,13 +16,19 @@
 #include <unordered_map>
 #include <vector>
 
-namespace game::core
+namespace game
 {
-class World;
+namespace core
+{
 class AssetManager;
-} // namespace game::core
+} // namespace core
+namespace world
+{
 
-namespace game::vehicles
+class World;
+}
+
+namespace vehicles
 {
 class Vehicle;
 
@@ -30,12 +36,12 @@ class VehicleManager : public Manager
 {
   private:
     game::core::AssetManager& m_assetManager;
-    game::core::World& m_world;
+    game::world::World& m_world;
     std::unordered_map<size_t, std::unique_ptr<Vehicle>> m_vehicles;
     std::string GenerateCarName() const;
 
   public:
-    VehicleManager(game::core::AssetManager& assetManager, game::core::World& world);
+    VehicleManager(game::core::AssetManager& assetManager, game::world::World& world);
     ~VehicleManager();
     Vehicle* CreateVehicle(int carID, int cityID);
     void Update(Time time);
@@ -45,4 +51,5 @@ class VehicleManager : public Manager
     std::vector<Vehicle*> GetVehicles();
     const std::string& GetVehicleTypeText(game::vehicles::CarType type) const;
 };
-} // namespace game::vehicles
+} // namespace vehicles
+} // namespace game

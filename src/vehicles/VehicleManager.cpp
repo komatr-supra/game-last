@@ -14,7 +14,7 @@
 namespace game::vehicles
 {
 
-VehicleManager::VehicleManager(game::core::AssetManager& assetManager, game::core::World& world)
+VehicleManager::VehicleManager(game::core::AssetManager& assetManager, game::world::World& world)
     : m_assetManager(assetManager), m_world(world)
 {
 }

@@ -5,11 +5,22 @@
  * @date 21.5.2026
  */
 #pragma once
-
 #include "ManagerBase.hpp"
 #include "raylib.h"
 #include "rlights.h"
 #include "tween.h"
+#include "world/World.hpp"
+
+namespace game::world
+{
+class World;
+}
+
+namespace game::core
+{
+class EntityManager;
+}
+
 namespace game::graphics
 {
 
@@ -32,10 +43,12 @@ class GameCamera : public Manager
     // tweeny test
     tweeny::tween<float, float> m_moveTween;
 
+    game::world::World& m_world;
+
   public:
-    GameCamera();
+    GameCamera(game::world::World& world);
     const Camera3D& GetCam() const { return m_camera; }
-    void Follow(const Vector3* target);
+    void FollowEntity(TypeID<game::world::WorldObjectType> entityID);
     void Unfollow();
     void Move(Vector2 direction);
     void Update(float deltaTime);

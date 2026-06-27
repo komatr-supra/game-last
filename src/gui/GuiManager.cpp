@@ -24,14 +24,14 @@ void GuiManager::Draw()
     // --- 4. OKNO: SHOP ---
     if (ImGui::Begin("Shop"))
     {
-        for (const auto* vehicle : vm.GetVehicleDatabase())
+        for (const auto* vehicle : m_vm.GetVehicleDatabase())
         {
             if (vehicle->type == vehicles::CarType::NOT_SET) continue;
             ImGui::PushID(vehicle);
             // 1. line
             ImGui::Text("%s", vehicle->name.c_str());
             ImGui::SameLine();
-            ImGui::Text("(type: %s)", vm.GetVehicleTypeText(vehicle->type).c_str());
+            ImGui::Text("(type: %s)", m_vm.GetVehicleTypeText(vehicle->type).c_str());
             // 2. line
             ImGui::Text("Capacity: %d units", vehicle->capacityMax);
             ImGui::SameLine(0, 20.0f);
@@ -46,7 +46,7 @@ void GuiManager::Draw()
             ImGui::Text("Cost: %d$", vehicle->price);
             ImGui::SameLine(.0f, 10.0f);
             float restWidth = ImGui::GetContentRegionAvail().x;
-            if (ImGui::Button("BUY", ImVec2(restWidth, 30))) { vm.CreateVehicle(vehicle->id, std::rand() % 7); }
+            if (ImGui::Button("BUY", ImVec2(restWidth, 30))) { m_vm.CreateVehicle(vehicle->id, std::rand() % 7); }
             ImGui::PopID();
             ImGui::Separator();
         }

@@ -1,16 +1,21 @@
 #include "GuiFleet.hpp"
+#include "graphics/GameCamera.hpp"
 #include "imgui.h"
 #include "raylib.h"
 #include "rlImGui.h"
 #include "vehicles/Vehicle.hpp"
 #include "vehicles/VehicleDefinition.hpp"
 #include "vehicles/VehicleManager.hpp"
+#include <cfloat>
 
 using namespace ImGui;
 
 namespace game::gui
 {
-GuiFleet::GuiFleet(game::vehicles::VehicleManager& vehicleManager) : m_vehicleManager(vehicleManager) {}
+GuiFleet::GuiFleet(game::vehicles::VehicleManager& vehicleManager, game::graphics::GameCamera& camera)
+    : m_vehicleManager(vehicleManager), m_cam(camera)
+{
+}
 void GuiFleet::Draw()
 {
 
@@ -33,10 +38,23 @@ void GuiFleet::Draw()
         Dummy(ImVec2(space, 0));
         SameLine();
         if (Button("show")) { TraceLog(LOG_INFO, "focus camera on this vehicle"); }
+        // m_cam.Follow(&vehicle->GetPosition());
         SameLine();
         if (Button("info")) { TraceLog(LOG_INFO, "open settings for this vahicle"); }
-        Text("C 0/7   o o o o o o o");
-        if (Button("current action data")) { TraceLog(LOG_INFO, "open schedule"); }
+        Text("o o o o o o o");
+        SameLine();
+        // todo real speed
+        const char* speedText = "100km/h";
+        ImVec2 speedTextSize = CalcTextSize(speedText);
+        space = GetContentRegionAvail().x - speedTextSize.x;
+        Dummy(ImVec2(space, 0));
+        Text("%s", speedText);
+        // todo import action data
+        if (Button("current action data", ImVec2(-FLT_MIN, 0)))
+        {
+            // todo open a new window, graphicaly connect(color)
+            TraceLog(LOG_INFO, "open schedule");
+        }
         EndGroup();
         PopID();
         Dummy(ImVec2(0, 10.0f));

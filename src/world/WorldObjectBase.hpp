@@ -1,13 +1,23 @@
 #pragma once
-
-#include "raylib.h"
-
-class WorldObject
+#include "NonCopyable.hpp"
+#include "raymath.h"
+namespace game::world
+{
+enum class ObjectType
+{
+    Vehicle,
+    City,
+    Road
+};
+class WorldObject : public NonCopyable
 {
   protected:
     Vector3 m_position;
 
   public:
-    virtual ~WorldObject() = default;
+    const int id;
+    const ObjectType type;
+    WorldObject(Vector3 position, int uniqueID, ObjectType objectType) : m_position(position), id(uniqueID), type(objectType) {};
     Vector3 GetPosition() const { return m_position; }
 };
+} // namespace game::world

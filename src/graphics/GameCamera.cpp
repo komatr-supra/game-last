@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "tween.h"
+#include "world/World.hpp"
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
 
@@ -14,7 +15,7 @@
 
 namespace game::graphics
 {
-GameCamera::GameCamera() : m_trackedPosition(nullptr), m_desiredPosition{0, 0, 0}, m_moveDir{0, 0}
+GameCamera::GameCamera(game::world::World& world) : m_trackedPosition(nullptr), m_desiredPosition{0, 0, 0}, m_moveDir{0, 0}, m_world(world)
 {
     m_camera.position = Vector3{0.0f, 0.0f, 0.0f};
     m_camera.target = Vector3{0.0f, 0.0f, 0.0f};
@@ -30,15 +31,15 @@ void GameCamera::CalculatePosition()
     m_camera.position.z = m_camera.target.z + m_radius * cosf(m_pitch) * cosf(m_yaw);
 }
 
-void GameCamera::Follow(const Vector3* target)
+void GameCamera::FollowEntity(game::TypeID<game::world::WorldObjectType> entityID)
 {
-    if (target)
-    {
-        // m_trackedPosition = target;
-        HideCursor();
-        SetMousePosition(GetScreenWidth() / 2, GetScreenHeight() / 2);
 
-        m_moveTween.from(m_camera.target.x, m_camera.target.z).to(target->x, target->z).during(400).via(tweeny::easing::cubicInOut);
+    if (entityID.value)
+    {
+        // HideCursor();
+        // SetMousePosition(GetScreenWidth() / 2, GetScreenHeight() / 2);
+
+        // m_moveTween.from(m_camera.target.x, m_camera.target.z).to(target->x, target->z).during(400).via(tweeny::easing::cubicInOut);
     }
 }
 

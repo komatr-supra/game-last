@@ -5,21 +5,26 @@
  * @date 21.5.2026
  */
 #pragma once
-
-#include "ManagerBase.hpp"
 #include "raylib.h"
+
+#include "Id.hpp"
+#include "Logistic.hpp"
+#include "ManagerBase.hpp"
+#include "WorldObjectBase.hpp"
 #include <memory>
 #include <vector>
 
-#pragma region Forward declaration
-struct Sprite;
-namespace game::core
+namespace game
+{
+namespace core
 {
 class AssetManager;
-struct City;
-struct Road;
-
-#pragma endregion
+}
+namespace world
+{
+struct WorldObjectType
+{
+};
 
 class World : public Manager
 {
@@ -41,7 +46,9 @@ class World : public Manager
     Road* GetRoadBetweenCities(City* city1, City* city2);
     std::vector<Road*> GetRoadsFromCity(City* city);
     bool TryGetRaycast(Camera3D camera, Vector3& outputPoint);
+    WorldObject* GetWorldObject(TypeID<WorldObjectType> id) const;
     void Update(float deltaTime);
     void Draw();
 };
-} // namespace game::core
+} // namespace world
+} // namespace game

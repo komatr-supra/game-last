@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-namespace game::core
+namespace game::world
 {
 
 struct Road;
@@ -30,4 +30,4 @@ struct Road
     City* cityB;
     float lenght;
 };
-} // namespace game::core
+} // namespace game::world

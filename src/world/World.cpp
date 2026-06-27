@@ -8,9 +8,12 @@
 #include "raymath.h"
 #include <fstream>
 
-namespace game::core
+namespace game
 {
-World::World(AssetManager& assetManager)
+namespace world
+{
+using id_w = TypeID<WorldObjectType>;
+World::World(game::core::AssetManager& assetManager)
     : m_am(assetManager), m_mapModel(assetManager.GetModel("map")), m_cityModel(assetManager.GetModel("building"))
 {
 }
@@ -124,5 +127,5 @@ void World::Draw()
         DrawModel(m_cityModel, city->Position, 1, WHITE);
     }
 }
-
-} // namespace game::core
+} // namespace world
+} // namespace game

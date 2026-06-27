@@ -18,13 +18,13 @@ int main(void)
 
     game::core::AssetManager am;
     am.Init();
-    game::graphics::GameCamera cam;
-    cam.Init();
-    game::core::World world(am);
+    game::world::World world(am);
     world.Init();
+    game::graphics::GameCamera cam(world);
+    cam.Init();
     game::vehicles::VehicleManager vm(am, world);
     vm.Init();
-    game::gui::GuiManager gui(vm);
+    game::gui::GuiManager gui(vm, cam);
     gui.Init();
 
     // ******************

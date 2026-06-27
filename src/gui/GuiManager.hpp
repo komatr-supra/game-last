@@ -2,21 +2,33 @@
 #include "ManagerBase.hpp"
 #include "gui/GuiFleet.hpp"
 
-namespace game::vehicles
+namespace game
+{
+namespace graphics
+{
+class GameCamera;
+}
+namespace vehicles
 {
 class VehicleManager;
 }
+} // namespace game
 
 namespace game::gui
 {
 class GuiManager : public Manager
 {
   private:
-    game::vehicles::VehicleManager& vm;
+    game::vehicles::VehicleManager& m_vm;
+    game::graphics::GameCamera& m_cam;
+
     GuiFleet m_fleetWindiow;
 
   public:
-    GuiManager(game::vehicles::VehicleManager& vehicleManager) : vm(vehicleManager), m_fleetWindiow(vehicleManager) {}
+    GuiManager(game::vehicles::VehicleManager& vehicleManager, game::graphics::GameCamera& gameCamera)
+        : m_vm(vehicleManager), m_cam(gameCamera), m_fleetWindiow(vehicleManager, gameCamera)
+    {
+    }
     void Draw();
     void Init() override;
 };
