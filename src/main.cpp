@@ -2,10 +2,10 @@
 #include "core/AssetManager.hpp"
 #include "graphics/GameCamera.hpp"
 #include "gui/GuiManager.hpp"
+#include "imgui.h"
+#include "raylib.h"
 #include "vehicles/VehicleManager.hpp"
 #include "world/World.hpp"
-
-#include "raylib.h"
 
 int main(void)
 {

@@ -9,7 +9,8 @@ set(SOURCES
     src/graphics/GameCamera.cpp
 
     # ----- GUI ------
-    src/gui/GuiManager.hpp
+    src/gui/GuiManager.cpp
+    src/gui/GuiFleet.cpp
 
     # ----- Game Core -----
     src/core/AssetManager.cpp
