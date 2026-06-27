@@ -39,9 +39,9 @@ Vehicle* VehicleManager::CreateVehicle(int carID, int cityID)
     return vehicle;
 }
 
-void VehicleManager::Update(Time time)
+void VehicleManager::Update(float deltaTime)
 {
-    for (const auto& [vehicleIndex, vehicle] : m_vehicles) { vehicle->Update(time); }
+    for (const auto& [vehicleIndex, vehicle] : m_vehicles) { vehicle->Update(deltaTime); }
 }
 
 void VehicleManager::DrawAllVehicles()

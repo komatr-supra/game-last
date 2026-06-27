@@ -1,8 +1,8 @@
 /**
  * @file Sprite.hpp
  * @author komatr
- * @brief sprite struct and related functions
- * sprite is an image in texture pack, GOT ORIGIN
+ * @brief sprite struct and related functions, main namespace = same acess as raylib functions
+ * sprite is an image in texture pack + ORIGIN
  * @date 2026-05-21
  */
 #pragma once

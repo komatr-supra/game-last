@@ -2,6 +2,7 @@
 #include "ManagerBase.hpp"
 #include "gui/GuiFleet.hpp"
 
+// TODO: add other windows as separate files
 namespace game
 {
 namespace graphics

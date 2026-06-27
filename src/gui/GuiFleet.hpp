@@ -1,5 +1,11 @@
+/**
+ * @file GuiFleet.hpp
+ * @author komatr
+ * @brief fleet window = control vehicles and their state/status
+ * @date 28.6.2026
+ */
 #pragma once
-#include "ManagerBase.hpp"
+#include "NonCopyable.hpp"
 namespace game
 {
 namespace graphics

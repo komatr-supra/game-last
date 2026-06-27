@@ -7,7 +7,6 @@
  */
 #pragma once
 
-#include "GameTime.hpp"
 #include "ManagerBase.hpp"
 #include "VehicleDefinition.hpp"
 
@@ -44,7 +43,7 @@ class VehicleManager : public Manager
     VehicleManager(game::core::AssetManager& assetManager, game::world::World& world);
     ~VehicleManager();
     Vehicle* CreateVehicle(int carID, int cityID);
-    void Update(Time time);
+    void Update(float deltaTime);
     void DrawAllVehicles();
     std::vector<const VehicleDefinition*> GetVehicleDatabase() const;
     void Init() override;

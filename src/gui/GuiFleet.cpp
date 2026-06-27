@@ -2,9 +2,7 @@
 #include "graphics/GameCamera.hpp"
 #include "imgui.h"
 #include "raylib.h"
-#include "rlImGui.h"
 #include "vehicles/Vehicle.hpp"
-#include "vehicles/VehicleDefinition.hpp"
 #include "vehicles/VehicleManager.hpp"
 #include <cfloat>
 

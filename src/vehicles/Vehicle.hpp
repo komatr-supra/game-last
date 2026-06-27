@@ -2,7 +2,7 @@
  * @file Vehicle.hpp
  * @author komatr
  * @brief vehicle related function, information about trucks load, position, schedule, etc
- * @date 2026-05-21
+ * @date 21.5.2026
  */
 #pragma once
 #include "Task.hpp"
@@ -34,7 +34,7 @@ class Vehicle
     Vehicle(std::string name, const VehicleDefinition& data);
     ~Vehicle();
 
-    void Update(const game::Time& gameTime);
+    void Update(float deltaTime);
     const std::string& GetName() { return m_name; }
     const VehicleDefinition& GetTypeData() const;
 

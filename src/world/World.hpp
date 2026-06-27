@@ -1,9 +1,10 @@
 /**
  * @file World.hpp
  * @author komatr
- * @brief take care about map, cities and paths... the world...
+ * @brief mediator of the game systems
  * @date 21.5.2026
  */
+// TODO: make it a mediator, delegate work
 #pragma once
 #include "raylib.h"
 

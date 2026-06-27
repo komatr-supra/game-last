@@ -1,7 +1,7 @@
 #pragma once
-
 namespace game
 {
+// non copyable class to avoid duplication
 class NonCopyable
 {
   protected:

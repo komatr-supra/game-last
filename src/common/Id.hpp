@@ -1,7 +1,7 @@
 #pragma once
 #include <cstddef>
 /**
- * @brief id for typesafety, its just size_t
+ * @brief id for typesafety, its just size_t. Use with empty struct.
  */
 namespace game
 {

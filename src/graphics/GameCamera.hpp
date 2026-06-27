@@ -11,19 +11,22 @@
 #include "tween.h"
 #include "world/World.hpp"
 
-namespace game::world
+namespace game
+{
+namespace world
 {
 class World;
 }
 
-namespace game::core
+namespace core
 {
 class EntityManager;
 }
 
-namespace game::graphics
+namespace graphics
 {
-
+// TODO: remove most of it, make fixed angle and distance
+// follow invisible CameraAnchor = new GameWorld object
 class GameCamera : public Manager
 {
   private:
@@ -54,5 +57,5 @@ class GameCamera : public Manager
     void Update(float deltaTime);
     void Init() override;
 };
-
-} // namespace game::graphics
+} // namespace graphics
+} // namespace game

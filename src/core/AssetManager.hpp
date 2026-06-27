@@ -1,10 +1,10 @@
 /**
  * @file AssetManager.hpp
- * @author your name (you@domain.com)
+ * @author komatr
  * @brief Load assets, should take care of loading/unloading or prevent multiple or wrong reading,
  *        maybe cooperate with renderer, sound manager, etc...
  *        all sprites are loaded at start
- * @date 2026-05-21
+ * @date 21.5.2026
  */
 #pragma once
 
@@ -20,20 +20,21 @@
 #include <unordered_map>
 #include <vector>
 
-namespace game::entities::vehicles
+namespace game
+{
+namespace vehicles
 {
 struct VehicleDefinition;
 }
 
-namespace game::core
+namespace core
 {
 class AssetManager : public Manager
 {
     using Vd = game::vehicles::VehicleDefinition;
 
   private:
-    static inline constexpr const char* fallback = "default";
-    // collections for assets
+    static inline constexpr const char* fallback = "default"; // fallback name + files names
     std::unordered_map<std::string, Texture2D> m_textures;
     std::unordered_map<std::string, Sprite> m_sprites;
     std::unordered_map<std::string, SpriteNP> m_spritesNP;
@@ -44,6 +45,7 @@ class AssetManager : public Manager
     Font m_font;
 
     game::vehicles::CarType GetCarType(const std::string& carName) const;
+    // TODO: better cars data and managing... dont need this info at all... REMOVE
     const std::unordered_map<std::string, game::vehicles::CarType> conversionMap = {{"Pickup", game::vehicles::CarType::Pickup},
                                                                                     {"Van", game::vehicles::CarType::Van},
                                                                                     {"Truck", game::vehicles::CarType::Truck}};
@@ -65,4 +67,5 @@ class AssetManager : public Manager
     void Init() override;
     void Shut() override;
 };
-} // namespace game::core
+} // namespace core
+} // namespace game

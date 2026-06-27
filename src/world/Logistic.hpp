@@ -1,9 +1,10 @@
 /**
  * @file Logistic.hpp
  * @author komatr
- * @brief everything about movement
+ * @brief cities and paths system = everything about movement, pathfinding etc...
  * @date 21.5.2026
  */
+// TODO: make it a complete system
 #pragma once
 #include "raylib.h"
 
@@ -12,9 +13,7 @@
 
 namespace game::world
 {
-
 struct Road;
-
 struct City
 {
     int id;
@@ -23,7 +22,6 @@ struct City
     Vector3 Position;
     std::vector<Road*> Connections;
 };
-
 struct Road
 {
     City* cityA;

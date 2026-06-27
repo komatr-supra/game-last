@@ -1,14 +1,12 @@
 /**
  * @file Task.hpp
  * @author komatr
- * @brief task related stuff, task is the main feature used for
+ * @brief task and task manager related stuff, task is the main feature used for
  * every game entity, like: vehicles, cities and roads
  * @date 18.06.2026
  */
 #pragma once
-
-#include "GameTime.hpp"
-
+#include "core/TimeManager.hpp"
 #include <memory>
 #include <vector>
 

@@ -1,3 +1,4 @@
+// base world object in the game
 #pragma once
 #include "NonCopyable.hpp"
 #include "raymath.h"

@@ -1,5 +1,4 @@
 #include "Vehicle.hpp"
-#include "GameTime.hpp"
 
 #include "raylib.h"
 
@@ -12,7 +11,7 @@ Vehicle::Vehicle(std::string name, const VehicleDefinition& data) : m_name(std::
 }
 Vehicle::~Vehicle() {}
 
-void Vehicle::Update(const game::Time& time) { m_taskManager.Update(time); }
+void Vehicle::Update(float deltaTime) {}
 const game::vehicles::VehicleDefinition& Vehicle::GetTypeData() const { return m_typeData; }
 
 void Vehicle::SetPosition(Vector3 position) { m_position = {position.x, 0.1f, position.z}; }

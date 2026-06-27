@@ -148,7 +148,7 @@ void AssetManager::Init()
     // MODELS
     TraceLog(LOG_INFO, "Loading models");
     // open file, parse, save
-    // TODO: create DataLoader -> move everything inside
+    // TODO: create DataLoader -> move loading staff inside (from this FILE)
     // VEHICLES
     std::ifstream f_vd(pth::VehicleDatabase);
     if (!f_vd.is_open()) { throw std::runtime_error("Vehicle Databese data file open FAILED!"); }
