@@ -4,7 +4,7 @@
  * @brief mediator of the game systems
  * @date 21.5.2026
  */
-// TODO: make it a mediator, delegate work
+// TODO: make it a mediator, delegate work, include new TimeContext instead of jist delta time
 #pragma once
 #include "raylib.h"
 
@@ -48,7 +48,7 @@ class World : public Manager
     std::vector<Road*> GetRoadsFromCity(City* city);
     bool TryGetRaycast(Camera3D camera, Vector3& outputPoint);
     WorldObject* GetWorldObject(TypeID<WorldObjectType> id) const;
-    void Update(float deltaTime);
+    void Update(float deltaTime); // main world update point
     void Draw();
 };
 } // namespace world
