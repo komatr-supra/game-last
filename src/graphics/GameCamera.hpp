@@ -1,15 +1,15 @@
 /**
  * @file Camera.hpp
  * @author komatr
- * @brief setup and move camera, effects, zoom, etc...
+ * @brief setup camera (effects, zoom, shaders, etc...)
+ * just a simple offset, following "Camera Anchor" => anchor make a tween and position calculation
  * @date 21.5.2026
  */
 #pragma once
 #include "ManagerBase.hpp"
 #include "raylib.h"
 #include "rlights.h"
-#include "tween.h"
-#include "world/World.hpp"
+#include "world/WorldObjectBase.hpp"
 
 namespace game
 {
@@ -18,44 +18,33 @@ namespace world
 class World;
 }
 
-namespace core
-{
-class EntityManager;
-}
-
-namespace graphics
+namespace camera
 {
 // TODO: remove most of it, make fixed angle and distance
-// follow invisible CameraAnchor = new GameWorld object
+// follow invisible CameraAnchor => to constructor
 class GameCamera : public Manager
 {
   private:
     Camera3D m_camera;
-    float m_yaw = 0.0f;
-    float m_pitch = 0.9f;
-    float m_radius = 20.0f;
+    // TODO: put it in config
+    const Vector3 m_offset = {0.0f, 25.0f, 12.0f};
     float m_fovy = 50.0f;
-    const Vector3* m_trackedPosition;
-    Vector3 m_desiredPosition;
     float m_camSpeed = 5.0f;
-    Vector2 m_moveDir;
-    void CalculatePosition();
+
+    game::world::WorldObject& m_cameraAnchor;
+
     Light m_lightWorld;
     Shader m_lightingShader;
 
-    // tweeny test
-    tweeny::tween<float, float> m_moveTween;
-
-    game::world::World& m_world;
-
   public:
-    GameCamera(game::world::World& world);
+    GameCamera(game::world::WorldObject& cameraAnchor);
     const Camera3D& GetCam() const { return m_camera; }
-    void FollowEntity(TypeID<game::world::WorldObjectType> entityID);
-    void Unfollow();
-    void Move(Vector2 direction);
     void Update(float deltaTime);
     void Init() override;
+
+    // apply effect method here
+    // void Shake(intensity)
+    // void Zoom(enum? just 3 zoom levels)???
 };
-} // namespace graphics
+} // namespace camera
 } // namespace game

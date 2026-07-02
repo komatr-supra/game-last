@@ -18,9 +18,10 @@ int main(void)
 
     game::core::AssetManager am;
     am.Init();
+    // TODO: add controller (input handler)
     game::world::World world(am);
     world.Init();
-    game::graphics::GameCamera cam(world);
+    game::camera::GameCamera cam(world);
     cam.Init();
     game::vehicles::VehicleManager vm(am, world);
     vm.Init();
