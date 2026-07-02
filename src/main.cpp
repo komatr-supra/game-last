@@ -1,6 +1,6 @@
 #include "Config.hpp"
+#include "camera/GameCamera.hpp"
 #include "core/AssetManager.hpp"
-#include "graphics/GameCamera.hpp"
 #include "gui/GuiManager.hpp"
 #include "imgui.h"
 #include "raylib.h"
