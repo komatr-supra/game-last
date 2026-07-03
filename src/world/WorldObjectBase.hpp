@@ -8,7 +8,8 @@ enum class ObjectType
 {
     Vehicle,
     City,
-    Road
+    Road,
+    System
 };
 class WorldObject : public NonCopyable
 {

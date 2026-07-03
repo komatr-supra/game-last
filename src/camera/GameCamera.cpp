@@ -1,5 +1,6 @@
 #include "GameCamera.hpp"
 
+#include "Config.hpp"
 #include "raylib.h"
 #include "raymath.h"
 #include "world/WorldObjectBase.hpp"
@@ -14,10 +15,17 @@
 
 namespace game::camera
 {
+void GameCamera::CalculateCameraPosition()
+{
+    Vector3 cameraAnchorVec3 = m_cameraAnchor.GetPosition();
+    m_camera.position = Vector3{cameraAnchorVec3.x + game::constant::settings::camOffsetX,
+                                game::constant::settings::camOffsetY,
+                                cameraAnchorVec3.z + game::constant::settings::camOffsetZ};
+    m_camera.target = cameraAnchorVec3;
+}
 GameCamera::GameCamera(game::world::WorldObject& cameraAnchor) : m_cameraAnchor(cameraAnchor)
 {
-    m_camera.position = Vector3{0.0f, 0.0f, 0.0f};
-    m_camera.target = Vector3{0.0f, 0.0f, 0.0f};
+    CalculateCameraPosition();
     m_camera.up = Vector3{0.0f, 1.0f, 0.0f};
     m_camera.projection = CAMERA_PERSPECTIVE;
 }
@@ -44,6 +52,9 @@ void GameCamera::Update(float deltaTime)
         ShowCursor();
     }
         */
+
+    // last step = set to position
+    CalculateCameraPosition();
 }
 void GameCamera::Init()
 {

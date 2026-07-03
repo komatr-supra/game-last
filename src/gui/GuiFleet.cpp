@@ -1,5 +1,5 @@
 #include "GuiFleet.hpp"
-#include "graphics/GameCamera.hpp"
+#include "camera/GameCamera.hpp"
 #include "imgui.h"
 #include "raylib.h"
 #include "vehicles/Vehicle.hpp"
@@ -10,7 +10,7 @@ using namespace ImGui;
 
 namespace game::gui
 {
-GuiFleet::GuiFleet(game::vehicles::VehicleManager& vehicleManager, game::graphics::GameCamera& camera)
+GuiFleet::GuiFleet(game::vehicles::VehicleManager& vehicleManager, game::camera::GameCamera& camera)
     : m_vehicleManager(vehicleManager), m_cam(camera)
 {
 }

@@ -8,7 +8,7 @@
 #include "NonCopyable.hpp"
 namespace game
 {
-namespace graphics
+namespace camera
 {
 class GameCamera;
 }
@@ -23,10 +23,10 @@ class GuiFleet : public NonCopyable
 {
   private:
     game::vehicles::VehicleManager& m_vehicleManager;
-    game::graphics::GameCamera& m_cam;
+    game::camera::GameCamera& m_cam;
 
   public:
-    GuiFleet(game::vehicles::VehicleManager& vehicleManager, game::graphics::GameCamera& camera);
+    GuiFleet(game::vehicles::VehicleManager& vehicleManager, game::camera::GameCamera& camera);
     void Draw();
 };
 } // namespace game::gui

@@ -6,11 +6,11 @@
  * @date 21.5.2026
  */
 #pragma once
+#include "Config.hpp"
 #include "ManagerBase.hpp"
 #include "raylib.h"
 #include "rlights.h"
 #include "world/WorldObjectBase.hpp"
-
 namespace game
 {
 namespace world
@@ -26,19 +26,18 @@ class GameCamera : public Manager
 {
   private:
     Camera3D m_camera;
-    // TODO: put it in config
-    const Vector3 m_offset = {0.0f, 25.0f, 12.0f};
-    float m_fovy = 50.0f;
-    float m_camSpeed = 5.0f;
+    float m_fov = game::constant::settings::camFov;
 
     game::world::WorldObject& m_cameraAnchor;
 
     Light m_lightWorld;
     Shader m_lightingShader;
+    void CalculateCameraPosition();
 
   public:
     GameCamera(game::world::WorldObject& cameraAnchor);
     const Camera3D& GetCam() const { return m_camera; }
+
     void Update(float deltaTime);
     void Init() override;
 
