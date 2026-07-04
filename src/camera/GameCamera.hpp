@@ -7,6 +7,7 @@
  */
 #pragma once
 #include "Config.hpp"
+#include "IPositionProvider.hpp"
 #include "ManagerBase.hpp"
 #include "raylib.h"
 #include "rlights.h"
@@ -26,16 +27,15 @@ class GameCamera : public Manager
 {
   private:
     Camera3D m_camera;
-    float m_fov = game::constant::settings::camFov;
 
-    game::world::WorldObject& m_cameraAnchor;
+    game::IPositionProvider& m_cameraAnchor;
 
     Light m_lightWorld;
     Shader m_lightingShader;
     void CalculateCameraPosition();
 
   public:
-    GameCamera(game::world::WorldObject& cameraAnchor);
+    GameCamera(game::IPositionProvider& cameraAnchor);
     const Camera3D& GetCam() const { return m_camera; }
 
     void Update(float deltaTime);

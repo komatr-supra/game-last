@@ -1,6 +1,7 @@
 #include "GameCamera.hpp"
 
 #include "Config.hpp"
+#include "IPositionProvider.hpp"
 #include "raylib.h"
 #include "raymath.h"
 #include "world/WorldObjectBase.hpp"
@@ -23,7 +24,7 @@ void GameCamera::CalculateCameraPosition()
                                 cameraAnchorVec3.z + game::constant::settings::camOffsetZ};
     m_camera.target = cameraAnchorVec3;
 }
-GameCamera::GameCamera(game::world::WorldObject& cameraAnchor) : m_cameraAnchor(cameraAnchor)
+GameCamera::GameCamera(game::IPositionProvider& cameraAnchor) : m_cameraAnchor(cameraAnchor)
 {
     CalculateCameraPosition();
     m_camera.up = Vector3{0.0f, 1.0f, 0.0f};
@@ -67,5 +68,6 @@ void GameCamera::Init()
     SetShaderValue(m_lightingShader, ambientLoc, ambient, SHADER_UNIFORM_VEC4);
     // create a Sun
     m_lightWorld = CreateLight(LIGHT_DIRECTIONAL, {-10, 30, 20}, Vector3Zero(), GRAY, m_lightingShader);
+    m_camera.fovy = game::constant::settings::camFov;
 }
 } // namespace game::camera

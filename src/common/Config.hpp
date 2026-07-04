@@ -29,8 +29,8 @@ inline constexpr float mapSizeX = 50;
 inline constexpr float mapSizeY = 50;
 // camera Y offset(map - camera distance) is constant = final camera position {x, 25, z}
 inline constexpr float camOffsetX = 0.0f;
-inline constexpr float camOffsetY = 25.0f;
-inline constexpr float camOffsetZ = 12.0f;
+inline constexpr float camOffsetY = 35.0f;
+inline constexpr float camOffsetZ = 18.0f;
 inline constexpr float camFov = 25.0f; // flat look (field of view angle) -> map vibe :D
 inline constexpr float camZooms[] = {0.5f, 1.0f, 2.0f};
 } // namespace settings
