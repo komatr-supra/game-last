@@ -7,8 +7,8 @@ class Manager : public NonCopyable
 {
   public:
     Manager() = default;
-
+    virtual ~Manager() = default;
     virtual void Init() = 0;
-    virtual void Shut() {}
+    virtual void Shut() = 0;
 };
 } // namespace game

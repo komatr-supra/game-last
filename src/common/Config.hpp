@@ -33,5 +33,7 @@ inline constexpr float camOffsetY = 35.0f;
 inline constexpr float camOffsetZ = 18.0f;
 inline constexpr float camFov = 25.0f; // flat look (field of view angle) -> map vibe :D
 inline constexpr float camZooms[] = {0.5f, 1.0f, 2.0f};
+// time
+inline constexpr float timeRealToGameSeconds = 60.0f;
 } // namespace settings
 } // namespace game::constant

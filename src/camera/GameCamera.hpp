@@ -6,12 +6,12 @@
  * @date 21.5.2026
  */
 #pragma once
-#include "Config.hpp"
 #include "IPositionProvider.hpp"
+#include "IUpdateable.hpp"
 #include "ManagerBase.hpp"
+#include "TimeContext.hpp"
 #include "raylib.h"
 #include "rlights.h"
-#include "world/WorldObjectBase.hpp"
 namespace game
 {
 namespace world
@@ -23,7 +23,7 @@ namespace camera
 {
 // TODO: remove most of it, make fixed angle and distance
 // follow invisible CameraAnchor => to constructor
-class GameCamera : public Manager
+class GameCamera : public Manager, public IUpdateable
 {
   private:
     Camera3D m_camera;
@@ -37,10 +37,9 @@ class GameCamera : public Manager
   public:
     GameCamera(game::IPositionProvider& cameraAnchor);
     const Camera3D& GetCam() const { return m_camera; }
-
-    void Update(float deltaTime);
     void Init() override;
 
+    void Update(TimeContext time) override;
     // apply effect method here
     // void Shake(intensity)
     // void Zoom(enum? just 3 zoom levels)???

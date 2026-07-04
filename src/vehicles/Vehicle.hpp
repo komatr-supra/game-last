@@ -6,6 +6,7 @@
  */
 #pragma once
 #include "Task.hpp"
+#include "TimeContext.hpp"
 #include "VehicleDefinition.hpp"
 #include "raylib.h"
 
@@ -34,7 +35,7 @@ class Vehicle
     Vehicle(std::string name, const VehicleDefinition& data);
     ~Vehicle();
 
-    void Update(float deltaTime);
+    void Update(TimeContext deltaTime);
     const std::string& GetName() { return m_name; }
     const VehicleDefinition& GetTypeData() const;
 

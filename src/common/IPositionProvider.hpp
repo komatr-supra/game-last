@@ -6,7 +6,7 @@ namespace game
 class IPositionProvider
 {
   public:
-    ~IPositionProvider() = default;
+    virtual ~IPositionProvider() = default;
     virtual const Vector3& GetPosition() const = 0;
 };
 } // namespace game

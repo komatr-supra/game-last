@@ -2,6 +2,7 @@
 
 #include "Config.hpp"
 #include "IPositionProvider.hpp"
+#include "TimeContext.hpp"
 #include "raylib.h"
 #include "raymath.h"
 #include "world/WorldObjectBase.hpp"
@@ -24,6 +25,7 @@ void GameCamera::CalculateCameraPosition()
                                 cameraAnchorVec3.z + game::constant::settings::camOffsetZ};
     m_camera.target = cameraAnchorVec3;
 }
+
 GameCamera::GameCamera(game::IPositionProvider& cameraAnchor) : m_cameraAnchor(cameraAnchor)
 {
     CalculateCameraPosition();
@@ -31,31 +33,13 @@ GameCamera::GameCamera(game::IPositionProvider& cameraAnchor) : m_cameraAnchor(c
     m_camera.projection = CAMERA_PERSPECTIVE;
 }
 
-void GameCamera::Update(float deltaTime)
+void GameCamera::Update(TimeContext time)
 {
-    // move camera directly
-    // camera.position = cameraAnchor.position + offset;
-
+    // position
+    CalculateCameraPosition();
     // light shader data
     float camPos[3] = {m_camera.position.x, m_camera.position.y, m_camera.position.z};
     SetShaderValue(m_lightingShader, m_lightingShader.locs[SHADER_LOC_VECTOR_VIEW], camPos, SHADER_UNIFORM_VEC3);
-
-    // TODO: move to anchor
-    /*
-    if (m_moveTween.progress() < 1.0f)
-    {
-        auto current = m_moveTween.step(static_cast<int>(deltaTime * 1000));
-        m_camera.target.x = current[0];
-        m_camera.target.z = current[1];
-    }
-    else
-    {
-        ShowCursor();
-    }
-        */
-
-    // last step = set to position
-    CalculateCameraPosition();
 }
 void GameCamera::Init()
 {

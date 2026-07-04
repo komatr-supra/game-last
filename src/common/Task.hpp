@@ -19,19 +19,19 @@ template <typename T> class ITask
     const Type taskType;
 
   protected:
-    game::Time m_startTime;
-    game::Time m_totalDuration;
+    game::GameTime m_startTime;
+    game::GameTime m_totalDuration;
 
   public:
-    virtual void Update(T& owner, game::Time gameTime) = 0;
-    ITask(game::Time startTime, game::Time duration, T::TaskType task_t)
+    virtual void Update(T& owner, game::GameTime gameTime) = 0;
+    ITask(game::GameTime startTime, game::GameTime duration, T::TaskType task_t)
         : m_startTime(startTime), m_totalDuration(duration), taskType(task_t)
     {
     }
     virtual ~ITask() = default;
 
-    virtual game::Time GetExpectedStartTime() const { return m_startTime; }
-    virtual game::Time GetExpectedEndTime() const { return m_startTime + m_totalDuration; }
+    virtual game::GameTime GetExpectedStartTime() const { return m_startTime; }
+    virtual game::GameTime GetExpectedEndTime() const { return m_startTime + m_totalDuration; }
 };
 
 template <typename T> class TaskManager
@@ -39,12 +39,12 @@ template <typename T> class TaskManager
   private:
     T& m_owner;
     std::vector<std::unique_ptr<task::ITask<T>>> m_tasks;
-    game::Time m_nextCheck;
+    game::GameTime m_nextCheck;
 
   public:
     TaskManager(T& owner) : m_owner(owner), m_nextCheck(0) {}
     virtual ~TaskManager() = default;
-    virtual void Update(const game::Time& time)
+    virtual void Update(const game::GameTime& time)
     {
         if (!m_tasks.empty())
             if (time >= m_nextCheck) { m_tasks.front()->Update(m_owner, time); }
