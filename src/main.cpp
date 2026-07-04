@@ -1,6 +1,7 @@
 #include "Config.hpp"
+#include "camera/CameraPlayerAnchor.hpp"
+#include "camera/GameCamera.hpp"
 #include "core/AssetManager.hpp"
-#include "graphics/GameCamera.hpp"
 #include "gui/GuiManager.hpp"
 #include "imgui.h"
 #include "raylib.h"
@@ -18,9 +19,11 @@ int main(void)
 
     game::core::AssetManager am;
     am.Init();
+    // TODO: add controller (input handler)
+    game::camera::CameraPlayerAnchor cameraAnchor({0, 0, 0});
     game::world::World world(am);
     world.Init();
-    game::graphics::GameCamera cam(world);
+    game::camera::GameCamera cam(cameraAnchor);
     cam.Init();
     game::vehicles::VehicleManager vm(am, world);
     vm.Init();
