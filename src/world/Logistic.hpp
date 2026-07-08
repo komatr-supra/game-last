@@ -1,7 +1,10 @@
 /**
  * @file Logistic.hpp
  * @author komatr
- * @brief cities and paths system = everything about movement, pathfinding etc...
+ * @brief Handles logistics simulation, unit conversion, and entity movement.
+ *
+ * Manages the transformation between real-time and game-time units and orchestrates
+ * the movement of vehicles along defined routes across the map.
  * @date 21.5.2026
  */
 // TODO: make it a complete system

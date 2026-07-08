@@ -1,4 +1,4 @@
-// just frameTime and gameTime floats together
+// just frame delta Time and game Time(delta with multiplier "0" for pause) floats together
 #pragma once
 
 namespace game

@@ -6,69 +6,57 @@
  */
 #pragma once
 #include "ManagerBase.hpp"
+#include "TimeContext.hpp"
 #include <compare>
 
 namespace game
 {
-struct Time
+struct GameTime
 {
     int minutes;
     int ToHours() { return minutes / 60; }
     int ToDays() { return minutes / 60 / 24; }
     int ToMonths() { return minutes / 60 / 24 / 30; }
     int ToYears() { return minutes / 60 / 24 / 30 / 12; }
-    explicit Time(int gameMinutes = 0) : minutes(gameMinutes) {}
-    Time& operator+=(const Time& b)
+    explicit GameTime(int gameMinutes = 0) : minutes(gameMinutes) {}
+    GameTime& operator+=(const GameTime& b)
     {
         this->minutes += b.minutes;
         return *this;
     }
-    Time& operator-=(const Time& b)
+    GameTime& operator-=(const GameTime& b)
     {
         this->minutes -= b.minutes;
         return *this;
     }
-    Time operator+(const Time& b) const { return Time(minutes + b.minutes); }
-    Time operator-(const Time& b) const { return Time(minutes - b.minutes); }
-    Time& operator++()
+    GameTime operator+(const GameTime& b) const { return GameTime(minutes + b.minutes); }
+    GameTime operator-(const GameTime& b) const { return GameTime(minutes - b.minutes); }
+    GameTime& operator++()
     {
         minutes++;
         return *this;
     }
-    Time& operator--()
+    GameTime& operator--()
     {
         minutes--;
         return *this;
     }
-    auto operator<=>(const Time&) const = default;
+    auto operator<=>(const GameTime&) const = default;
 };
 
 class TimeManager : public Manager
 {
   private:
-    bool m_isGamePaused = false;
     int m_gameSpeed = 1;
-    int m_totalSeconds = 0;
-    float m_fractionSecond = 0;
-    int m_gameMinutes = 0;
-    float m_deltaTime = 0;
+    float m_gameSecondsAccumulator = 0;
+    GameTime m_gameTime{0};
+    TimeContext m_timeContext{0, 0};
 
   public:
-    void Update(float deltaTime)
-    {
-        m_deltaTime = deltaTime;
-        if (m_isGamePaused) return;
-
-        m_fractionSecond += m_deltaTime;
-        if (m_deltaTime >= 1.0f)
-        {
-            m_totalSeconds++;
-            m_gameMinutes += m_gameSpeed;
-            m_fractionSecond -= 1.0f;
-        }
-    }
-
-    int GetGameTime() { return m_gameMinutes; }
-    int GetDeltaTime() { return m_deltaTime; }
+    void TimeUpdate(float deltaTime);
+    const TimeContext& GetTimeContext() const;
+    const GameTime& GetGameTime() const;
+    bool IsGamePaused() const;
+    void Init() override;
 };
 } // namespace game

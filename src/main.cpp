@@ -2,6 +2,7 @@
 #include "camera/CameraPlayerAnchor.hpp"
 #include "camera/GameCamera.hpp"
 #include "core/AssetManager.hpp"
+#include "core/TimeManager.hpp"
 #include "gui/GuiManager.hpp"
 #include "imgui.h"
 #include "raylib.h"
@@ -16,7 +17,7 @@ int main(void)
     SetConfigFlags(FLAG_MSAA_4X_HINT);
     InitWindow(game::constant::settings::winWidth, game::constant::settings::winHeight, "STD");
     SetTargetFPS(60);
-
+    game::TimeManager tm;
     game::core::AssetManager am;
     am.Init();
     // TODO: add controller (input handler)
