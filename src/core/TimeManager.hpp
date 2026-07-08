@@ -57,5 +57,6 @@ class TimeManager : public Manager
     const TimeContext& GetTimeContext() const;
     const GameTime& GetGameTime() const;
     bool IsGamePaused() const;
+    void Init() override;
 };
 } // namespace game

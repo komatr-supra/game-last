@@ -9,6 +9,6 @@ class Manager : public NonCopyable
     Manager() = default;
     virtual ~Manager() = default;
     virtual void Init() = 0;
-    virtual void Shut() = 0;
+    virtual void Shut() {};
 };
 } // namespace game

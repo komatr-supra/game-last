@@ -1,4 +1,5 @@
 #pragma once
+#include <compare>
 #include <cstddef>
 /**
  * @brief id for typesafety, its just size_t. Use with empty struct.

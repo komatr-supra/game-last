@@ -3,6 +3,7 @@
 #include "TimeContext.hpp"
 namespace game
 {
+void TimeManager::Init() {}
 void TimeManager::TimeUpdate(float deltaTime)
 {
     // normal delta seconds
